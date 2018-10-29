@@ -1,0 +1,17 @@
+<%- include('./partials/head') -%>
+	<body>
+		<div class="container">
+
+			<form class="form-horizontal" action="/font/upload" method="post" enctype="multipart/form-data">
+				<div class="form-group">
+					<label class="col-sm-3 control-label">이미지</label>
+					<div class="col-sm-9">
+						<img id="img" width="100px" height="100px" style="display: none" />
+						<input type="file" class="form-control" name="image" placeholder="이미지를 넣어주세요" accept="image/*" />
+					</div>
+					<button class="btn-default btn" onclick="return true;">제출하기</button>
+				</div>
+			</form>	
+		</div>
+	</body>
+<%- include('./partials/foot') -%>
