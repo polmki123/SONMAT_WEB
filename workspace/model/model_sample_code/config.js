@@ -12,6 +12,7 @@ var config = {
       //TODO; create작업 전에 해야할 사항들.
         //
         //
+        //
     });
 
     db.Publisher.beforeCreate(function() {
