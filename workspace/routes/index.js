@@ -8,6 +8,7 @@ router.get('/', function(req, res) {
 
 router.get('/shutdwon', function(req, res) {
 	process.exit(0);
+	//
 })
 
 router.get('/ping', function(req, res) {
