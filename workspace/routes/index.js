@@ -44,7 +44,7 @@ router.get('/db/d', function(req, res) {
 	});
 });
 
-router.get('/shutdwon', function(req, res) {
+router.get('/shutdown', function(req, res) {
 	process.exit(0);
 	//
 })
