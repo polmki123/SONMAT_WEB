@@ -3,6 +3,9 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
+	// 메인 페이지를 보여준다.
+
+	// DB 를 쿼리할 필요가 없어보인다. 
 	res.render('index');
 });
 
