@@ -4,7 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var config = require('./config');
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('web', 'root', 'Thsakt!@#123', {
+var sequelize = new Sequelize('sonmat', 'root', 'Thsakt!@#123', {
 	host: '210.89.188.101',
 	port: '3306',
 	dialect: 'mysql'

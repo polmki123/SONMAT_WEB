@@ -8,8 +8,8 @@ module.exports = function(sequelize, DataTypes) {
     maker_id: {type: DataTypes.INTEGER, allowNull: false, references: {model: models.User, key: 'id'}},
     name: {type: DataTypes.STRING(30)},
     description: {type: DataTypes.TEXT},
-    make_date: {type: DataTypes.DATE, defaultValue: DataTypes.NOW}
-    is_public: {type: DataTypes.BOOLEAN, defaultValue: false},
+    make_date: {type: DataTypes.DATE, defaultValue: DataTypes.NOW},
+    is_public: {type: DataTypes.BOOLEAN, defaultValue: 0},
     follower_num: {type: DataTypes.INTEGER, defaultValue: null},    
   }, {
     classMethods: {},

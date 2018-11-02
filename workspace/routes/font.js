@@ -15,7 +15,7 @@ router.get('/create', function(req, res) {
 	res.render('create');
 });
 
-route.get('/complete', function(req, res) {
+router.get('/complete', function(req, res) {
 	// 딥러닝 서버에서 Font 제작을 완료했을 때 여기로 요청
 
 	// Font table Update with FontID
