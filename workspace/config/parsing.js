@@ -4,6 +4,7 @@ var parsing = function(req,res,next) {
   var opts = {
     encoding: 'utf-8',
     uploadDir: './public/repository',
+    //  with epoch time
     multiples: true,
   }
   const form = new formidable.IncomingForm();
