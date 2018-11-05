@@ -5,6 +5,12 @@ var config = {
     db.Message.belongsTo(db.User, {as:'Sender', foreignKey: 'sender_id', targetKey: 'id'})
     db.Message.belongsTo(db.User, {as:'Receiver', foreignKey: 'receiver_id', targetKey: 'id'})
     db.Font.belongsTo(db.User, {foreignKey: 'maker_id', targetKey: 'id'})
+
+    db.User_Following_Font.belongsTo(db.User, {as:'User', foreignKey: 'user_id', targetKey: 'id'})
+    db.User_Following_Font.belongsTo(db.Font, {as:'Font', foreignKey: 'font_id', targetKey: 'id'})
+    
+    db.User_Purchased_Message_Background.belongsTo(db.User, {as:'User', foreignKey: 'user_id', targetKey: 'id'})
+    db.User_Purchased_Message_Background.belongsTo(db.Message_Background, {as:'Background', foreignKey: 'message_background_id', targetKey: 'id'})
     // db.Publisher.hasMany(db.Books, {foreignKey: 'pub_id'});
     // db.Books.belongsTo(db.Publisher, {foreignKey: 'pub_id', targetKey: 'pub_id'});
     // db.RentHistory.belongsTo(db.User, {foreignKey: 'user_id', targetKey: 'user_id'});

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../model');
+var query = require('../exec/query');
 
 const Op = models.Sequelize.Op
 
@@ -29,8 +30,6 @@ router.get('/read', function(req, res) {
 		limit: 5
 	}).then(function(results) {
 		opponent_users = [];
-		opponent_ids = [];
-
 
 		results.forEach(function(item){
 			if(item.sender_id != req.user.id) {
@@ -41,8 +40,7 @@ router.get('/read', function(req, res) {
 				id = item.receiver_id;
 			}
 			if(!opponent_users.includes(other)){
-				opponent_users.push(other)
-				opponent_ids.push(id)
+				opponent_users.push({id: id, name: other})
 			}
 		})
 
@@ -76,7 +74,6 @@ router.get('/read_detail/:user_id', function(req, res) {
 				$and:[
 					{ sender_id: req.user.id, },
 					models.Sequelize.literal("Receiver.user_id = '" + uid + "'"),
-						// Receiver.user_id: uid
 				]
 			},{
 				$and:[
@@ -97,7 +94,46 @@ router.get('/read_detail/:user_id', function(req, res) {
 
 
 router.get('/write', function(req, res) {
-	res.render('write');
+	var font;
+	var bg;
+
+	query.User_Following_Font(req.user.id)
+		.then(function(fonts){
+			font = fonts;
+			return query.User_Purchased_Message_Background(req.user.id)
+		}).then(function(msg_bg){
+			bg = msg_bg
+			console.log(font)
+			console.log(bg)
+			res.render('write');
+
+		}).catch(function(err){
+			res.send(err);
+		})
+
+
+
+	// models.User_Following_Font.findAll({
+	// 	where: { user_id: req.user.id },
+	// }).then(function(fonts) {
+	// 	font = fonts
+
+	// 	models.User_Purchased_Message_Background.findAll({
+	// 		where: { user_id: req.user.id },
+	// 	}).then(function(msg_bg) {
+	// 		console.log (fonts)
+	// 		console.log (msg_bg)
+			
+	// 		res.json(results);
+
+	// 	}).catch(function(err) {
+	// 		res.send(err);
+	// 	});
+	// }).catch(function(err) {
+	// 	res.send(err);
+	// });
+
+	// res.render('write');
 });
 
 router.post('/write', function(req,res) {

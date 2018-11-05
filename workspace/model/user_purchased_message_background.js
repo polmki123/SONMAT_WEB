@@ -4,9 +4,9 @@ var models = require('./index');
 
 module.exports = function(sequelize, DataTypes) {
     return sequelize.define('User_Purchased_Message_Background', {
-        user_id: {type: DataTypes.INTEGER, allowNull: false
+        user_id: {type: DataTypes.INTEGER, allowNull: false, primaryKey : true
             , references: {model: models.User, key: 'id'}},
-        message_background_id: {type: DataTypes.INTEGER, allowNull: false
+        message_background_id: {type: DataTypes.INTEGER, allowNull: false, primaryKey : true
             , references: {model: models.Message_Background, key: 'id'}},
         
     }, {
