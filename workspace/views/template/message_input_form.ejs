@@ -1,0 +1,219 @@
+<%- include('../partials/head') -%>
+
+  <!-- body classes:  -->
+  <!-- "boxed": boxed layout mode e.g. <body class="boxed"> -->
+  <!-- "pattern-1 ... pattern-9": background patterns for boxed layout mode e.g. <body class="boxed pattern-1"> -->
+  <!-- "transparent-header": makes the header transparent and pulls the banner to top -->
+  <!-- "gradient-background-header": applies gradient background to header -->
+  <!-- "page-loader-1 ... page-loader-6": add a page loader to the page (more info @components-page-loaders.html) -->
+  <body class=" ">
+
+    <!-- scrollToTop -->
+    <!-- ================ -->
+    <div class="scrollToTop circle"><i class="fa fa-angle-up"></i></div>
+
+    <!-- page wrapper start -->
+    <!-- ================ -->
+    <div class="page-wrapper">
+      <!-- header-container start -->
+      <div class="header-container">
+        <!-- header-top start -->
+        <!-- classes:  -->
+        <!-- "dark": dark version of header top e.g. class="header-top dark" -->
+        <!-- "colored": colored version of header top e.g. class="header-top colored" -->
+        <!-- ================ -->
+        <div class="header-top dark">
+          <div class="container">
+            <div class="row">
+              <div class="col-3 col-sm-6 col-lg-9">
+                <!-- header-top-first start -->
+                <!-- ================ -->
+                <div class="header-top-first clearfix">
+                  <ul class="social-links circle small clearfix hidden-sm-down">
+                    <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li class="skype"><a href="#"><i class="fa fa-skype"></i></a></li>
+                    <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                    <li class="youtube"><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+                    <li class="flickr"><a href="#"><i class="fa fa-flickr"></i></a></li>
+                    <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                  </ul>
+                  <div class="social-links hidden-md-up circle small">
+                    <div class="btn-group dropdown">
+                      <button id="header-top-drop-1" type="button" class="btn dropdown-toggle dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-share-alt"></i></button>
+                      <ul class="dropdown-menu dropdown-animation" aria-labelledby="header-top-drop-1">
+                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                        <li class="skype"><a href="#"><i class="fa fa-skype"></i></a></li>
+                        <li class="linkedin"><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        <li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                        <li class="youtube"><a href="#"><i class="fa fa-youtube-play"></i></a></li>
+                        <li class="flickr"><a href="#"><i class="fa fa-flickr"></i></a></li>
+                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                        <li class="pinterest"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <ul class="list-inline hidden-md-down">
+                    <li class="list-inline-item"><i class="fa fa-map-marker pr-1 pl-2"></i>Address, City, Postal Code</li>
+                    <li class="list-inline-item"><i class="fa fa-phone pr-1 pl-2"></i>+00 123 123 123</li>
+                    <li class="list-inline-item"><i class="fa fa-envelope-o pr-1 pl-2"></i> example@your_domain.com</li>
+                  </ul>
+                </div>
+                <!-- header-top-first end -->
+              </div>
+              <div class="col-9 col-sm-6 col-lg-3">
+
+                <!-- header-top-second start -->
+                <!-- ================ -->
+                <div id="header-top-second"  class="clearfix">
+
+                  <!-- header top dropdowns start -->
+                  <!-- ================ -->
+                  <div class="header-top-dropdown text-right">
+                    <div class="btn-group">
+                      <a href="page-signup.html" class="btn btn-default btn-sm"><i class="fa fa-user pr-2"></i> Sign Up</a>
+                    </div>
+                    <div class="btn-group">
+                      <button id="header-top-drop-2" type="button" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock pr-2"></i> Login</button>
+                      <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-top-drop-2">
+                        <li>
+                          <form class="login-form margin-clear">
+                            <div class="form-group has-feedback">
+                              <label class="control-label">Username</label>
+                              <input type="text" class="form-control" placeholder="">
+                              <i class="fa fa-user form-control-feedback"></i>
+                            </div>
+                            <div class="form-group has-feedback">
+                              <label class="control-label">Password</label>
+                              <input type="password" class="form-control" placeholder="">
+                              <i class="fa fa-lock form-control-feedback"></i>
+                            </div>
+                            <button type="submit" class="btn btn-gray btn-sm">Log In</button>
+                            <span class="pl-1 pr-1">or</span>
+                            <button type="submit" class="btn btn-default btn-sm">Sing Up</button>
+                            <ul>
+                              <li><a href="#">Forgot your password?</a></li>
+                            </ul>
+                            <span class="text-center">Login with</span>
+                            <ul class="social-links circle small colored clearfix">
+                              <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                              <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                              <li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            </ul>
+                          </form>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!--  header top dropdowns end -->
+                </div>
+                <!-- header-top-second end -->
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- header-top end -->
+
+        <!-- header start -->
+        <!-- classes:  -->
+        <!-- "fixed": enables fixed navigation mode (sticky menu) e.g. class="header fixed clearfix" -->
+        <!-- "fixed-desktop": enables fixed navigation only for desktop devices e.g. class="header fixed fixed-desktop clearfix" -->
+        <!-- "fixed-all": enables fixed navigation only for all devices desktop and mobile e.g. class="header fixed fixed-desktop clearfix" -->
+        <!-- "dark": dark version of header e.g. class="header dark clearfix" -->
+        <!-- "centered": mandatory class for the centered logo layout -->
+        <!-- ================ -->
+       
+        <!-- header end -->
+      </div>
+      <!-- header-container end -->
+      <!-- breadcrumb start -->
+      <!-- ================ -->
+      <div class="breadcrumb-container">
+        <div class="container">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><i class="fa fa-home pr-2"></i><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active">Forms</li>
+          </ol>
+        </div>
+      </div>
+      <!-- breadcrumb end -->
+
+      <!-- main-container start -->
+      <!-- ================ -->
+      <section class="main-container">
+
+        <div class="container">
+          <div class="row">
+
+            <!-- main start -->
+            <!-- ================ -->
+            <div class="main col-lg-8">
+
+              <h2 class="mt-5">메시지 작성</h2>
+              <form>
+                <div class="form-group row">
+                  <label for="inputEmail3" class="col-sm-2 col-form-label">수신자</label>
+                  <div class="col-sm-10">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="수신자의 이메일을 입력하세요">
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="inputPassword3" class="col-sm-2 col-form-label">제목</label>
+                  <div class="col-sm-10">
+                    <input class="form-control" type="text" placeholder="제목을 입력하세요">
+                  </div>
+                </div>
+              </form>
+
+              <br/>
+              <!-- accordion start -->
+              <div id="accordion-3" class="collapse-style-3" role="tablist" aria-multiselectable="true">
+                <div class="card">
+                  <div class="card-header" role="tab" id="headingOne-3">
+                    <h4 class="mb-0">
+                      <a data-toggle="collapse" data-parent="#accordion-3" href="#collapseOne-3" aria-expanded="true" aria-controls="collapseOne-3">
+                        <i class="fa fa-bold pr-10"></i>편지지
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseOne-3" class="collapse show" role="tabpanel" aria-labelledby="headingOne-3">
+                    <div class="card-block">
+                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" role="tab" id="headingTwo-3">
+                    <h4 class="mb-0">
+                      <a class="collapsed" data-toggle="collapse" data-parent="#accordion-3" href="#collapseTwo-3" aria-expanded="false" aria-controls="collapseTwo-3">
+                        <i class="fa fa-leaf pr-10"></i>손글씨
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo-3" class="collapse" role="tabpanel" aria-labelledby="headingTwo-3">
+                    <div class="card-block">
+                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <br/>
+
+              <h2>편지 내용</h2>
+              <form>
+                <div class="form-group">
+                  <label for="exampleTextarea">Example textarea</label>
+                  <textarea class="form-control" id="exampleTextarea" rows="10"></textarea>
+                </div>
+              </form>
+              
+            </div>
+            
+          </div>
+        </div>
+      </section>
+    </div>
+
+  </body>
+<%- include('../partials/foot') -%>
