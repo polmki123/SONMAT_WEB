@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../model');
+var service = require('../service/service')
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -11,6 +12,15 @@ router.get('/', function(req, res) {
 	// DB 를 쿼리할 필요가 없어보인다. 
 	res.render('index');
 });
+
+router.post('/test_upload', function(req, res){
+	console.log(req.files);
+	console.log(req.body);
+	service.image_dir_change(req.files.image, 'font', '1', '1');
+	// service.image_dir_change(req.files.image, 'handwrite_image', '.', '1')
+	// service.image_dir_change(req.files.image, 'message_image', '.', '1')
+
+})
 
 router.get('/db/a', function(req, res) {
 	models.User.findAll().then(function(results) {

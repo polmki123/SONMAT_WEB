@@ -19,7 +19,7 @@ function configApp() {
 	app.use(require('./config/user')); // temporary user
 
 	app.use('/font', require('./routes/font')); // create, gallery
-	app.use('/letter', require('./routes/letter')); // read write mailbox
+	app.use('/handwrite', require('./routes/handwrite')); // read write mailbox
 	app.use('/user', require('./routes/user')); // user login logout register setting
 	app.use('/', require('./routes/index')); // main
 }
