@@ -1,7 +1,7 @@
 var models = require('../model');
 
 var user_setting = function(req,res,next) {
-	models.User.find({
+	models.user.find({
 		where: {
 			id : 1
 		}

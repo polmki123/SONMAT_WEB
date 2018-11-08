@@ -23,7 +23,7 @@ router.post('/test_upload', function(req, res){
 })
 
 router.get('/db/a', function(req, res) {
-	models.User.findAll().then(function(results) {
+	models.user.findAll().then(function(results) {
 		res.json(results);
 	}).catch(function(err) {
 		res.send(err);
@@ -31,7 +31,7 @@ router.get('/db/a', function(req, res) {
 });
 
 router.get('/db/b', function(req, res) {
-	models.Message.findAll().then(function(results) {
+	models.message.findAll().then(function(results) {
 		res.json(results);
 	}).catch(function(err) {
 		res.send(err);
@@ -39,7 +39,7 @@ router.get('/db/b', function(req, res) {
 });
 
 router.get('/db/c', function(req, res) {
-	models.Font.findAll().then(function(results) {
+	models.font.findAll().then(function(results) {
 		res.json(results);
 	}).catch(function(err) {
 		res.send(err);
@@ -47,7 +47,7 @@ router.get('/db/c', function(req, res) {
 });
 
 router.get('/db/d', function(req, res) {
-	models.Message_Background.findAll().then(function(results) {
+	models.sonmat.findAll().then(function(results) {
 		res.json(results);
 	}).catch(function(err) {
 		res.send(err);
