@@ -6,7 +6,7 @@ var User_Following_Font = require('../dao/User_Following_Font');
 var User_Purchased_Message_Background = require('../dao/User_Purchased_Message_Background');
 var Message = require('../dao/Message');
 
-const Op = models.Sequelize.Op
+var Op = models.Sequelize.Op
 
 router.get('/read', function(req, res) {
 
