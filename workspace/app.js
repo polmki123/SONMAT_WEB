@@ -16,7 +16,7 @@ function configApp() {
 	app.use(express.static(path.join(__dirname, 'public')));
 	app.use(require('./config/parsing'));
 
-	// app.use(require('./config/user')); // temporary user
+	app.use(require('./config/user')); // temporary user
 
 	app.use('/font', require('./routes/font')); // create, gallery
 	app.use('/handwrite', require('./routes/handwrite')); // read write mailbox
