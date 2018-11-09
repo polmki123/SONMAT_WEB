@@ -1,16 +1,23 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../model');
-var service = require('../service/file_service')
+var file_service = require('../service/file_service')
+var msgB_service = require('../service/message_box_service')
 
 /* GET home page. */
 router.get('/', function(req, res) {
-	
+	msgB_service.get_Opponents_name(req.user.id)
+	.then(function(opponent_users){
+		console.log(opponent_users)
+		res.render('index', {opponents: opponent_users});
+	}).catch(function(err){
+		res.send(err);
+	});
 
 	// 메인 페이지를 보여준다.
 
 	// DB 를 쿼리할 필요가 없어보인다. 
-	res.render('index');
+	// res.render('index');
 });
 
 router.post('/test_upload', function(req, res){
@@ -48,6 +55,14 @@ router.get('/db/c', function(req, res) {
 
 router.get('/db/d', function(req, res) {
 	models.sonmat.findAll().then(function(results) {
+		res.json(results);
+	}).catch(function(err) {
+		res.send(err);
+	});
+});
+
+router.get('/db/e', function(req, res) {
+	models.sonmat_request.findAll().then(function(results) {
 		res.json(results);
 	}).catch(function(err) {
 		res.send(err);
