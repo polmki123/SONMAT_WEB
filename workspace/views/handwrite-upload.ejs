@@ -37,17 +37,17 @@
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-3 pull-right">
-                                                            <button type="submit" class="btn btn-default btn-lg btn-animated margin-clear">업로드&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-up fa-2x"></i></button>
+                                                            <button id="image_upload_btn" class="btn btn-default btn-lg btn-animated margin-clear">업로드&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-up fa-2x"></i></button>
                                                         </div>
                                                     </div>
 
                                                     <div class="separator"></div>
                                                     <div class="col-lg-10">
-                                                        <div class="form-group form-inline margin-clear d-flex">
+                                                        <form class="form-group form-inline margin-clear d-flex">
                                                             <input type="file" name="img[]" class="file" style="visibility: hidden; position: absolute;">
                                                             <input type="text" class="form-control col-lg-10" placeholder="파일을 선택해주세요" disabled style="background-color: whitesmoke; color: black;">
                                                             <button class="browse btn btn-dark margin-clear col-lg-2" type="button">열기</button>
-                                                        </div>
+                                                        </form>
                                                     </div>
                                                     <input type="text" style="visibility: hidden;">
                                                 </div>
@@ -118,29 +118,48 @@
         <!-- JavaScript files placed at the end of the document so the pages load faster -->
         <!-- ================================================== -->
         <!-- Jquery and Bootstap core js files -->
-        <script src="plugins/jquery.min.js"></script>
-        <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="/plugins/jquery.min.js"></script>
+        <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- Magnific Popup javascript -->
-        <script src="plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+        <script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
         <!-- Appear javascript -->
-        <script src="plugins/waypoints/jquery.waypoints.min.js"></script>
-        <script src="plugins/waypoints/sticky.min.js"></script>
+        <script src="/plugins/waypoints/jquery.waypoints.min.js"></script>
+        <script src="/plugins/waypoints/sticky.min.js"></script>
         <!-- Count To javascript -->
-        <script src="plugins/countTo/jquery.countTo.js"></script>
+        <script src="/plugins/countTo/jquery.countTo.js"></script>
         <!-- Slick carousel javascript -->
-        <script src="plugins/slick/slick.min.js"></script>
+        <script src="/plugins/slick/slick.min.js"></script>
         <!-- Initialization of Plugins -->
-        <script src="js/template.js"></script>
+        <script src="/js/template.js"></script>
         <!-- Custom Scripts -->
-        <script src="js/custom.js"></script>
+        <script src="/js/custom.js"></script>
 
         <script>
+
             $(document).on('click', '.browse', function(){
                 var file = $(this).parent().find('.file');
                 file.trigger('click');
             });
             $(document).on('change', '.file', function(){
                 $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+            });
+
+            $(document).on('click', '#image_upload_btn', function() {
+
+                var form = $(this).parent().parent().parent().find('.form-group');
+                var formData = new FormData(form);
+
+                var file = $(form).find('.file');
+                formData.append("file", file[0].files[0]);
+                //formData.append("body", );
+
+                $.ajax({
+                    url : '/handwrite/file',
+                    processData: false,
+                    contentType: false,
+                    data: formData,
+                    type: 'POST'
+                });
             });
         </script>
 
