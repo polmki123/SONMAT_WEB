@@ -6,7 +6,7 @@ var msgB_service = require('../service/message_box_service')
 
 /* GET home page. */
 router.get('/', function(req, res) {
-	msgB_service.get_Opponents_name(req.user.id)
+	msgB_service.get_opponents_name(req.user.id)
 	.then(function(opponent_users){
 		console.log(opponent_users)
 		res.render('index', {opponents: opponent_users});
