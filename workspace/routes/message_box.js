@@ -3,7 +3,7 @@ var router = express.Router();
 var models = require('../model');
 var msgB_service = require('../service/message_box_service')
 
-router.get('/timeline/:opponent', function(req, res) {
+router.get('/timeline/:opponent', function(req, res, next) {
 
 	opponent_uid = req.params.opponent;
 	
@@ -11,11 +11,12 @@ router.get('/timeline/:opponent', function(req, res) {
 	.then(function(msgs){
 		res.json(msgs);
 	}).catch(function(err){
-		res.send(err);
+		console.log(err);
+		next();
 	});
 });
 
-router.get('/message', function(req, res) {
+router.get('/message', function(req, res, next) {
 	
 });
 
