@@ -115,25 +115,6 @@
         </div>
         <!-- page-wrapper end -->
 
-        <!-- JavaScript files placed at the end of the document so the pages load faster -->
-        <!-- ================================================== -->
-        <!-- Jquery and Bootstap core js files -->
-        <script src="/plugins/jquery.min.js"></script>
-        <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
-        <!-- Magnific Popup javascript -->
-        <script src="/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
-        <!-- Appear javascript -->
-        <script src="/plugins/waypoints/jquery.waypoints.min.js"></script>
-        <script src="/plugins/waypoints/sticky.min.js"></script>
-        <!-- Count To javascript -->
-        <script src="/plugins/countTo/jquery.countTo.js"></script>
-        <!-- Slick carousel javascript -->
-        <script src="/plugins/slick/slick.min.js"></script>
-        <!-- Initialization of Plugins -->
-        <script src="/js/template.js"></script>
-        <!-- Custom Scripts -->
-        <script src="/js/custom.js"></script>
-
         <script>
 
             $(document).on('click', '.browse', function(){
@@ -151,14 +132,24 @@
 
                 var file = $(form).find('.file');
                 formData.append("file", file[0].files[0]);
-                //formData.append("body", );
 
                 $.ajax({
-                    url : '/handwrite/file',
+                    url : '/file_upload',
                     processData: false,
                     contentType: false,
                     data: formData,
                     type: 'POST'
+                }).then( function(res) {
+
+                    var body = {};
+                    body.file_path = res.path;
+                    body.user_id = 1;
+
+                    $.ajax({
+                        url : '/handwrite/file',
+                        data: body,
+                        type: 'POST'
+                    });
                 });
             });
         </script>
