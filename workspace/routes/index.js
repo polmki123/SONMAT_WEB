@@ -5,13 +5,14 @@ var file_service = require('../service/file_service')
 var msgB_service = require('../service/message_box_service')
 
 /* GET home page. */
-router.get('/', function(req, res) {
-	msgB_service.get_Opponents_name(req.user.id)
+router.get('/', function(req, res, next) {
+	msgB_service.get_opponents_name(req.user.id)
 	.then(function(opponent_users){
 		console.log(opponent_users)
 		res.render('index', {opponents: opponent_users});
 	}).catch(function(err){
-		res.send(err);
+		console.log(err);
+		next();
 	});
 
 	// 메인 페이지를 보여준다.
@@ -20,7 +21,7 @@ router.get('/', function(req, res) {
 	// res.render('index');
 });
 
-router.post('/test_upload', function(req, res){
+router.post('/test_upload', function(req, res, next){
 	console.log(req.files);
 	console.log(req.body);
 	service.image_dir_change(req.files.image, 'font', '1', '1');
@@ -29,52 +30,57 @@ router.post('/test_upload', function(req, res){
 
 })
 
-router.get('/db/a', function(req, res) {
+router.get('/db/a', function(req, res, next) {
 	models.user.findAll().then(function(results) {
 		res.json(results);
 	}).catch(function(err) {
-		res.send(err);
+		console.log(err);
+		next();
 	});
 });
 
-router.get('/db/b', function(req, res) {
+router.get('/db/b', function(req, res, next) {
 	models.message.findAll().then(function(results) {
 		res.json(results);
 	}).catch(function(err) {
-		res.send(err);
+		console.log(err);
+		next();
 	});
 });
 
-router.get('/db/c', function(req, res) {
+router.get('/db/c', function(req, res, next) {
 	models.font.findAll().then(function(results) {
 		res.json(results);
 	}).catch(function(err) {
-		res.send(err);
+		console.log(err);
+		next();
 	});
 });
 
-router.get('/db/d', function(req, res) {
+router.get('/db/d', function(req, res, next) {
 	models.sonmat.findAll().then(function(results) {
 		res.json(results);
 	}).catch(function(err) {
-		res.send(err);
+		console.log(err);
+		next();
 	});
 });
 
-router.get('/db/e', function(req, res) {
+router.get('/db/e', function(req, res, next) {
 	models.sonmat_request.findAll().then(function(results) {
 		res.json(results);
 	}).catch(function(err) {
-		res.send(err);
+		console.log(err);
+		next();
 	});
 });
 
-router.get('/shutdown', function(req, res) {
+router.get('/shutdown', function(req, res, next) {
 	process.exit(0);
 	//
 })
 
-router.get('/ping', function(req, res) {
+router.get('/ping', function(req, res, next) {
 	res.sendStatus(200);
 })
 

@@ -22,6 +22,7 @@ function configApp() {
 	app.use('/handwrite', require('./routes/handwrite')); // read write mailbox
 	app.use('/messageBox', require('./routes/message_box')); // read write mailbox
 	app.use('/user', require('./routes/user')); // user login logout register setting
+    app.use('/file_upload', require('./routes/file_upload')); // file upload service
 	app.use('/', require('./routes/index')); // main
 }
 

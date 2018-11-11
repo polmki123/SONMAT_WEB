@@ -1,19 +1,19 @@
 var models = require('../model');
 
-function get_Opponents_name(uid){
+function get_opponents_name(uid){
 	return new Promise(function(resolve, reject){
 		models.sonmat_request.findAll({
 			include: [
 				{
 					model: models.user, 
 					as : "From", 
-					required : false, 
+					required : true, 
 					attributes : ['name'], 
 				},
 				{
 					model: models.user, 
 					as : "To", 
-					required : false, 
+					required : true, 
 					attributes : ['name'], 
 				},
 			],
@@ -45,39 +45,53 @@ function get_Opponents_name(uid){
 	});
 };
 
-function get_Message_with_user(uid, opponent_uid){
+function get_message_timeline(uid, opponent_uid){
 	return new Promise(function(resolve, reject){
-		models.Message.findAll({
+		models.sonmat_request.findAll({
 			include: [
 				{
-					model: models.User,
-					as: 'Sender',
-					required : false, 
-					attributes : ['user_id'], 
+					model: models.user,
+					as: 'From',
+					required : true, 
+					attributes : ['name'], 
 				},{
-					model: models.User,
-					as: 'Receiver',
-					required : false, 
-					attributes : ['user_id'], 
+					model: models.user,
+					as: 'To',
+					required : true, 
+					attributes : ['name'], 
+				},{
+					model: models.sonmat,
+					required : true, 
+					attributes : ['message_id', 'font_id'], 
+					include:[
+						{
+							model: models.message,
+							required : true, 
+							attributes : ['title', 'contents'], 
+						}
+					]
 				}
 			],
 			where: {
 				$or: [{
 					$and:[
-						{ sender_id: uid, },
-						models.Sequelize.literal("Receiver.user_id = '" + opponent_uid + "'"),
+						{ from_user_id: uid, 
+							to_user_id: opponent_uid },
+						// models.Sequelize.literal("Receiver.user_id = '" + opponent_uid + "'"),
 					]
 				},{
 					$and:[
-						{ receiver_id: uid },
-						models.Sequelize.literal("Sender.user_id = '" + opponent_uid + "'"),
+						{ from_user_id: opponent_uid, 
+							to_user_id: uid },
+						// models.Sequelize.literal("Sender.user_id = '" + opponent_uid + "'"),
 					]
 				}]
 			},
 			order: [['send_date', 'DESC']], // index 0 is new, index 1 is old (if DESC)
 			// limit: 5
-		}).then(function(msg) {
-			resolve(msg)
+		}).then(function(msgs) {
+			msgs_json = JSON.parse(JSON.stringify(msgs));
+			resolve(msgs_json)
 		}).catch(function(err) {
 			reject(err);
 		});
@@ -85,7 +99,7 @@ function get_Message_with_user(uid, opponent_uid){
 };
 
 var func = {}
-func.get_Opponents_name = get_Opponents_name;
-func.get_Message_with_user = get_Message_with_user;
+func.get_opponents_name = get_opponents_name;
+func.get_message_timeline = get_message_timeline;
 
 module.exports = func;
