@@ -1,55 +1,29 @@
 'use strict';
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('User', {
+	return sequelize.define('user', {
 		id: {
-			type: DataTypes.INTEGER, 
+			type: DataTypes.INTEGER.UNSIGNED,
 			primaryKey: true, 
-			autoIncrement: true
+			autoIncrement: true,
+            allowNull: false
 		},
-		
-		// id: {
-		// 	type: DataTypes.UUID, 
-		// 	primaryKey: true, 
-		// 	defaultValue: DataTypes.UUIDV4,
-		// 	allowNull: false
-
-		// },
-		user_id: {
-			type: DataTypes.STRING(20), 
+		name: {
+			type: DataTypes.STRING,
 			allowNull: true
 		},
 		email: {
-			type: DataTypes.STRING(30), 
-			validate: {isEmail: true}
+			type: DataTypes.STRING,
+			allowNull: true,
+			validate: { isEmail: true }
 		},
 		password: {
-			type: DataTypes.STRING(20), // (Encrypt) 
+			type: DataTypes.STRING,
 			allowNull: true
-		},
-		temp_key: {
-			type: DataTypes.STRING(50), 
-			allowNull: true
-		},
-		is_linked_dropbox: {
-			type: DataTypes.BOOLEAN, 
-			defaultValue: 0
-		}, // or defaultValue: 0
-		dropbox_account: {
-			type: DataTypes.STRING(30), 
-			defaultValue: null
-		},
-		// created_at: {
-		// 	type: DataTypes.DATE,
-		// 	allowNull: false
-		// },
-		// updated_at:  DataTypes.DATE,
-
-		// deleted_at: DataTypes.DATE
+		}
 	}, {
-		tableName: 'User',
-		freezeTableName: true,
+        tableName: 'user',
 		underscored: true,
-		timestamps: false,
+		timestamps: false
 	});
 };

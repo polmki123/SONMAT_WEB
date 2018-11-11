@@ -3,28 +3,28 @@
 var models = require('./index');
 
 module.exports = function(sequelize, DataTypes) {
-	return sequelize.define('message', {
+	return sequelize.define('user_cloud_service', {
 		id: {
 			type: DataTypes.INTEGER.UNSIGNED,
 			primaryKey: true, 
 			autoIncrement: true,
-            allowNull: false
+			allowNull: false
 		},
         user_id: {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: true,
             references: { model: models.user, key: 'id' }
         },
-		title: {
+		service_name: {
 			type: DataTypes.STRING,
 			allowNull: true
 		},
-		contents: {
+		account: {
 			type: DataTypes.STRING,
 			allowNull: true
 		}
 	}, {
-		tableName: 'message',
+        tableName: 'user_link_cloud_service',
 		underscored: true,
 		timestamps: false
 	});

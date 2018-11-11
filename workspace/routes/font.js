@@ -3,11 +3,11 @@ var router = express.Router();
 
 /* GET home page. */
 // create, gallery
-router.get('/gallery', function(req, res) {
+router.get('/gallery', function(req, res, next) {
 
 });
 
-router.get('/create', function(req, res) {
+router.get('/create', function(req, res, next) {
 	// 이미지 업로드 
 	// 폰트 이름 작성
 	// 폰트 Description 작성 with loginRequired
@@ -15,7 +15,7 @@ router.get('/create', function(req, res) {
 	res.render('create');
 });
 
-router.get('/complete', function(req, res) {
+router.get('/complete', function(req, res, next) {
 	// 딥러닝 서버에서 Font 제작을 완료했을 때 여기로 요청
 
 	// Font table Update with FontID
@@ -36,7 +36,7 @@ router.get('/complete', function(req, res) {
 	res.sendStatus(200)
 });
 
-router.post('/upload', function(req, res) {
+router.post('/upload', function(req, res, next) {
 	// 이미지 파일 저장 및 폰트 제작 요청 with loginRequired
 	
 	console.log(req.files.image)

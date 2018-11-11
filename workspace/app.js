@@ -16,10 +16,11 @@ function configApp() {
 	app.use(express.static(path.join(__dirname, 'public')));
 	app.use(require('./config/parsing'));
 
-	// app.use(require('./config/user')); // temporary user
+	app.use(require('./config/user')); // temporary user
 
 	app.use('/font', require('./routes/font')); // create, gallery
 	app.use('/handwrite', require('./routes/handwrite')); // read write mailbox
+	app.use('/messageBox', require('./routes/message_box')); // read write mailbox
 	app.use('/user', require('./routes/user')); // user login logout register setting
 	app.use('/', require('./routes/index')); // main
 }
