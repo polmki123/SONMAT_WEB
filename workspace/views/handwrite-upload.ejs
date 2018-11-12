@@ -75,7 +75,7 @@
                                             <div class="hc-item-box-2 hc-element-invisible" data-animation-effect="fadeInLeftSmall" style="animation-delay: 0.1s; vertical-align: middle">
                                                 <span class="icon dark-bg small">1</span>
                                                 <div class="body">
-                                                    <h5 class="title" style="vertical-align:middle;">손글씨 쓰기</h5>
+                                                    <h5 class="title">손글씨 쓰기</h5>
                                                 </div>
                                             </div>
                                             <div class="separator-2"></div>
@@ -117,14 +117,18 @@
 
         <script>
 
+            // 열기 버튼 - click event
             $(document).on('click', '.browse', function(){
                 var file = $(this).parent().find('.file');
                 file.trigger('click');
             });
+
+            // 파일 경로 input - change event
             $(document).on('change', '.file', function(){
                 $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
             });
 
+            // 업로드 버튼 - click event
             $(document).on('click', '#image_upload_btn', function() {
 
                 var form = $(this).parent().parent().parent().find('.form-group');
@@ -132,6 +136,12 @@
 
                 var file = $(form).find('.file');
                 formData.append("file", file[0].files[0]);
+
+                // TODO validation 구현
+                /*if(file[0].files[0] == undefined) {
+                    alert('업로드할 파일을 선택하세요.');
+                    return;
+                }*/
 
                 $.ajax({
                     url : '/file_upload',
