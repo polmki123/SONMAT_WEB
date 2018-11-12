@@ -2,14 +2,29 @@ var express = require('express');
 var router = express.Router();
 var models = require('../model');
 
-var hw_service = require('../service/handwrite_service');
-var file_service = require('../service/file_service');
-var font_service = require('../service/font_service');
+router.get('/upload', function (req, res) {
 
-router.post('/image_upload', function(req, res, next) {
+    res.render('handwrite-upload');
+});
 
-	console.log('path : ', req.files.image.path)
-	res.send(req.files.image.path)
+router.post('/file', function(req, res) {
+
+    var body = {};
+    body.user_id = req.body.user_id;
+
+    models.font.create(body).then( function(result) {
+        //res.json(result);
+
+        // move directory
+
+    }).catch( function(err) {
+        console.error(err);
+    });
+});
+
+router.get('/making/start', function(req, res) {
+
+    res.render('font-making-start');
 });
 
 module.exports = router;
