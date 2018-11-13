@@ -6,7 +6,7 @@ var msgB_service = require('../../../service/message_box_service')
 /* index */
 router.get('/', function(req, res, next) {
 	msgB_service.get_opponents_name(req.user.id) // user
-	.exec(function(opponents){
+	.then(function(opponents){
 		res.render('home/home', {'opponents' : opponents});		
 	}).catch(function(err) {
 		console.log(err);

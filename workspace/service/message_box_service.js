@@ -34,7 +34,7 @@ function get_opponents_name(uid){
 					id = oppo.to_user_id;
 				}
 				if(!opponent_users.includes(other)){
-					opponent_users.push({id: id, name: other, send_date: opponents.send_date})
+					opponent_users.push({id: id, name: other, send_date: oppo.send_date})
 				}
 			});
 			
