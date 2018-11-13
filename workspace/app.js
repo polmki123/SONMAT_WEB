@@ -13,11 +13,11 @@ var app = express();
 
 function configApp() {
 
-	app.set('views', path.join(__dirname, 'views/mento/template'));
+	app.set('views', path.join(__dirname, 'views/template'));
 	app.set('view engine', 'ejs');
 
 	// ejs-layouts setting
-    app.set('layout', path.join(__dirname, 'views/mento/template/layout/layout'));
+    app.set('layout', path.join(__dirname, 'views/template/layout/layout'));
     app.set("layout extractScripts", true);
     app.set("layout extractStyles", true);
     app.use(expressLayouts);
@@ -37,7 +37,7 @@ function configApp() {
 }
 
 function viewRoute() {
-	var VIEW_BASE_PATH = "./routes/mento/view/";
+	var VIEW_BASE_PATH = "./routes/view/";
     // home
 	app.use('/', require(VIEW_BASE_PATH + 'home/home'));
 
@@ -49,6 +49,9 @@ function viewRoute() {
 
     // font
     app.use('/font', require(VIEW_BASE_PATH + 'font/font'));
+
+    // handwrite
+    app.use('/handwrite', require(VIEW_BASE_PATH + 'handwrite/handwrite'));
 }
 
 function apiRoute() {
