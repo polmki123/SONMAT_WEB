@@ -1,0 +1,43 @@
+<div id="page-start"></div>
+
+<section class="main-container">
+
+    <div class="container">
+        <div class="row">
+
+            <!-- main start -->
+            <!-- ================ -->
+                <div class="main col-12">
+                    <!-- page-title start -->
+                    <!-- ================ -->
+
+                    <div class="separator with-icon"><i class="fa fa-pencil bordered"></i></div>
+
+                    <br>
+                    <br>
+                    <form action="/api/message" method="post">
+                    <div id="summernote">여기에 내용을 채워넣어</div>
+                    <div class="separator"></div>
+                    <div class="text-right">
+                        <button type="button" class="btn btn-info"><i class="fa fa-link"></i> 미리보기</button>
+                        <button type="button" class="btn btn-success"><i class="fa fa-save"></i> 저장</button>
+                        <button type="submit" class="btn btn-default"><i class="fa fa-share"></i> 공유</button>
+                    </div>
+                    </form>
+                </div>
+
+
+            <!-- main end -->
+
+        </div>
+    </div>
+</section>
+
+
+<script type="text/javascript">
+    $('#summernote').summernote({
+        placeholder: 'Text Here',
+        tabsize: 2,
+        height: 400,
+    });
+</script>
