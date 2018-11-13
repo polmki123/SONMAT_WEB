@@ -6,28 +6,27 @@ var models = require('../../../model');
 
 router.post('/', function(req, res) {
 
-    var body = {};
-    body.user_id = req.body.user_id;
+    var font = {};
+    font.user_id = req.user.id;
 
-    models.font.create(body).then( function(result) {
+    models.font.create(font).then( function(result) {
 
-        console.log("[font.js] insert font : ", result);
-
-        /*// move directory
-        var temp_file_path = body.file_path;
+        // move directory
+        var temp_file_path = req.body.file_path;
         var temp_dirname = path.dirname(temp_file_path);
 
-        var dest_dirname = path.join(temp_dirname, '..', 'font');
+        var dest_dirname = path.join(temp_dirname, '..', 'font', result.dataValues.id.toString());
+        var dest_file_path = dest_dirname + "\\handwrite" + path.extname(temp_file_path);
 
-        var file_name = req.files.file.name;
-        var file_raw_name = file_name.substring(0, file_name.lastIndexOf("\."));
-        var file_ext_name = path.extname(file_name);
+        // create new directory : (repository_path)/font/{font_id}
+        if (!fs.existsSync(dest_dirname)) {
+            fs.mkdirSync(dest_dirname);
+        }
 
-        var new_file_path = dirname + file_raw_name + "_" + (new Date).getTime() + file_ext_name;
-
-        fs.rename(input_file_path, new_file_path, function(err) {
+        // move file
+        fs.rename(temp_file_path, dest_file_path, function(err) {
             if ( err ) console.log('ERROR: ' + err);
-        });*/
+        });
 
         res.send(200);
 
