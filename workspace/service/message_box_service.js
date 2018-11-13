@@ -17,7 +17,7 @@ function get_opponents_name(uid){
 					attributes : ['name'], 
 				},
 			],
-			attributes: ['from_user_id','to_user_id', 'send_date'],
+			attributes: ['from_user_id','to_user_id', 'send_date', 'read_state'],
 			where: {
 				$or: [{from_user_id: uid}, {to_user_id: uid}]
 			},
@@ -33,8 +33,21 @@ function get_opponents_name(uid){
 					other = oppo.To.dataValues.name;
 					id = oppo.to_user_id;
 				}
-				if(!opponent_users.includes(other)){
-					opponent_users.push({id: id, name: other, send_date: oppo.send_date})
+				var found = false;
+				opponent_users.forEach(function(user){
+					if(user.id == id){
+						found = true;
+						if(oppo.read_state == 'unread'){
+							user.count = user.count + 1;	
+						}
+					}
+				});
+				if(found == false){
+					if(oppo.read_state == 'unread'){
+						opponent_users.push({id: id, name: other, send_date: oppo.send_date, count: 1})
+					}else {
+						opponent_users.push({id: id, name: other, send_date: oppo.send_date, count: 0})
+					}
 				}
 			});
 			
