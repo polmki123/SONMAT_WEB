@@ -17,7 +17,7 @@ function get_opponents_name(uid){
 					attributes : ['name'], 
 				},
 			],
-			attributes: ['from_user_id','to_user_id'],
+			attributes: ['from_user_id','to_user_id', 'send_date'],
 			where: {
 				$or: [{from_user_id: uid}, {to_user_id: uid}]
 			},
@@ -34,7 +34,7 @@ function get_opponents_name(uid){
 					id = oppo.to_user_id;
 				}
 				if(!opponent_users.includes(other)){
-					opponent_users.push({id: id, name: other})
+					opponent_users.push({id: id, name: other, send_date: opponents.send_date})
 				}
 			});
 			

@@ -1,9 +1,18 @@
 var express = require('express');
 var router = express.Router();
+var msgB_service = require('../../../service/message_box_service')
+
 
 /* index */
 router.get('/', function(req, res, next) {
-    res.render('home/home');
+	msgB_service.get_opponents_name(req.user.id) // user
+	.exec(function(opponents){
+		res.render('home/home', {'opponents' : opponents});		
+	}).catch(function(err) {
+		console.log(err);
+		next()
+	});
+    // res.render('home/home');
 });
 
 router.get('/shutdown', function(req, res, next) {
