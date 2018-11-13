@@ -12,7 +12,6 @@ var app = express();
 
 
 function configApp() {
-	app.set('views', path.join(__dirname, 'views'));
 
 	app.set('views', path.join(__dirname, 'views/template'));
 	app.set('view engine', 'ejs');
@@ -33,15 +32,10 @@ function configApp() {
 
 function viewRoute() {
 	var VIEW_BASE_PATH = "./routes/view/";
+
     // home
 	app.use('/', require(VIEW_BASE_PATH + 'home/home'));
 
-	app.use('/font', require('./routes/font')); // create, gallery
-	app.use('/handwrite', require('./routes/handwrite')); // read write mailbox
-	app.use('/messageBox', require('./routes/message_box')); // read write mailbox
-	app.use('/user', require('./routes/user')); // user login logout register setting
-    app.use('/file_upload', require('./routes/file_upload')); // file upload service
-	app.use('/', require('./routes/index')); // main
 	// account
     app.use('/account', require(VIEW_BASE_PATH + 'account/account'));
 
