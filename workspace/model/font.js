@@ -26,12 +26,12 @@ module.exports = function(sequelize, DataTypes) {
             making_status: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                defaultValue: 'in_progress'
+                defaultValue: 1
             },
             open_state: {
                 type: DataTypes.STRING,
                 allowNull: false,
-                defaultValue: 'private'
+                defaultValue: 1
             },
             making_date: {
                 type: DataTypes.DATE,

@@ -9,8 +9,6 @@ var logger = require('morgan');
 
 var app = express();
 
-
-
 function configApp() {
 
 	app.set('views', path.join(__dirname, 'views/template'));
@@ -50,7 +48,14 @@ function viewRoute() {
 }
 
 function apiRoute() {
-	//TODO not yet
+
+    var API_BASE_PATH = "./routes/api/";
+
+    // file
+    app.use('/api/files', require(API_BASE_PATH + 'files/file'));
+
+    // font
+    app.use('/api/font', require(API_BASE_PATH + 'font/font'));
 }
 
 configApp();

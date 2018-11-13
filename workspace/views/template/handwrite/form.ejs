@@ -28,7 +28,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 pull-right">
-                                                    <a href="/handwrite/making/start" id="image_upload_btn" class="btn btn-default btn-lg btn-animated margin-clear">업로드&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-up fa-2x"></i></a>
+                                                    <a href="/handwrite/making" id="image_upload_btn" class="btn btn-default btn-lg btn-animated margin-clear">업로드&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-up fa-2x"></i></a>
                                                 </div>
                                             </div>
 
@@ -126,13 +126,13 @@
             formData.append("file", file[0].files[0]);
 
             // TODO validation 구현
-            /*if(file[0].files[0] == undefined) {
+            if(file[0].files[0] == undefined) {
                 alert('업로드할 파일을 선택하세요.');
-                return;
-            }*/
+                return false;
+            }
 
             $.ajax({
-                url : '/file_upload',
+                url : '/api/files/upload',
                 processData: false,
                 contentType: false,
                 data: formData,
@@ -144,9 +144,11 @@
                 body.user_id = 1;
 
                 $.ajax({
-                    url : '/handwrite/file',
+                    url : '/api/font/',
                     data: body,
                     type: 'POST'
+                }).then( function(res) {
+
                 });
             });
         });
