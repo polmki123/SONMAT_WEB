@@ -29,11 +29,10 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.DATE,
             allowNull: true
         },
-        is_read: {
-            type: DataTypes.BOOLEAN,
+        read_state: {
+            type: DataTypes.STRING,
             allowNull: false,
-            defaultValue: 0,
-            field: 'read_state'
+            defaultValue: 1
         }
     }, {
         tableName: 'sonmat_request',

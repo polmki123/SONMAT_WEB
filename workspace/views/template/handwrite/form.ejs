@@ -137,19 +137,21 @@
                 contentType: false,
                 data: formData,
                 type: 'POST'
-            }).then( function(res) {
+            }).done( function(res) {
 
                 var body = {};
                 body.file_path = res.path;
-                body.user_id = 1;
+                //body.user_id = 1;
 
                 $.ajax({
                     url : '/api/font/',
                     data: body,
-                    type: 'POST'
-                }).then( function(res) {
+                    type: 'POST',
+                    dataType: 'json'
+                }).done( function(res) {
 
                 });
             });
+
         });
     </script>
