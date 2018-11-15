@@ -28,7 +28,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-3 pull-right">
-                                                    <a href="/handwrite/making" id="image_upload_btn" class="btn btn-default btn-lg btn-animated margin-clear">업로드&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-up fa-2x"></i></a>
+                                                    <btn id="image_upload_btn" class="btn btn-default btn-lg btn-animated margin-clear">업로드&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-up fa-2x"></i></btn>
                                                 </div>
                                             </div>
 
@@ -138,7 +138,6 @@
                 data: formData,
                 type: 'POST'
             }).done( function(res) {
-
                 var body = {};
                 body.file_path = res.path;
                 //body.user_id = 1;
@@ -146,10 +145,9 @@
                 $.ajax({
                     url : '/api/font/',
                     data: body,
-                    type: 'POST',
-                    dataType: 'json'
+                    type: 'POST'
                 }).done( function(res) {
-
+                    window.location.href = "/handwrite/making";
                 });
             });
 
