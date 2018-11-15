@@ -145,10 +145,9 @@
                 $.ajax({
                     url : '/api/font/',
                     data: body,
-                    type: 'POST',
-                    dataType: 'json'
+                    type: 'POST'
                 }).done( function(res) {
-                    location.href = "/handwrite/making";
+                    window.location.href = "/handwrite/making";
                 });
             });
 
