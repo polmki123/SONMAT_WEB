@@ -1,5 +1,7 @@
 'use strict';
 
+var HashMap = require('hashmap');
+
 var FontRepository = function () {
     this._$constructor();
 }
@@ -8,16 +10,16 @@ var FontRepository = function () {
 FontRepository.prototype =  {
 
     _$constructor: function() {
-        this.fontList = new Array();
+        this.fontMap = new HashMap();
     },
 
 
     findNewByUserId : function(userId) {
-        return this.fontList;
+        return this.fontMap.get(userId);
     },
 
     checkedByUserId: function (userId) {
-        this.fontList = new Array();
+        this.fontMap.remove(userId)
     },
 
     createNewFont: function (userId) {
@@ -25,19 +27,18 @@ FontRepository.prototype =  {
         setTimeout(function () {
             var dummyFontSize = 3;
 
+            var fontList = new Array();
             for (var indexI = 0; indexI < dummyFontSize; indexI++) {
                 var font = {
                     id : indexI,
                 }
-                that.fontList.push(font);
+                fontList.push(font);
             }
+
+            that.fontMap.set(userId , fontList);
         } , 5000 , 'test');
 
     },
-
-    _createFont: function () {
-
-    }
 };
 
 module.exports = FontRepository;

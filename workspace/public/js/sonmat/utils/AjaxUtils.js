@@ -11,6 +11,7 @@ AjaxUtils.get = function (url, params , fnSuccess, fnError) {
         data : params,
         dataType: "json",
         success: function (result) {
+
             if (fnSuccess) {
                 fnSuccess(result);
             }

@@ -16,7 +16,7 @@ router.post('/', function(req, res) {
 
     models.font.create(font).then( function(result) {
 
-        /*// move directory
+        // move directory
         var temp_file_path = req.body.file_path;
         var temp_dirname = path.dirname(temp_file_path);
 
@@ -31,7 +31,7 @@ router.post('/', function(req, res) {
         // move file
         fs.rename(temp_file_path, dest_file_path, function(err) {
             if ( err ) console.log('ERROR: ' + err);
-        });*/
+        });
 
         res.send(200);
 
