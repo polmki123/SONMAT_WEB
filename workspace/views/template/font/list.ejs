@@ -874,3 +874,15 @@
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+
+    function checkedNewFontToServer() {
+        AjaxUtils.post("/api/font/new/checked" , null , function () {
+            hideNewBadges();
+        });
+    };
+
+    checkedNewFontToServer();
+
+</script>

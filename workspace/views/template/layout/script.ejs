@@ -25,5 +25,59 @@
 <!-- Custom Scripts -->
 <script src="/js/custom.js"></script>
 
+<!-- sonmat -->
+<script src="/js/sonmat/utils/AjaxUtils.js"></script>
+
 <!-- summernote -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
+
+<script>
+
+    function activeMenu() {
+        var path = window.location.pathname;
+        if (path === '' || path === '/') {
+            $('#message-list').addClass('active');
+        } else if (path === '/message/form') {
+            $('#message-form').addClass('active');
+        } else if (path === '/handwrite') {
+            $('#font-make').addClass('active');
+        } else if (path === '/font') {
+            $('#font-gallery').addClass('active');
+        }
+    }
+
+    activeMenu();
+
+    function checkNewFontFromServer() {
+
+        var NEW_FONT_CHECK_API_URL = '/api/font/new';
+
+        AjaxUtils.get(NEW_FONT_CHECK_API_URL , null , function (result) {
+
+            if (result.fontList.length > 0)
+                showNewBadges();
+            else
+                hideNewBadges();
+        });
+    }
+
+
+    function runCheckNewFont() {
+        checkNewFontFromServer();
+        setInterval(function() {
+            checkNewFontFromServer();
+        }, 5000);
+    }
+
+    function showNewBadges() {
+        if ($('#new-badges').is(':visible') == false)
+            $('#new-badges').show();
+    }
+
+    function hideNewBadges() {
+        if ($('#new-badges').is(':visible'))
+            $('#new-badges').hide();
+    }
+    
+    runCheckNewFont();
+</script>

@@ -4,7 +4,7 @@ var fs = require('fs');
 var router = express.Router();
 
 router.post('/upload', function(req, res, next) {
-
+    debugger;
     var input_file_path = req.files.file.path;
     var dirname = path.dirname(input_file_path);
 
