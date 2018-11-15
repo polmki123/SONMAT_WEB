@@ -28,10 +28,16 @@ router.get('/to/:toUserId/timeline', function(req, res, next) {
 
 });
 
-router.get('/to/:toUserId/:messageId', function(req, res, next) {
-	var opponent_uid = req.params.toUserId
-	var msg_id = req.params.messageId
-	res.render('message/detail');
+router.get('/to/:sonmat_request_id', function(req, res, next) {
+	var son_id = req.params.sonmat_request_id;
+	msgB_service.get_message_from_id(son_id) // user
+	.then(function(msg){
+		console.log(msg)
+		res.render('message/detail', { 'msg': msg });
+	}).catch(function(err) {
+		console.log(err);
+		next()
+	});
 });
 
 

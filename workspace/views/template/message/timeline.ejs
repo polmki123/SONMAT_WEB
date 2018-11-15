@@ -74,7 +74,7 @@
 											<div class="timeline-item pull-right">
 												<article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
 													<header>
-														<h2><a href="/message/to/<%= msg.to_user_id %>/<%= msg.sonmat.message_id %>"><%= msg.sonmat.message.title %></a></h2>
+														<h2><a href="/message/to/<%= msg.id %>"><%= msg.sonmat.message.title %></a></h2>
 														<div class="post-info">
 															<span class="post-date">
 																<i class="fa fa-calendar-o pr-1"></i>
@@ -88,7 +88,7 @@
 														<p><%= msg.sonmat.message.contents %></p>
 													</div>
 													<footer class="clearfix">
-														<div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="/message/to/<%= msg.to_user_id %>/<%= msg.sonmat.message_id %>">Read More</a></div>
+														<div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="/message/to/<%= msg.id %>">Read More</a></div>
 													</footer>
 												</article>
 											</div>
@@ -96,7 +96,7 @@
 											<div class="timeline-item">
 												<article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
 													<header>
-														<h2><a href="/message/to/<%= msg.from_user_id %>/<%= msg.sonmat.message_id %>"><%= msg.sonmat.message.title %></a></h2>
+														<h2><a href="/message/to/<%= msg.id %>"><%= msg.sonmat.message.title %></a></h2>
 														<div class="post-info">
 															<span class="post-date">
 																<i class="fa fa-calendar-o pr-1"></i>
@@ -110,7 +110,7 @@
 														<p><%= msg.sonmat.message.contents %></p>
 													</div>
 													<footer class="clearfix">
-														<div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="/message/to/<%= msg.from_user_id %>/<%= msg.sonmat.message_id %>">Read More</a></div>
+														<div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="/message/to/<%= msg.id %>">Read More</a></div>
 													</footer>
 												</article>
 											</div>

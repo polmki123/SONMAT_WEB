@@ -32,3 +32,38 @@ router.get('/query_use', function(req, res, next) {
 router.get('/template_use', function(req, res, next){
 	res.render('template/shop-cart');
 })
+
+function get_user_from_id(user_id){
+	return new Promise(function(resolve, reject){
+		models.user.find({
+			where: { id: user_id }
+		}).then(function(usr){
+			resolve(usr)
+		}).catch(function(err) {
+			reject(err);
+		});
+	});
+};
+
+function get_message_from_id(msg_id, opponent_uid){
+	var msg_result;
+	return new Promise(function(resolve, reject){
+		models.message.find({
+			where: { id: msg_id }
+		}).then(function(msg) {
+			msg_result = msg.dataValues;
+			return get_user_from_id(opponent_uid)
+		}).then(function(usr) {
+			if(msg_result.user_id == usr.id){
+				msg_result.From = usr.name;
+				msg_result.To = "";
+			}else{
+				msg_result.From = "";
+				msg_result.To = usr.name;
+			}
+			resolve(msg_result);
+		}).catch(function(err) {
+			reject(err);
+		});
+	});
+};

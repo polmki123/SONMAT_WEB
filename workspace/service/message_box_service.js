@@ -111,8 +111,49 @@ function get_message_timeline(uid, opponent_uid){
 	});
 };
 
+
+function get_message_from_id(son_id){
+	return new Promise(function(resolve, reject){
+		models.sonmat_request.find({
+			include: [
+				{
+					model: models.user,
+					as: 'From',
+					required : true, 
+					attributes : ['name'], 
+				},{
+					model: models.user,
+					as: 'To',
+					required : true, 
+					attributes : ['name'], 
+				},{
+					model: models.sonmat,
+					required : true, 
+					attributes : ['message_id', 'font_id'], 
+					include:[
+						{
+							model: models.message,
+							required : true, 
+							attributes : ['title', 'contents'], 
+						}
+					]
+				}
+			],
+			where: { id: son_id },
+		}).then(function(msgs) {
+			msgs_json = JSON.parse(JSON.stringify(msgs));
+			resolve(msgs_json)
+		}).catch(function(err) {
+			reject(err);
+		});
+	});
+};
+
+
+
 var func = {}
 func.get_opponents_name = get_opponents_name;
 func.get_message_timeline = get_message_timeline;
+func.get_message_from_id = get_message_from_id;
 
 module.exports = func;
