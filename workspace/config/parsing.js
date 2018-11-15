@@ -2,7 +2,7 @@ var formidable = require('formidable');
 var path = require('path');
 
 var parsing = function(req,res,next) {
-  var save_path = path.join(__dirname, '..', '..', 'repository', 'temporary')
+  var save_path = path.join(__dirname, '..', 'repository', 'temporary')
   var opts = {
     encoding: 'utf-8',
     uploadDir: save_path,

@@ -20,12 +20,18 @@ router.post('/', function(req, res) {
         var temp_file_path = req.body.file_path;
         var temp_dirname = path.dirname(temp_file_path);
 
+        var base_dirname = path.join(temp_dirname, '..', 'font');
         var dest_dirname = path.join(temp_dirname, '..', 'font', result.dataValues.id.toString());
         var dest_file_path = dest_dirname + "\\handwrite" + path.extname(temp_file_path);
 
+        // create new directory : (repository_path)/font
+        if (!fs.existsSync(base_dirname)) {
+            fs.mkdirSync(base_dirname, { recursive: true });
+        }
+
         // create new directory : (repository_path)/font/{font_id}
         if (!fs.existsSync(dest_dirname)) {
-            fs.mkdirSync(dest_dirname);
+            fs.mkdirSync(dest_dirname, { recursive: true });
         }
 
         // move file
@@ -33,7 +39,7 @@ router.post('/', function(req, res) {
             if ( err ) console.log('ERROR: ' + err);
         });
 
-        res.send(200);
+        res.send();
 
     }).catch( function(err) {
         console.error(err);
