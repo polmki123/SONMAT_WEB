@@ -38,6 +38,11 @@ module.exports = function(sequelize, DataTypes) {
 /*                allowNull: false,
                 defaultValue: DataTypes.NOW,*/
                 field: 'created_at'
+            },
+            read_state: {
+                type: DataTypes.STRING,
+                allowNull: false,
+                defaultValue: 1
             }
         },
         {
