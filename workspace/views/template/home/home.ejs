@@ -8,49 +8,9 @@
 
 			<!-- sidebar start -->
 			<!-- ================ -->
-			<aside class="col-lg-3 ">
-				<div class="sidebar">
-					<div class="pv-30"></div>
-					<div class="block clearfix">
-						<% opponents.forEach(function(user){ %>
 
-							<div class="media mb-3  white-bg hc-item-box bordered round-corners">
-
-								<div class="d-flex pr-2">
-									<div class="">
-
-										<span class="icon default-bg mt-2 mb-2 ml-2 mr-2 circle"><i class="fa fa-user"></i></span>
-
-									</div>
-								</div>
-								<div class="media-body container">
-									<div class="row pt-3">
-										<div class="col-lg-9">
-											<h6 class="media-heading"><a href="/message/to/<%= user.id %>/timeline"><%= user.name %> </a></h6>
-											<p class="small margin-clear"><i class="fa fa-calendar pr-2"></i><%= user.send_date %></p>
-										</div>
-										<div class="col-lg-3">
-											<div class="header-dropdown-buttons padding-top-clear">
-												<div class="btn-group">
-													<a href="/message/to/<%= user.id %>/timeline" class="btn btn-default "><i class="fa fa-envelope text-dark"></i><span class="cart-count bg-danger text-white"><%= user.count %></span></a>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-							</div>
-						<% }); %>
-
-
-
-
-						
-					</div>
-				</div>
-			</aside>
 			<!-- sidebar end -->
-			<div class="main col-lg-9 border-left">
+			<div class="main col-lg-12 border-left">
 
 
 

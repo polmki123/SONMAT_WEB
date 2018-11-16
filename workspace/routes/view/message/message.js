@@ -4,11 +4,11 @@ var msgB_service = require('../../../service/message_box_service')
 
 /* index */
 router.get('/', function(req, res, next) {
-	res.render('message/list');
+	res.render('message/list', {opponents : res.opponents});
 });
 
 router.get('/form', function(req, res, next) {
-	res.render('message/form');
+	res.render('message/form' , {opponents : res.opponents});
 });
 
 router.get('/to/:toUserId/timeline', function(req, res, next) {
@@ -25,7 +25,6 @@ router.get('/to/:toUserId/timeline', function(req, res, next) {
 		console.log(err);
 		next()
 	});
-
 });
 
 router.get('/to/:sonmat_request_id', function(req, res, next) {
