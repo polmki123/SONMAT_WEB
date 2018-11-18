@@ -16,7 +16,7 @@
                     <br>
                     <br>
                     <form action="/api/message" method="post">
-                    <div id="summernote">여기에 내용을 채워넣어</div>
+                    <div id="summernote"></div>
                     <div class="separator"></div>
                     <div class="text-right">
                         <button type="button" class="btn btn-info"><i class="fa fa-link"></i> 미리보기</button>
@@ -33,11 +33,39 @@
     </div>
 </section>
 
-
 <script type="text/javascript">
-    $('#summernote').summernote({
-        placeholder: 'Text Here',
-        tabsize: 2,
-        height: 400,
+
+    // 폰트 리스트 (summernote에 선언 후 폰트 load)
+    var font_names = [];
+
+    var FONT_LIST_GET_API_URL = '/api/font/list';
+
+    // 사용자가 사용 가능한 폰트 리스트 가져오기
+    AjaxUtils.get(FONT_LIST_GET_API_URL, null, function(result) {
+
+        // 폰트 이름, 경로
+        font_names = result.font_names;
+        var font_file_path = result.font_file_path;
+
+        font_names.forEach(function(font_name, index) {
+
+            var font_face = new FontFace(font_name, 'url(' + font_file_path[index] + ')');
+
+            // 폰트 load
+            font_face.load().then(function(loaded_face) {
+
+                // load 된 폰트 추가
+                document.fonts.add(loaded_face);
+            }).catch(function(error) { });
+        });
+
+        $('#summernote').summernote({
+            placeholder: '당신의 손글씨가 담긴 편지로 마음을 전해보세요',
+            tabsize: 2,
+            height: 400,
+            fontNames: font_names,
+            fontNamesIgnoreCheck: font_names
+        });
     });
+
 </script>
