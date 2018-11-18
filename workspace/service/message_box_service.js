@@ -90,13 +90,11 @@ function get_message_timeline(uid, opponent_uid){
 					$and:[
 						{ from_user_id: uid, 
 							to_user_id: opponent_uid },
-						// models.Sequelize.literal("Receiver.user_id = '" + opponent_uid + "'"),
 					]
 				},{
 					$and:[
 						{ from_user_id: opponent_uid, 
 							to_user_id: uid },
-						// models.Sequelize.literal("Sender.user_id = '" + opponent_uid + "'"),
 					]
 				}]
 			},

@@ -26,8 +26,8 @@ function configApp() {
 	app.use(cookieParser());
 	app.use(express.static(path.join(__dirname, 'public')));
 	app.use(require('./config/parsing'));
+    app.use(require('./config/user')); // temporary user
 
-	app.use(require('./config/user')); // temporary user
 }
 
 var msgB_service = require('./service/message_box_service');
@@ -35,6 +35,7 @@ var msgB_service = require('./service/message_box_service');
 
 
 function viewRoute() {
+
 	var VIEW_BASE_PATH = "./routes/view/";
 
     // home
@@ -64,23 +65,21 @@ function apiRoute() {
     app.use('/api/font', require(API_BASE_PATH + 'font/font'));
 }
 
+configApp();
+
 app.use(function(req, res, next) {
 
-    // TODO 실제 USER ID 로 처리할것.
-    var dummyUserId = 1;
-
-    msgB_service.get_opponents_name(dummyUserId) // user
+    msgB_service.get_opponents_name(req.user.id) // user
         .then(function(opponents){
             res.opponents = opponents;
             next();
         }).catch(function(err) {
         console.log(err);
     });
-
 });
 
-
-
+viewRoute();
+apiRoute();
 
 app.use(function(err, req, res, next) {
 	res.locals.message = err.message;
@@ -88,10 +87,5 @@ app.use(function(err, req, res, next) {
 	res.status(err.status || 500);
 	res.render('error');
 });
-
-configApp();
-viewRoute();
-apiRoute();
-
 
 module.exports = app;
