@@ -44,9 +44,9 @@ function get_opponents_name(uid){
 				});
 				if(found == false){
 					if(oppo.read_state == 'unread'){
-						opponent_users.push({id: id, name: other, send_date: oppo.send_date, count: 1})
+						opponent_users.push({id: id, name: other, send_date: formatDate(oppo.send_date), count: 1})
 					}else {
-						opponent_users.push({id: id, name: other, send_date: oppo.send_date, count: 0})
+						opponent_users.push({id: id, name: other, send_date: formatDate(oppo.send_date), count: 0})
 					}
 				}
 			});
@@ -101,6 +101,11 @@ function get_message_timeline(uid, opponent_uid){
 			order: [['send_date', 'DESC']], // index 0 is new, index 1 is old (if DESC)
 			// limit: 5
 		}).then(function(msgs) {
+			msgs.forEach(function(msg){
+				msg.dataValues.send_date = formatDate(msg.dataValues.send_date);
+			})
+			console.log(msgs)
+			
 			msgs_json = JSON.parse(JSON.stringify(msgs));
 			resolve(msgs_json)
 		}).catch(function(err) {
@@ -138,14 +143,26 @@ function get_message_from_id(son_id){
 				}
 			],
 			where: { id: son_id },
-		}).then(function(msgs) {
-			msgs_json = JSON.parse(JSON.stringify(msgs));
-			resolve(msgs_json)
+		}).then(function(msg) {
+			msg_json = JSON.parse(JSON.stringify(msg));
+			msg_json.send_date = formatDate(msg.dataValues.send_date);
+			resolve(msg_json)
 		}).catch(function(err) {
 			reject(err);
 		});
 	});
 };
+
+function formatDate(date) {
+    var month = '' + (date.getMonth() + 1),
+        day = '' + date.getDate(),
+        year = date.getFullYear();
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+
+    return [year, month, day].join('-');
+}
 
 
 
