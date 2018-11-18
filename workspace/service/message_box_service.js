@@ -104,8 +104,6 @@ function get_message_timeline(uid, opponent_uid){
 			msgs.forEach(function(msg){
 				msg.dataValues.send_date = formatDate(msg.dataValues.send_date);
 			})
-			console.log(msgs)
-			
 			msgs_json = JSON.parse(JSON.stringify(msgs));
 			resolve(msgs_json)
 		}).catch(function(err) {
@@ -164,11 +162,23 @@ function formatDate(date) {
     return [year, month, day].join('-');
 }
 
-
+function get_name_from_id(user_id){
+	return new Promise(function(resolve, reject){
+		models.user.find({
+			where: { id: user_id },
+			attributes : ['name'], 
+		}).then(function(name) {
+			resolve(name)
+		}).catch(function(err) {
+			reject(err);
+		});
+	});
+}
 
 var func = {}
 func.get_opponents_name = get_opponents_name;
 func.get_message_timeline = get_message_timeline;
 func.get_message_from_id = get_message_from_id;
+func.get_name_from_id = get_name_from_id;
 
 module.exports = func;
