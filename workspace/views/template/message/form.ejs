@@ -115,4 +115,23 @@
 
     });
 
+    $(document).on('focusout', 'input[name=inputEmail]', function() {
+
+        var formData = {}
+        formData.email = $("input[name=inputEmail]").val()
+        var CHECK_EMAIL_URL = '/api/message/check_email';
+
+        function fn_success(user) {
+            if (user.name == null){
+                // user = {}
+                $("input[name=inputEmail]").attr('class', 'form-control is-invalid');
+            }else{
+                // user = { id, name, .... }
+                $("input[name=inputEmail]").attr('class', 'form-control is-valid');
+            }
+        }
+        AjaxUtils.postResult(CHECK_EMAIL_URL, formData, fn_success);
+
+    });
+
 </script>

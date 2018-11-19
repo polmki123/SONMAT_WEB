@@ -20,4 +20,18 @@ router.post('/', function(req, res) {
     });
 });
 
+router.post('/check_email', function(req, res) {
+
+    message_service.find_user_by_email(req.body.email)
+    .then(function(user) {
+        if(user == null){
+            res.send({});    
+        }else{
+            res.send(user.dataValues);   
+        }
+    }).catch(function(err) {
+        console.log(err);
+    });
+});
+
 module.exports = router;

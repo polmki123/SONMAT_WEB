@@ -64,7 +64,22 @@ function send_message(body){
 	});
 };
 
+function find_user_by_email(email){
+	return new Promise(function(resolve, reject){
+		models.user.find({
+			where: {
+				email: email,
+			},
+		}).then(function(user) {
+			resolve(user);
+		}).catch(function(err) {
+			reject(err);
+		});
+	});
+};
+
 var func = {}
 func.send_message = send_message;
+func.find_user_by_email = find_user_by_email;
 
 module.exports = func;
