@@ -15,20 +15,19 @@
                     <br/>
                     <form class="form-group">
                         <div class="row">
-                            <label for="inputEmail" class="col-sm-2 col-form-label">수신자</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" name="inputEmail" placeholder="수신자의 이메일을 입력하세요">
+
+                            <div class="col-lg-12">
+                                <input type="email" class="form-control" name="inputEmail" placeholder="이메일을 입력하세요">
                             </div>
                         </div>
                         <br/>
                         <br/>
                         <div class="row">
-                            <label for="inputTitle" class="col-sm-2 col-form-label">제목</label>
-                            <div class="col-sm-10">
+                            <div class="col-lg-12">
                                 <input class="form-control" type="text" name="inputTitle" placeholder="제목을 입력하세요">
                             </div>
                         </div>
-                        <div class="separator with-icon"><i class="fa fa-pencil bordered"></i></div>
+                        <div class="separator"></div>
 
                         <div id="summernote" name="inputContents"></div>
                         <div class="separator"></div>
@@ -48,38 +47,56 @@
 <script type="text/javascript">
 
     // 폰트 리스트 (summernote에 선언 후 폰트 load)
-    var font_names = [];
 
-    var FONT_LIST_GET_API_URL = '/api/font/list';
+    var font_names = <%- JSON.stringify(font_names) %>;
 
-    // 사용자가 사용 가능한 폰트 리스트 가져오기
-    AjaxUtils.get(FONT_LIST_GET_API_URL, null, function(result) {
+    var font_file_path =  <%- JSON.stringify(font_file_path) %> ;
 
-        // 폰트 이름, 경로
-        font_names = result.font_names;
-        var font_file_path = result.font_file_path;
+    font_names.forEach(function(font_name, index) {
 
-        font_names.forEach(function(font_name, index) {
+        var font_face = new FontFace(font_name, 'url(' + font_file_path[index] + ')');
 
-            var font_face = new FontFace(font_name, 'url(' + font_file_path[index] + ')');
+        // 폰트 load
+        font_face.load().then(function(loaded_face) {
 
-            // 폰트 load
-            font_face.load().then(function(loaded_face) {
-
-                // load 된 폰트 추가
-                document.fonts.add(loaded_face);
-            }).catch(function(error) { });
-        });
-
-        $('#summernote').summernote({
-            placeholder: '당신의 손글씨가 담긴 편지로 마음을 전해보세요',
-            tabsize: 2,
-            height: 400,
-            fontNames: font_names,
-            fontNamesIgnoreCheck: font_names
-        });
+            // load 된 폰트 추가
+            document.fonts.add(loaded_face);
+        }).catch(function(error) { });
     });
-    
+
+
+
+    var editor = $('#summernote').summernote({
+        placeholder: '당신의 손글씨가 담긴 편지로 마음을 전해보세요',
+        tabsize: 2,
+        height: 400,
+        fontNames: font_names,
+        fontNamesIgnoreCheck: font_names,
+        toolbar : false
+    });
+
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+
+
+    function getRandomFont() {
+        var randomFontIndex = getRandomInt(0 , font_names.length);
+        return font_names[randomFontIndex];
+    }
+
+    // summernote.change font
+    editor.on('summernote.keyup', function(we, contents, $editable) {
+        var randomFont = getRandomFont();
+        console.log(randomFont);
+        editor.summernote('fontName' , randomFont);
+
+    });
+
         // 업로드 버튼 - click event
     $(document).on('click', '#upload_btn', function() {
 
