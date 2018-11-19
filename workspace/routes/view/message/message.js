@@ -3,7 +3,7 @@ var router = express.Router();
 var msgB_service = require('../../../service/message_box_service')
 
 /* index */
-router.get('/', function(req, res, next) {
+router.get('/list', function(req, res, next) {
 	res.render('message/list', {opponents : res.opponents});
 });
 
