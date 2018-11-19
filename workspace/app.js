@@ -63,6 +63,10 @@ function apiRoute() {
 
     // font
     app.use('/api/font', require(API_BASE_PATH + 'font/font'));
+
+    // message
+    app.use('/api/message', require(API_BASE_PATH + 'message/message'));
+
 }
 
 configApp();
