@@ -120,4 +120,17 @@
         }
         return false;
     });
+
+
+    $( document ).ajaxError(function( event, jqxhr, settings, thrownError ) {
+        console.log(event);
+        console.log(jqxhr);
+        console.log(settings);
+
+        if (jqxhr.status === 500) {
+            alert("오류가 발생했습니다. 잠시 후 다시 시도해 주세요.");
+        } else if (jqxhr.status === 401 && window.location.pathname != '/account/sign-in') {
+            alert("로그인 해 주세요.");
+        }
+    });
 </script>

@@ -8,5 +8,10 @@ router.get('/sign-up', function(req, res, next) {
     });
 });
 
+router.get('/sign-in', function(req, res, next) {
+    res.render('account/signIn' , {
+        loggedUser : res.loggedUser
+    });
+});
 
 module.exports = router;

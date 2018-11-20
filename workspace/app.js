@@ -77,6 +77,13 @@ function apiRoute() {
 
 configApp();
 
+function isSecureAuthPageUrl(originalUrl) {
+
+    if (originalUrl === '/handwrite' || originalUrl === '/message/list' || originalUrl === '/font') {
+        return true;
+    }
+}
+
 app.use(function(req, res, next) {
 
 
@@ -84,6 +91,14 @@ app.use(function(req, res, next) {
 
     if (loggedUser != null) {
         res.loggedUser = loggedUser;
+    }
+
+    var isNeedAuth = isSecureAuthPageUrl(req.originalUrl);
+
+    if (isNeedAuth && loggedUser == null) {
+        res.statusCode = 302;
+        res.setHeader('Location', '/account/sign-in?referer=' + req.originalUrl);
+        res.end();
     }
 
     msgB_service.get_opponents_name(req.user.id) // user

@@ -39,6 +39,10 @@
                                                     <input type="text" id="form-control-file" class="form-control col-lg-10" placeholder="파일을 선택해주세요" disabled style="background-color: whitesmoke; color: black;">
                                                     <button id="button-browse" class="browse btn btn-dark margin-clear col-lg-2" type="button">열기</button>
                                                 </form>
+
+                                                <div id="preview" style="display: none;">
+                                                    <img src="" id="preview_image">
+                                                </div>
                                             </div>
                                             <input type="text" style="visibility: hidden;">
                                         </div>
@@ -139,10 +143,9 @@
                 data: formData,
                 type: 'POST'
             }).done( function(res) {
-                debugger;
-                var body = {
-                    file_path : res.path,
 
+                var body = {
+                    file_path : res.path
                 };
 
                 AjaxUtils.post(FONT_CREATE_API_URL, body, function(res) {

@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var random = require('../../../domain/utils/RandomUtils');
 /*var FontRepository = require('./FontRepository');*/
 
 /*
@@ -20,7 +21,7 @@ var userFontService = new UserFontService();
 router.post('/' , function (req , res) {
 
     var loggedUser = res.loggedUser;
-    var fontName = req.body.fontName;
+    var fontName = random.generateId();
 
     userFontService.create(loggedUser.id , fontName);
     res.end();
