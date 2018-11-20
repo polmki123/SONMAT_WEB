@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
-var FontRepository = require('./FontRepository');
+/*var FontRepository = require('./FontRepository');*/
+
+/*
 
 router.post('/', function(req, res) {
     
@@ -8,7 +10,21 @@ router.post('/', function(req, res) {
 
     res.send();
 });
+*/
 
+var UserFontService = require('../../../domain/user/font/UserFontService');
+var userFontService = new UserFontService();
+/**
+ * mento version
+ */
+router.post('/' , function (req , res) {
+
+    var loggedUser = res.loggedUser;
+    var fontName = req.body.fontName;
+
+    userFontService.create(loggedUser.id , fontName);
+    res.end();
+});
 
 // 유저가 확인 하지 않은 새 폰트 목록을 리턴한다.
 router.get('/new', function(req, res) {

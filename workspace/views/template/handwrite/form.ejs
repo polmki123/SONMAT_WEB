@@ -139,9 +139,11 @@
                 data: formData,
                 type: 'POST'
             }).done( function(res) {
+                debugger;
+                var body = {
+                    file_path : res.path,
 
-                var body = {};
-                body.file_path = res.path;
+                };
 
                 AjaxUtils.post(FONT_CREATE_API_URL, body, function(res) {
                     window.location.href = "/handwrite/making";
