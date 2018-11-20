@@ -5,7 +5,7 @@
     <!-- "dark": dark version of header top e.g. class="header-top dark" -->
     <!-- "colored": colored version of header top e.g. class="header-top colored" -->
     <!-- ================ -->
-    <div class="header-top dark">
+    <div class="header-top">
         <div class="container">
             <div class="row">
                 <div class="col-3 col-sm-6 col-lg-9">
@@ -22,37 +22,49 @@
 
                         <!-- header top dropdowns start -->
                         <!-- ================ -->
-                        <div class="header-top-dropdown text-right">
-                            <div class="btn-group">
-                                <a href="/account/sign-up" class="btn btn-default btn-sm"><i class="fa fa-user pr-2"></i> Sign Up</a>
+                        <% if(locals.loggedUser) { %>
+
+                            <div class="header-top-dropdown text-right">
+                                <div class="btn-group">
+                                    <a href="#" class="btn btn-default btn-sm"><span><%=loggedUser.id %>님</span></a>
+                                </div>
+                                <div class="btn-group">
+                                    <a href="/account/logout" class="btn btn-default btn-sm"><i class="fa fa-sign-out pr-2"></i> logout</a>
+                                </div>
                             </div>
-                            <div class="btn-group">
-                                <button  type="button" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock pr-2"></i> Login</button>
-                                <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-top-drop-2">
-                                    <li>
-                                        <form class="login-form margin-clear" action="/api/account/login" method="post">
-                                            <div class="form-group has-feedback">
-                                                <label class="control-label">Username</label>
-                                                <input type="text" name="id" class="form-control" placeholder="">
-                                                <i class="fa fa-user form-control-feedback"></i>
-                                            </div>
-                                            <div class="form-group has-feedback">
-                                                <label class="control-label">Password</label>
-                                                <input type="password" name="password" class="form-control" placeholder="">
-                                                <i class="fa fa-lock form-control-feedback"></i>
-                                            </div>
+                        <% } else { %>
+                            <div class="header-top-dropdown text-right">
+                                <div class="btn-group">
+                                    <a href="/account/sign-up" class="btn btn-default btn-sm"><i class="fa fa-user pr-2"></i> Sign Up</a>
+                                </div>
+                                <div class="btn-group">
+                                    <button  type="button" class="btn dropdown-toggle btn-default btn-sm dropdown-toggle--no-caret" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lock pr-2"></i> Login</button>
+                                    <ul class="dropdown-menu dropdown-menu-right dropdown-animation" aria-labelledby="header-top-drop-2">
+                                        <li>
+                                            <form class="login-form margin-clear" action="/api/account/login" method="post">
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label">Username</label>
+                                                    <input type="text" name="id" class="form-control" placeholder="">
+                                                    <i class="fa fa-user form-control-feedback"></i>
+                                                </div>
+                                                <div class="form-group has-feedback">
+                                                    <label class="control-label">Password</label>
+                                                    <input type="password" name="password" class="form-control" placeholder="">
+                                                    <i class="fa fa-lock form-control-feedback"></i>
+                                                </div>
 
 
-                                            <button type="submit" class="btn btn-gray btn-sm">Log In</button>
-                                            <span class="pl-1 pr-1">or</span>
-                                            <a href="/account/sign-up"  class="btn btn-default btn-sm">Sing Up</a>
-                                        </form>
+                                                <button type="submit" class="btn btn-gray btn-sm">Log In</button>
+                                                <span class="pl-1 pr-1">or</span>
+                                                <a href="/account/sign-up"  class="btn btn-default btn-sm">Sing Up</a>
+                                            </form>
 
 
-                                    </li>
-                                </ul>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+                        <% } %>
                         <!--  header top dropdowns end -->
                     </div>
                     <!-- header-top-second end -->
