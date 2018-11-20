@@ -6,7 +6,7 @@ var fs = require('fs');
 
 /* index */
 router.get('/list', function(req, res, next) {
-	res.render('message/list', {opponents : res.opponents});
+	res.render('message/list', {opponents : res.opponents, loggedUser : res.loggedUser});
 });
 
 router.get('/form', function(req, res, next) {
@@ -27,7 +27,8 @@ router.get('/form', function(req, res, next) {
     var body = {
         font_names : font_names ,
         font_file_path : font_file_path,
-        opponents :res.opponents
+        opponents :res.opponents,
+        loggedUser : res.loggedUser
     };
 
 	res.render('message/form' , body);
@@ -42,6 +43,7 @@ router.get('/to/:toUserId/timeline', function(req, res, next) {
 		return msgB_service.get_name_from_id(opponent_uid);
 	}).then(function(oppo_name){
 		render_data.oppo_name = oppo_name.dataValues.name;
+    	render_data.loggedUser = res.loggedUser;
 		res.render('message/timeline', render_data);
 	}).catch(function(err) {
 		console.log(err);
@@ -53,7 +55,7 @@ router.get('/to/:sonmat_request_id', function(req, res, next) {
 	var son_id = req.params.sonmat_request_id;
 	msgB_service.get_message_from_id(son_id) // user
 	.then(function(msg){
-		res.render('message/detail', { 'msg': msg });
+		res.render('message/detail', { 'msg': msg , loggedUser : res.loggedUser });
 	}).catch(function(err) {
 		console.log(err);
 		next()

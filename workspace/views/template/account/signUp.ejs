@@ -14,53 +14,62 @@
 
 <!-- main-container start -->
 <!-- ================ -->
-<div class="main-container dark-translucent-bg" >
+<div class="main-container dark-translucent-bg" style="background-image:url('/images/background-img-6.jpg');">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-auto">
                 <!-- main start -->
                 <!-- ================ -->
-                <div class="main hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
+                <div class="main object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
                     <div class="form-block p-30 light-gray-bg border-clear">
-                        <h2 class="title">Login</h2>
-                        <form class="form-horizontal">
+                        <h2 class="title">회원 가입</h2>
+
+                        <form class="form-horizontal memberForm " role="form" method="post" action="/api/account/signup">
+
                             <div class="form-group has-feedback row">
-                                <label for="inputUserName" class="col-md-3 text-md-right control-label col-form-label">User Name</label>
+                                <label for="loginId" class="col-md-3 control-label text-md-right col-form-label">ID <span class="text-danger small">*</span></label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" id="inputUserName" placeholder="User Name" required>
-                                    <i class="fa fa-user form-control-feedback pr-4"></i>
+                                    <input type="email" class="form-control" id="loginId" name="id" placeholder="id" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" data-error="이메일 형식으로 입력해주세요" required>
+                                    <i class="fa fa-envelope form-control-feedback pr-4"></i>
+                                    <div class="help-block with-errors"></div>
                                 </div>
                             </div>
                             <div class="form-group has-feedback row">
-                                <label for="inputPassword" class="col-md-3 text-md-right control-label col-form-label">Password</label>
-                                <div class="col-md-8">
-                                    <input type="password" class="form-control" id="inputPassword" placeholder="Password" required>
+                                <label for="inputPassword" class="col-md-3 control-label text-md-right col-form-label">비밀번호 <span class="text-danger small">*</span></label>
+                                <div class="col-md-8 ">
+                                    <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" data-error="비밀번호를 입력해주세요." data-minlength="8" data-minlength-error="8자 이상 입력해주세요." required>
                                     <i class="fa fa-lock form-control-feedback pr-4"></i>
+                                    <div class="help-block with-errors"></div>
                                 </div>
                             </div>
+                            <div class="form-group has-feedback row">
+                                <label for="matchPassword" class="col-md-3 control-label text-md-right col-form-label">비밀번호 확인<span class="text-danger small">*</span></label>
+                                <div class="col-md-8">
+                                    <input type="password" class="form-control" data-match="#inputPassword" id="matchPassword" placeholder="비밀번호 확인" data-match-error="비밀번호를 확인해주세요." data-minlength="8" data-minlength-error="8자 이상 입력해주세요." data-error="비밀번호를 입력해주세요." required>
+                                    <i class="fa fa-check form-control-feedback pr-4"></i>
+                                    <div class="help-block with-errors"></div>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <label for="matchPassword" class="col-md-3 control-label text-md-right col-form-label"></label>
+                                <div class="col-md-8" id="errorMessageArea">
+                                    <strong id="errorMessage" class="text-danger">
+
+                                    </strong>
+                                </div>
+                            </div>
+
+
                             <div class="form-group row">
                                 <div class="ml-md-auto col-md-9">
-                                    <div class="checkbox form-check">
-                                        <input class="form-check-input" type="checkbox" required>
-                                        <label class="form-check-label">
-                                            Remember me.
-                                        </label>
-                                    </div>
-                                    <button type="submit" class="btn btn-group btn-default btn-animated">Log In <i class="fa fa-user"></i></button>
-                                    <ul class="space-top">
-                                        <li><a href="#">Forgot your password?</a></li>
-                                    </ul>
-                                    <span class="text-center text-muted">Login with</span>
-                                    <ul class="social-links colored circle clearfix">
-                                        <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                        <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                        <li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                    </ul>
+                                    <button type="submit" class="btn btn-group btn-default">가입 </button>
                                 </div>
                             </div>
+
                         </form>
                     </div>
-                    <p class="text-center space-top">Don't have an account yet? <a href="page-signup.html">Sing up</a> now.</p>
                 </div>
                 <!-- main end -->
             </div>
@@ -68,3 +77,22 @@
     </div>
 </div>
 <!-- main-container end -->
+
+
+<script type="text/javascript">
+    $('.memberForm').validator().on('submit', function (event) {
+        debugger;
+        if (event.isDefaultPrevented() == false) {
+            var $this = $(this);
+            FormAjaxUtils.send($this, function () {
+                alert('회원 가입이 완료 되었습니다.')
+                location.href = "/" ;
+            }, function (response) {
+                $('#errorMessageArea').show().find('#errorMessage').text(response.responseJSON.message);
+            });
+        }
+        return false;
+    });
+
+
+</script>

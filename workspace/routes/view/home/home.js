@@ -6,7 +6,7 @@ var msgB_service = require('../../../service/message_box_service')
 /* index */
 router.get('/', function(req, res, next) {
 
-    res.render('home/home', {opponents : res.opponents});
+    res.render('home/home', {opponents : res.opponents, loggedUser : res.loggedUser});
 });
 
 router.get('/shutdown', function(req, res, next) {

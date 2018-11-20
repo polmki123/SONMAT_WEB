@@ -16,6 +16,8 @@
 <script src="/plugins/waypoints/sticky.min.js"></script>
 <script src="/plugins/style/style-switcher.js"></script>
 
+<script src="/plugins/validate/bootstrap-validator.min.js"></script>
+
 <!-- Count To javascript -->
 <script src="/plugins/countTo/jquery.countTo.js"></script>
 <!-- Slick carousel javascript -->
@@ -29,6 +31,7 @@
 
 <!-- sonmat -->
 <script src="/js/sonmat/utils/AjaxUtils.js"></script>
+<script src="/js/sonmat/utils/FormAjaxUtils.js"></script>
 
 <!-- summernote -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
@@ -81,5 +84,40 @@
             $('#new-badges').hide();
     }
     
-    runCheckNewFont();
+    //runCheckNewFont();
+
+
+    jQuery.fn.serializeObject = function () {
+        var obj = null;
+        try {
+            if (this[0].tagName && this[0].tagName.toUpperCase() == "FORM") {
+                var arr = this.serializeArray();
+                if (arr) {
+                    obj = {};
+                    jQuery.each(arr, function () {
+                        obj[this.name] = this.value;
+                    });
+                }
+            }
+        } catch (e) {
+            alert(e.message);
+        } finally {
+        }
+        return obj;
+    };
+
+
+    $('.login-form').validator().on('submit', function (event) {
+
+        if (event.isDefaultPrevented() == false) {
+            var $this = $(this);
+            FormAjaxUtils.send($this, function () {
+                location.replace('/');
+
+            }, function (response) {
+                alert(response.responseJSON.message);
+            });
+        }
+        return false;
+    });
 </script>

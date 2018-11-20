@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var session = require('express-session');
 var expressLayouts = require('express-ejs-layouts');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -8,8 +9,6 @@ var logger = require('morgan');
 // need login using passport-XXXXX
 
 var app = express();
-
-
 
 function configApp() {
 
@@ -27,6 +26,12 @@ function configApp() {
 	app.use(express.static(path.join(__dirname, 'public')));
 	app.use(require('./config/parsing'));
     app.use(require('./config/user')); // temporary user
+
+    app.use(session({
+        secret: 'Thsakt!@#123',
+        resave: false,
+        saveUninitialized: true
+    }));
 
 }
 
@@ -67,11 +72,19 @@ function apiRoute() {
     // message
     app.use('/api/message', require(API_BASE_PATH + 'message/message'));
 
+    app.use('/api/account' , require(API_BASE_PATH + 'account/account'));
 }
 
 configApp();
 
 app.use(function(req, res, next) {
+
+
+    var loggedUser = req.session.user;
+
+    if (loggedUser != null) {
+        res.loggedUser = loggedUser;
+    }
 
     msgB_service.get_opponents_name(req.user.id) // user
         .then(function(opponents){

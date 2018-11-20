@@ -3,7 +3,9 @@ var router = express.Router();
 
 /* index */
 router.get('/sign-up', function(req, res, next) {
-    res.render('account/signUp');
+    res.render('account/signUp' , {
+        loggedUser : res.loggedUser
+    });
 });
 
 
