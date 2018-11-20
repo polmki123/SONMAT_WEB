@@ -1,8 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var msgB_service = require('../../../service/message_box_service')
-
-var fs = require('fs');
+var msgB_service = require('../../../service/message_box_service');
+var font_service = require('../../../service/font_service');
 
 /* index */
 router.get('/list', function(req, res, next) {
@@ -11,22 +10,11 @@ router.get('/list', function(req, res, next) {
 
 router.get('/form', function(req, res, next) {
 
-    var FONT_FILES_DIR_PATH = 'public/sonmat/font/';
-    var FONT_FILE_PREFIX = '../sonmat/font/';
-
-    // 폰트 파일 명 (확장자 없음)
-    var font_names = [];
-    // 폰트 다운로드 요청 경로
-    var font_file_path = [];
-
-    fs.readdirSync(FONT_FILES_DIR_PATH).forEach(function(font_name) {
-        font_names.push(font_name.substring(0, font_name.lastIndexOf('\.')));
-        font_file_path.push(FONT_FILE_PREFIX + font_name);
-    });
+    var fonts = font_service.get_font_list();
 
     var body = {
-        font_names : font_names ,
-        font_file_path : font_file_path,
+        font_names : fonts.font_names ,
+        font_file_path : fonts.font_file_path,
         opponents :res.opponents
     };
 

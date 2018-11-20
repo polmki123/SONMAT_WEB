@@ -1,6 +1,4 @@
 var express = require('express');
-var path = require('path');
-var fs = require('fs');
 var router = express.Router();
 var FontRepository = require('./FontRepository');
 
@@ -11,27 +9,6 @@ router.post('/', function(req, res) {
     res.send();
 });
 
-router.get('/list', function(req, res) {
-
-    var FONT_FILES_DIR_PATH = 'public/sonmat/font/';
-    var FONT_FILE_PREFIX = '../sonmat/font/';
-
-    // 폰트 파일 명 (확장자 없음)
-    var font_names = [];
-    // 폰트 다운로드 요청 경로
-    var font_file_path = [];
-
-    fs.readdirSync(FONT_FILES_DIR_PATH).forEach(function(font_name) {
-        font_names.push(font_name.substring(0, font_name.lastIndexOf('\.')));
-        font_file_path.push(FONT_FILE_PREFIX + font_name);
-    });
-
-    var body = {};
-    body.font_names = font_names;
-    body.font_file_path = font_file_path;
-
-    res.send(body);
-});
 
 // 유저가 확인 하지 않은 새 폰트 목록을 리턴한다.
 router.get('/new', function(req, res) {
