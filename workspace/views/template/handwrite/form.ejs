@@ -19,26 +19,49 @@
                                 <div class="col-md-12">
                                     <div class="call-to-action p-20 light-gray-bg hc-shadow bordered" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
                                         <div class="row justify-content-md-center">
-
                                             <div class="row col-lg-10">
-                                                <div class="col-lg-9">
+                                                <div class="col-lg-12">
                                                     <h2 class="title row">손글씨 이미지 선택</h2>
                                                     <div class="row">
                                                         <p>손글씨 이미지를 선택해주세요</p>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-3 pull-right">
-                                                    <btn id="image_upload_btn" class="btn btn-default btn-lg btn-animated margin-clear">업로드&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-up fa-2x"></i></btn>
-                                                </div>
                                             </div>
 
-                                            <div class="separator"></div>
                                             <div class="col-lg-10">
                                                 <form id="form-group-file" class="form-group form-inline margin-clear d-flex">
-                                                    <input type="file" id="input-file" name="img[]" class="file" style="visibility: hidden; position: absolute;">
+                                                    <input type="file" id="input-file" name="img[]" class="file" style="visibility: hidden; position: absolute;" accept="image/*">
                                                     <input type="text" id="form-control-file" class="form-control col-lg-10" placeholder="파일을 선택해주세요" disabled style="background-color: whitesmoke; color: black;">
                                                     <button id="button-browse" class="browse btn btn-dark margin-clear col-lg-2" type="button">열기</button>
                                                 </form>
+
+                                                <div id="preview" class="col-sm-12" style="display: none;">
+                                                    <br/>
+                                                    <img src="" id="preview_image">
+                                                </div>
+
+                                                <br/>
+                                                <div class="form-group row">
+                                                    <label for="font_name" class="col-sm-3 col-form-label">손글씨 이름</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="font_name" placeholder="손글씨 이름을 정해주세요.">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="font_desc" class="col-sm-3 col-form-label">손글씨 설명</label>
+                                                    <div class="col-sm-9">
+                                                        <textarea class="form-control" id="font_desc" rows="3" placeholder="손글씨에 대한 설명을 써주세요."></textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="separator"></div>
+
+
+                                                <div class="col-lg-9"></div>
+                                                <div class="col-lg-3 pull-right">
+                                                    <btn id="image_upload_btn" class="btn btn-default btn-lg btn-animated margin-clear">업로드&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-up fa-2x"></i></btn>
+                                                </div>
+
                                             </div>
                                             <input type="text" style="visibility: hidden;">
                                         </div>
@@ -138,14 +161,33 @@
                 contentType: false,
                 data: formData,
                 type: 'POST'
-            }).done( function(res) {
+            }).done( function(body) {
 
-                var body = {};
-                body.file_path = res.path;
+                body.name = $('#font_name').val();
+                body.desc = $('#font_desc').val();
 
                 AjaxUtils.post(FONT_CREATE_API_URL, body, function(res) {
                     window.location.href = "/handwrite/making";
                 });
             });
         });
+
+        $(document).on('change', '#input-file', function() {
+            readURL(this);
+        });
+
+        function readURL(input) {
+ 
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+         
+                reader.onload = function (e) {
+                    $('#preview_image').attr('src', e.target.result);
+                    $('#preview').css('display', "");
+                }
+         
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+         
     </script>

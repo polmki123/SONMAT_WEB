@@ -3,8 +3,8 @@ var router = express.Router();
 var FontRepository = require('./FontRepository');
 
 router.post('/', function(req, res) {
-    
-    font_id = FontRepository.createNewFont(req.user.id, req.body.file_path);
+
+    font_id = FontRepository.createNewFont(req.user.id, req.body);
 
     res.send();
 });

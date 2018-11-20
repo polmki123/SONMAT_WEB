@@ -29,14 +29,14 @@ function checkedByUserId(user_id) {
 };
 
 
-function createNewFont(user_id, file_path) {
+function createNewFont(user_id, body) {
         // create new font item, 
         // server communication with deep-server
         // request (font_id)
-    font_service.create_new_font(user_id)
+    font_service.create_new_font(user_id, body)
     .then(function(font){
 
-        var temp_file_path = file_path;
+        var temp_file_path = body.file_path;
         var temp_dirname = path.dirname(temp_file_path);
 
         var base_dirname = path.join(temp_dirname, '..', 'font');
