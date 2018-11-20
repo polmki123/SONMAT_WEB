@@ -17,7 +17,7 @@ UserFontRepository.prototype =  {
 
         var userFontList = this.userFontMap.get(userFont.userId);
 
-        if (userFont === null) {
+        if (typeof userFontList == "undefined") {
             userFontList = new Array();
         }
 

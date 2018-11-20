@@ -29,7 +29,7 @@
                             <div class="form-group has-feedback row">
                                 <label for="loginId" class="col-md-3 control-label text-md-right col-form-label">ID <span class="text-danger small">*</span></label>
                                 <div class="col-md-8">
-                                    <input type="email" class="form-control" id="loginId" name="id" placeholder="id" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" data-error="이메일 형식으로 입력해주세요" required>
+                                    <input type="email" class="form-control" name="id" placeholder="id" pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$" data-error="이메일 형식으로 입력해주세요" required>
                                     <i class="fa fa-envelope form-control-feedback pr-4"></i>
                                     <div class="help-block with-errors"></div>
                                 </div>
@@ -37,27 +37,16 @@
                             <div class="form-group has-feedback row">
                                 <label for="inputPassword" class="col-md-3 control-label text-md-right col-form-label">비밀번호 <span class="text-danger small">*</span></label>
                                 <div class="col-md-8 ">
-                                    <input type="password" class="form-control" id="inputPassword" name="password" placeholder="Password" data-error="비밀번호를 입력해주세요." data-minlength="8" data-minlength-error="8자 이상 입력해주세요." required>
+                                    <input type="password" class="form-control" name="password" placeholder="Password" data-error="비밀번호를 입력해주세요." data-minlength="8" data-minlength-error="8자 이상 입력해주세요." required>
                                     <i class="fa fa-lock form-control-feedback pr-4"></i>
                                     <div class="help-block with-errors"></div>
                                 </div>
                             </div>
 
 
-
-                            <div class="row">
-                                <label for="matchPassword" class="col-md-3 control-label text-md-right col-form-label"></label>
-                                <div class="col-md-8" id="errorMessageArea">
-                                    <strong id="errorMessage" class="text-danger">
-
-                                    </strong>
-                                </div>
-                            </div>
-
-
                             <div class="form-group row">
                                 <div class="ml-md-auto col-md-9">
-                                    <button type="submit" class="btn btn-group btn-default">로그인 </button>
+                                    <button type="submit" class="btn btn-group btn-default">로그인</button>
                                 </div>
                             </div>
 
@@ -78,8 +67,12 @@
         if (event.isDefaultPrevented() == false) {
             var $this = $(this);
             FormAjaxUtils.send($this, function () {
+                var referer = getUrlVars()['referer'];
 
-                location.href = "/" ;
+                if (referer)
+                    window.location.replace(referer);
+                else
+                    window.location.href = "/";
             }, function (response) {
                 $('#errorMessageArea').show().find('#errorMessage').text(response.responseJSON.message);
             });
@@ -88,4 +81,15 @@
     });
 
 
+    // Read a page's GET URL variables and return them as an associative array.
+    function getUrlVars() {
+        var vars = [], hash;
+        var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < hashes.length; i++) {
+            hash = hashes[i].split('=');
+            vars.push(hash[0]);
+            vars[hash[0]] = hash[1];
+        }
+        return vars;
+    }
 </script>

@@ -10,7 +10,7 @@ UserFont.prototype =  {
         this.userId = userId;
         this.name = name;
         this.fontList = new Array();
-
+        this.createdAt = new Date();
         for (var indexI = 0; indexI < fontList.length; indexI++) {
             this.fontList.push(fontList[indexI]);
         }
