@@ -18,6 +18,7 @@
 
                             <div class="col-lg-12">
                                 <input type="email" class="form-control" name="inputEmail" placeholder="이메일을 입력하세요">
+                                <div id="email-feedback" class="invalid-feedback" style="display:none;">상대 이메일을 확인해주세요.</div>
                             </div>
                         </div>
                         <br/>
@@ -47,6 +48,9 @@
 <script type="text/javascript">
 
     // 폰트 리스트 (summernote에 선언 후 폰트 load)
+    var is_sendable_state = {
+        email: false,
+    };
 
     var font_names = <%- JSON.stringify(font_names) %>;
 
@@ -89,6 +93,15 @@
         return font_names[randomFontIndex];
     }
 
+
+    function getSendableState(){
+        var state = true;
+        for (var item in is_sendable_state){
+            if (is_sendable_state[item] == false) state = false;
+        }
+        return state;
+    }
+
     // summernote.change font
     editor.on('summernote.keyup', function(we, contents, $editable) {
         var randomFont = getRandomFont();
@@ -100,20 +113,24 @@
         // 업로드 버튼 - click event
     $(document).on('click', '#upload_btn', function() {
 
-        var formData = {}
-        formData.email = $("input[name=inputEmail]").val()
-        formData.title = $("input[name=inputTitle]").val()
-        formData.contents = $("div#summernote").summernote('code');
+        if (getSendableState()){
+            var formData = {}
+            formData.email = $("input[name=inputEmail]").val()
+            formData.title = $("input[name=inputTitle]").val()
+            formData.contents = $("div#summernote").summernote('code');
 
-        var MESSAGE_POST_UPLOAD_URL = '/api/message';
+            var MESSAGE_POST_UPLOAD_URL = '/api/message';
 
-        function fn_success(sonmat_req_id) {
-            window.location.href = "/message/to/" + sonmat_req_id;
+            function fn_success(sonmat_req_id) {
+                window.location.href = "/message/to/" + sonmat_req_id;
+            }
+
+            AjaxUtils.postResult(MESSAGE_POST_UPLOAD_URL, formData, fn_success);
+        } else {
+            if (is_sendable_state.email == false)  $('#email-feedback').css('display', '');
         }
-
-        AjaxUtils.postResult(MESSAGE_POST_UPLOAD_URL, formData, fn_success);
-
     });
+
 
     $(document).on('focusout', 'input[name=inputEmail]', function() {
 
@@ -124,9 +141,11 @@
         function fn_success(user) {
             if (user.name == null){
                 // user = {}
+                is_sendable_state.email = false;
                 $("input[name=inputEmail]").attr('class', 'form-control is-invalid');
             }else{
                 // user = { id, name, .... }
+                is_sendable_state.email = true;
                 $("input[name=inputEmail]").attr('class', 'form-control is-valid');
             }
         }
