@@ -65,26 +65,110 @@ function notify_complete(font_id){
 	});
 };
 
-function get_font_list() {
+function get_font_id_name_list_by_user(user_id) {
+    return new Promise(function(resolve, reject){
+        models.font.findAll({
+            where: {
+                user_id: user_id,
+                making_status: 'complete',
+            },
+            attributes: ['id', 'name'],
+            order: [['making_date', 'DESC']],
+        })
+        .then(function(fonts) {
+            fonts_json = JSON.parse(JSON.stringify(fonts));
+            resolve(fonts_json);
+        }).catch(function(err) {
+            reject(err);
+        });
+    });
+}
 
-    var FONT_FILES_DIR_PATH = 'public/sonmat/font/';
-    var FONT_FILE_PREFIX = '../sonmat/font/';
+function get_font_list(user_id) {
 
-    // 폰트 파일 명 (확장자 없음)
-    var font_names = [];
-    // 폰트 다운로드 요청 경로
-    var font_file_path = [];
+    // TODO DELETE THIS!
+    user_id = 2;
 
-    fs.readdirSync(FONT_FILES_DIR_PATH).forEach(function(font_name) {
-        font_names.push(font_name.substring(0, font_name.lastIndexOf('\.')));
-        font_file_path.push(FONT_FILE_PREFIX + font_name);
+
+    return get_font_id_name_list_by_user(user_id) // get fonts (id, name) by user id
+        .then(function(font_id_name_list) {
+
+            var font_list = [];
+
+            // append main font_file, variation font_file
+            font_id_name_list.forEach(function(font) {
+
+                var font_file_paths  = get_font_file_paths(font);
+                if (font_file_paths === null) return;
+
+                font.main_font_file = get_main_font_file(font, font_file_paths);
+                font.variation_font_file = get_variation_font_file(font, font_file_paths);
+
+                font_list.push(font);
+            });
+
+            return font_list;
+    });
+}
+
+function get_font_file_paths(font) {
+
+    var FONT_FILES_ROOT_DIR_PATH = 'repository/font/';
+    var FONT_EXT_NAME = '.ttf';
+
+    // /font/{font_id} 폴더
+    var font_file_dir_path = FONT_FILES_ROOT_DIR_PATH + font.id;
+
+    var font_file_paths = [];
+
+    if (!fs.existsSync(font_file_dir_path))
+        return null;
+
+    // get font_file_paths
+    fs.readdirSync(font_file_dir_path).forEach(function(font_file_name) {
+
+        // ttf 이외의 파일 exclude
+        if(font_file_name.substring(font_file_name.lastIndexOf('\.')) !== FONT_EXT_NAME)
+            return;
+
+        // ttf 파일 경로 저장
+        font_file_paths.push(font_file_dir_path + '/' + font_file_name);
     });
 
-    var fonts = {};
-    fonts.font_names = font_names;
-    fonts.font_file_path = font_file_path;
+    if (font_file_paths.length == 0)
+        return null;
 
-    return fonts;
+    return font_file_paths;
+}
+
+function get_main_font_file(font, font_file_paths) {
+
+    var main_font_file = {};
+
+    main_font_file.font_name = font.name;
+    main_font_file.file_path = font_file_paths[0];
+
+    return main_font_file;
+}
+
+function get_variation_font_file(font, font_file_paths) {
+
+    var font_name_delimiter = '-';
+    var variation_font_file = [];
+
+    font_file_paths.forEach(function(font_file_path) {
+
+        var var_font_file = {};
+
+        var font_file_name = font_file_path.substring(font_file_path.lastIndexOf('/')+1, font_file_path.lastIndexOf('\.'));
+
+        var_font_file.font_name = font.name + font_name_delimiter + font_file_name;
+        var_font_file.file_path = font_file_path;
+
+        variation_font_file.push(var_font_file);
+    });
+
+    return variation_font_file;
 }
 
 var func = {}
