@@ -89,26 +89,49 @@ function get_font_list(user_id) {
     // TODO DELETE THIS!
     user_id = 2;
 
-
     return get_font_id_name_list_by_user(user_id) // get fonts (id, name) by user id
         .then(function(font_id_name_list) {
 
+            // 사용 가능한 Dynamic 폰트 리스트
             var font_list = [];
 
-            // append main font_file, variation font_file
+            // 에디터에 등록할 대표 폰트 이름 리스트
+            var editor_font_list = [];
+
+            // append font_files
             font_id_name_list.forEach(function(font) {
 
-                var font_file_paths  = get_font_file_paths(font);
-                if (font_file_paths === null) return;
+                var font_files = get_font_files(font);
+                if (font_files === null) return;
 
-                font.main_font_file = get_main_font_file(font, font_file_paths);
-                font.variation_font_file = get_variation_font_file(font, font_file_paths);
-
+                font.font_files = font_files;
                 font_list.push(font);
+                
+                editor_font_list.push(font.name);
             });
 
-            return font_list;
+            var result = {};
+            result.font_list = font_list;
+            result.editor_font_list = editor_font_list;
+
+            return result;
     });
+}
+
+function get_font_files(font) {
+
+    var font_files = [];
+
+    var font_file_paths  = get_font_file_paths(font);
+    if (font_file_paths === null) return null;
+
+    // 대표 폰트 (: 현재는 변형 폰트 1번이 대표 폰트)
+    var main_font = get_main_font(font, font_file_paths[0]);
+    font_files.push(main_font);
+
+    // 변형 폰트
+    var variation_font_list = get_variation_font(font, font_file_paths);
+    return font_files.concat(variation_font_list);
 }
 
 function get_font_file_paths(font) {
@@ -141,20 +164,20 @@ function get_font_file_paths(font) {
     return font_file_paths;
 }
 
-function get_main_font_file(font, font_file_paths) {
+function get_main_font(font, font_file_path) {
 
-    var main_font_file = {};
+    var main_font = {};
 
-    main_font_file.font_name = font.name;
-    main_font_file.file_path = font_file_paths[0];
+    main_font.font_name = font.name;
+    main_font.file_path = font_file_path;
 
-    return main_font_file;
+    return main_font;
 }
 
-function get_variation_font_file(font, font_file_paths) {
+function get_variation_font(font, font_file_paths) {
 
     var font_name_delimiter = '-';
-    var variation_font_file = [];
+    var variation_font_list = [];
 
     font_file_paths.forEach(function(font_file_path) {
 
@@ -165,10 +188,10 @@ function get_variation_font_file(font, font_file_paths) {
         var_font_file.font_name = font.name + font_name_delimiter + font_file_name;
         var_font_file.file_path = font_file_path;
 
-        variation_font_file.push(var_font_file);
+        variation_font_list.push(var_font_file);
     });
 
-    return variation_font_file;
+    return variation_font_list;
 }
 
 var func = {}

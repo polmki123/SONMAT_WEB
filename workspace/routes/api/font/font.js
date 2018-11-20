@@ -44,9 +44,7 @@ router.get('/font_service_test', function(req, res) {
     var body = {};
 
     font_service.get_font_list(2).then(function(result) {
-
-        body.font_id_list = result;
-        res.send(body);
+        res.json(result);
     })
 });
 

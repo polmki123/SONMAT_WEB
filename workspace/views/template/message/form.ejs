@@ -46,33 +46,41 @@
 
 <script type="text/javascript">
 
-    // 폰트 리스트 (summernote에 선언 후 폰트 load)
+    // 사용 가능한 Dynamic 폰트 리스트
+    var font_list = <%- JSON.stringify(font_list) %>;
 
-    var font_names = <%- JSON.stringify(font_names) %>;
+    // 에디터에 등록할 대표 폰트 리스트
+    var editor_font_list = <%- JSON.stringify(editor_font_list) %>;
 
-    var font_file_path =  <%- JSON.stringify(font_file_path) %> ;
+    var t = <%- JSON.stringify(result) %>;
+    console.log("result ", t);
 
-    font_names.forEach(function(font_name, index) {
 
-        var font_face = new FontFace(font_name, 'url(' + font_file_path[index] + ')');
+    console.log("font list : ", font_list);
+    console.log("editor font list : ", editor_font_list);
 
-        // 폰트 load
-        font_face.load().then(function(loaded_face) {
+    // 모튼 font를 font-face에 등록
+    font_list.forEach(function(dynamic_font) {
 
-            // load 된 폰트 추가
-            document.fonts.add(loaded_face);
-        }).catch(function(error) { });
+        dynamic_font.font_files.forEach(function(font_file) {
+
+            var font_face = new FontFace(font_file.font_name, 'url(/../' + font_file.file_path + ')');
+
+            // 폰트 load
+            font_face.load().then(function(loaded_face) {
+                // load 된 폰트 추가
+                document.fonts.add(loaded_face);
+            }).catch(function(error) { });
+        });
     });
-
-
 
     var editor = $('#summernote').summernote({
         placeholder: '당신의 손글씨가 담긴 편지로 마음을 전해보세요',
         tabsize: 2,
         height: 400,
-        fontNames: font_names,
-        fontNamesIgnoreCheck: font_names,
-        toolbar : false
+        fontNames: editor_font_list,
+        fontNamesIgnoreCheck: editor_font_list,
+        //toolbar : false
     });
 
 

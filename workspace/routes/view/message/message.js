@@ -10,15 +10,17 @@ router.get('/list', function(req, res, next) {
 
 router.get('/form', function(req, res, next) {
 
-    var fonts = font_service.get_font_list();
+    font_service.get_font_list(req.user.id).then(function(result) {
 
-    var body = {
-        font_names : fonts.font_names ,
-        font_file_path : fonts.font_file_path,
-        opponents :res.opponents
-    };
+        var body = {
+            result : result,
+            font_list : result.font_list,
+            editor_font_list : result.editor_font_list,
+            opponents :res.opponents
+        };
 
-	res.render('message/form' , body);
+        res.render('message/form' , body);
+    });
 });
 
 router.get('/to/:toUserId/timeline', function(req, res, next) {
