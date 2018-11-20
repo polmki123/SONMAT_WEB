@@ -118,7 +118,8 @@
         // 업로드 버튼 - click event
         $(document).on('click', '#image_upload_btn', function() {
 
-            var formData = new FormData();
+            var form = $('#form-group-file');
+            var formData = new FormData(form);
             var file = $('#input-file')[0].files[0];
 
             if(file == undefined) {
@@ -128,25 +129,23 @@
 
             formData.append("file", file);
 
-            $.ajax({
-                url : '/api/files/upload',
+            var FILE_UPLOAD_API_URL = '/api/files/upload';
+            var FONT_CREATE_API_URL = '/api/font/';
+
+            $.ajax({  // file 형식이라 AjaxUtils의 post는 사용 불가
+                url : FILE_UPLOAD_API_URL,
                 processData: false,
                 contentType: false,
                 data: formData,
                 type: 'POST'
             }).done( function(res) {
+
                 var body = {};
                 body.file_path = res.path;
-                //body.user_id = 1;
 
-                $.ajax({
-                    url : '/api/font/',
-                    data: body,
-                    type: 'POST'
-                }).done( function(res) {
+                AjaxUtils.post(FONT_CREATE_API_URL, body, function(res) {
                     window.location.href = "/handwrite/making";
                 });
             });
-
         });
     </script>
