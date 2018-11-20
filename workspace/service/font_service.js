@@ -137,6 +137,7 @@ function get_font_files(font) {
 function get_font_file_paths(font) {
 
     var FONT_FILES_ROOT_DIR_PATH = 'repository/font/';
+    var FONT_FILES_PATH_PREFIX = 'font/';
     var FONT_EXT_NAME = '.ttf';
 
     // /font/{font_id} 폴더
@@ -155,7 +156,7 @@ function get_font_file_paths(font) {
             return;
 
         // ttf 파일 경로 저장
-        font_file_paths.push(font_file_dir_path + '/' + font_file_name);
+        font_file_paths.push(FONT_FILES_PATH_PREFIX + font.id + '/' + font_file_name);
     });
 
     if (font_file_paths.length == 0)
