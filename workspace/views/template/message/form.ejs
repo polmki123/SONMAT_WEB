@@ -1,6 +1,12 @@
 <div id="page-start"></div>
 
-<section class="main-container">
+<style>
+    .message-form-background {
+        background: url("../images/message-form-background.jpg") 50% 0px no-repeat;
+    }
+</style>
+
+<section class="main-container section pv-40 fixed-bg dark-translucent-bg message-form-background">
 
     <div class="container">
         <div class="row">
@@ -11,29 +17,36 @@
                     <!-- page-title start -->
                     <!-- ================ -->
 
-                    <br/>
-                    <br/>
                     <form class="form-group">
-                        <div class="row">
 
-                            <div class="col-lg-12">
-                                <input type="email" class="form-control" name="inputEmail" placeholder="이메일을 입력하세요">
-                                <div id="email-feedback" class="invalid-feedback" style="display:none;">상대 이메일을 확인해주세요.</div>
-                            </div>
-                        </div>
-                        <br/>
-                        <br/>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <input class="form-control" type="text" name="inputTitle" placeholder="제목을 입력하세요">
-                            </div>
-                        </div>
-                        <div class="separator"></div>
+                        <div class="pv-20 ph-20 light-gray-bg hc-item-box bordered hc-shadow animated hc-element-invisible hc-element-visible">
 
-                        <div id="summernote" name="inputContents"></div>
-                        <div class="separator"></div>
-                        <div class="text-right">
-                            <button type="button" class="btn btn-success" id="upload_btn"><i class="fa fa-save"></i>저장</button>
+                            <br/>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input type="email" class="form-control" name="inputEmail" placeholder="이메일을 입력하세요">
+                                    <div id="email-feedback" class="invalid-feedback" style="display:none;">상대 이메일을 확인해주세요.</div>
+                                </div>
+                            </div>
+
+                            <br/>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input class="form-control" type="text" name="inputTitle" placeholder="제목을 입력하세요">
+                                </div>
+                            </div>
+
+                            <div class="separator with-icon"><i class="fa text-default fa-envelope-square"></i></div>
+
+                            <div id="summernote" name="inputContents"></div>
+
+                            <br/>
+
+                            <div class="text-right">
+                                <button type="button" class="btn btn-success" id="upload_btn"><i class="fa fa-save"></i>저장</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -60,26 +73,22 @@
     // 대표 폰트 등록된 summernote 생성
     var editor = init_summertnote(main_font_list);
 
-    // summernote.change font
-    editor.on('summernote.change', function(we, e) {
 
-        // TODO key filter
 
-        /*var clear_text = editor.summernote('code').replace(/<\/p>/gi, "\n")
-            .replace(/<br\/?>/gi, "\n")
-            .replace(/<\/?[^>]+(>|$)/g, "");
+    // summernote.keyup event
+    $('#summernote').on('summernote.keyup', function(we, e) {
 
-        console.log(clear_text);
-
-        var randomFont = getRandomFont();
-        //console.log(randomFont);
-        editor.summernote('fontName' , randomFont);*/
+        // enter
+        if (e.keyCode == 13) {
+            var randomFont = getRandomFont();
+            editor.summernote('fontName' , randomFont);
+        }
 
     });
 
 
 
-    
+
     function register_font_to_font_face(font_list) {
         font_list.forEach(function(font) {
             var font_face = new FontFace(font.font_name, 'url(/api/files/?path=' + font.file_path + ')');
@@ -100,49 +109,35 @@
         });
 
         return $('#summernote').summernote({
+            lang: 'ko-KR',
             placeholder: '당신의 손글씨가 담긴 편지로 마음을 전해보세요',
             tabsize: 2,
             height: 400,
             fontNames: font_name_list,
-            fontNamesIgnoreCheck: font_name_list
+            fontNamesIgnoreCheck: font_name_list,
             //toolbar : false
         });
     }
 
-   /* function getRandomInt(min, max) {
+    function getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     function getRandomFont() {
-        var randomFontIndex = getRandomInt(0 , temp_font_list.length);
-        return temp_font_list[randomFontIndex];
+
+        var selected_font_list = variation_font_list.slice(0, 3);
+
+        var randomFontIndex = getRandomInt(0 , selected_font_list.length - 1);
+
+        return selected_font_list[randomFontIndex].font_name;
     }
 
-*/
 
-    $.fn.extend({
-        placeCursorAtEnd: function() {
-            // Places the cursor at the end of a contenteditable container (should also work for textarea / input)
-            if (this.length === 0) {
-                throw new Error("Cannot manipulate an element if there is no element!");
-            }
-            var el = this[0];
-            var range = document.createRange();
-            var sel = window.getSelection();
-            var childLength = el.childNodes.length;
-            if (childLength > 0) {
-                var lastNode = el.childNodes[childLength - 1];
-                var lastNodeChildren = lastNode.childNodes.length;
-                range.setStart(lastNode, lastNodeChildren);
-                range.collapse(true);
-                sel.removeAllRanges();
-                sel.addRange(range);
-            }
-            return this;
-        }
-    });
+
+
+
 
 
     var is_sendable_state = {
