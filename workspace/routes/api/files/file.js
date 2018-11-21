@@ -4,6 +4,7 @@ var fs = require('fs');
 var router = express.Router();
 
 router.post('/upload', function(req, res, next) {
+
 	var input_file_path = req.files.file.path;
 	var dirname = path.dirname(input_file_path);
 
@@ -18,7 +19,7 @@ router.post('/upload', function(req, res, next) {
 	});
 
 	var body = {};
-	body.path = new_file_path;
+	body.file_path = new_file_path;
 
 	console.log("[file.js] file received : ", new_file_path);
 	res.send(body);

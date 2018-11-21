@@ -38,10 +38,16 @@ function checked_by_userid(user_id){
 	});
 };
 
-function create_new_font(user_id){
+function create_new_font(user_id, body){
+
+    if (body.name == "") body.name = "default_" + (new Date).getTime();
+
 	return new Promise(function(resolve, reject){
-		models.font.create({user_id: user_id})
-		.then(function(font) {
+		models.font.create({
+			user_id: user_id,
+			name: body.name,
+			description: body.desc,
+		}).then(function(font) {
 			resolve(font)
 		}).catch(function(err) {
 			reject(err);
