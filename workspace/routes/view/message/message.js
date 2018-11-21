@@ -10,12 +10,11 @@ router.get('/list', function(req, res, next) {
 
 router.get('/form', function(req, res, next) {
 
-    font_service.get_font_list(req.user.id).then(function(result) {
+    font_service.get_font_list(req.user.id).then(function(font_list) {
 
         var body = {
-            result : result,
-            font_list : result.font_list,
-            editor_font_list : result.editor_font_list,
+            main_font_list : font_list.main_font_list,
+            variation_font_list : font_list.variation_font_list,
             opponents :res.opponents
         };
 

@@ -46,25 +46,43 @@
 
 <script type="text/javascript">
 
-    // 사용 가능한 Dynamic 폰트 리스트
-    var font_list = <%- JSON.stringify(font_list) %>;
-
     // 에디터에 등록할 대표 폰트 리스트
-    var editor_font_list = <%- JSON.stringify(editor_font_list) %>;
+    var main_font_list = <%- JSON.stringify(main_font_list) %>;
 
-    var t = <%- JSON.stringify(result) %>;
-    console.log("result ", t);
+    // 실제 사용되는 변형 폰트 리스트
+    var variation_font_list = <%- JSON.stringify(variation_font_list) %>;
+
+    // 모든 폰트를 font-face에 등록
+    register_font_to_font_face(main_font_list);
+    register_font_to_font_face(variation_font_list);
+
+    // 대표 폰트 등록된 summernote 생성
+    var editor = init_summertnote(main_font_list);
+
+    // summernote.change font
+    editor.on('summernote.change', function(we, e) {
+
+        // TODO key filter
+
+        /*var clear_text = editor.summernote('code').replace(/<\/p>/gi, "\n")
+            .replace(/<br\/?>/gi, "\n")
+            .replace(/<\/?[^>]+(>|$)/g, "");
+
+        console.log(clear_text);
+
+        var randomFont = getRandomFont();
+        //console.log(randomFont);
+        editor.summernote('fontName' , randomFont);*/
+
+    });
 
 
-    console.log("font list : ", font_list);
-    console.log("editor font list : ", editor_font_list);
 
-    // 모튼 font를 font-face에 등록
-    font_list.forEach(function(dynamic_font) {
 
-        dynamic_font.font_files.forEach(function(font_file) {
 
-            var font_face = new FontFace(font_file.font_name, 'url(/../' + font_file.file_path + ')');
+    function register_font_to_font_face(font_list) {
+        font_list.forEach(function(font) {
+            var font_face = new FontFace(font.font_name, 'url(/api/files/?path=' + font.file_path + ')');
 
             // 폰트 load
             font_face.load().then(function(loaded_face) {
@@ -72,38 +90,62 @@
                 document.fonts.add(loaded_face);
             }).catch(function(error) { });
         });
-    });
+    }
 
-    var editor = $('#summernote').summernote({
-        placeholder: '당신의 손글씨가 담긴 편지로 마음을 전해보세요',
-        tabsize: 2,
-        height: 400,
-        fontNames: editor_font_list,
-        fontNamesIgnoreCheck: editor_font_list,
-        //toolbar : false
-    });
+    function init_summertnote(font_list) {
 
+        var font_name_list = [];
+        font_list.forEach(function(font) {
+            font_name_list.push(font.font_name);
+        });
 
-    function getRandomInt(min, max) {
+        return $('#summernote').summernote({
+            placeholder: '당신의 손글씨가 담긴 편지로 마음을 전해보세요',
+            tabsize: 2,
+            height: 400,
+            fontNames: font_name_list,
+            fontNamesIgnoreCheck: font_name_list
+            //toolbar : false
+        });
+    }
+
+   /* function getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-
-
     function getRandomFont() {
-        var randomFontIndex = getRandomInt(0 , font_names.length);
-        return font_names[randomFontIndex];
+        var randomFontIndex = getRandomInt(0 , temp_font_list.length);
+        return temp_font_list[randomFontIndex];
     }
 
-    // summernote.change font
-    editor.on('summernote.keyup', function(we, contents, $editable) {
-        var randomFont = getRandomFont();
-        console.log(randomFont);
-        editor.summernote('fontName' , randomFont);
+    */
 
+    $.fn.extend({
+        placeCursorAtEnd: function() {
+            // Places the cursor at the end of a contenteditable container (should also work for textarea / input)
+            if (this.length === 0) {
+                throw new Error("Cannot manipulate an element if there is no element!");
+            }
+            var el = this[0];
+            var range = document.createRange();
+            var sel = window.getSelection();
+            var childLength = el.childNodes.length;
+            if (childLength > 0) {
+                var lastNode = el.childNodes[childLength - 1];
+                var lastNodeChildren = lastNode.childNodes.length;
+                range.setStart(lastNode, lastNodeChildren);
+                range.collapse(true);
+                sel.removeAllRanges();
+                sel.addRange(range);
+            }
+            return this;
+        }
     });
+
+
+
 
         // 업로드 버튼 - click event
     $(document).on('click', '#upload_btn', function() {
