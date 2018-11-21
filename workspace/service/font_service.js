@@ -40,7 +40,7 @@ function checked_by_userid(user_id){
 
 function create_new_font(user_id, body){
 
-    if (body.name == "") body.name = "default_" + (new Date).getTime();
+    if (body.name == "") body.name = getDate_format();
 
 	return new Promise(function(resolve, reject){
 		models.font.create({
@@ -54,6 +54,24 @@ function create_new_font(user_id, body){
 		});
 	});
 };
+
+function getDate_format(){
+    var date_time = new Date();
+    var yyyy = date_time.getFullYear().toString();
+    var MM = pad(date_time.getMonth() + 1,2);
+    var dd = pad(date_time.getDate(), 2);
+    var hh = pad(date_time.getHours(), 2);
+    var mm = pad(date_time.getMinutes(), 2)
+    var ss = pad(date_time.getSeconds(), 2)
+    return yyyy+'/'+MM+'/'+dd+' '+hh+':'+mm+':'+ss;
+}
+function pad(number, length) {
+    var str = '' + number;
+    while (str.length < length) {
+        str = '0' + str;
+    }
+    return str;
+}
 
 function notify_complete(font_id){
 	return new Promise(function(resolve, reject){
