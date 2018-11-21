@@ -5,7 +5,7 @@ var font_service = require('../../../service/font_service');
 
 /* index */
 router.get('/list', function(req, res, next) {
-	res.render('message/list', {opponents : res.opponents});
+	res.render('message/list', {opponents : res.opponents, show_opponent: true});
 });
 
 router.get('/form', function(req, res, next) {

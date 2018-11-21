@@ -47,7 +47,12 @@
 
 <% if(locals.opponents) { %>
 
+<% if(locals.show_opponent) { %>
+<div class="style-switcher opened" style="left: 0px;">
+<% } else { %>
 <div class="style-switcher closed">
+<% } %>
+
     <div class="header">
         <a class="trigger" href="#"><i class="fa fa-envelope"></i></a>
         <h2>Messages</h2>
