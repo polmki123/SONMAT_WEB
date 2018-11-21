@@ -4,6 +4,17 @@
     .message-form-background {
         background: url("../images/message-form-background.jpg") 50% 0px no-repeat;
     }
+
+    .separator {
+        background:
+                linear-gradient(to right,
+                                transparent 0%,
+                                rgba(0, 0, 0, 0.09) 25%,
+                                transparent 45%,
+                                transparent 55%,
+                                rgba(0, 0, 0, 0.09) 75%,
+                                transparent 100%); !important;
+    }
 </style>
 
 <section class="main-container section pv-40 fixed-bg dark-translucent-bg message-form-background">
@@ -45,7 +56,7 @@
                             <br/>
 
                             <div class="text-right">
-                                <button type="button" class="btn btn-success" id="upload_btn"><i class="fa fa-save"></i>저장</button>
+                                <button type="button" class="btn btn-success" id="upload_btn"><i class="fa fa-envelope"></i>&nbsp;&nbsp;전송</button>
                             </div>
                         </div>
                     </form>
@@ -108,6 +119,7 @@
             font_name_list.push(font.font_name);
         });
 
+
         return $('#summernote').summernote({
             lang: 'ko-KR',
             placeholder: '당신의 손글씨가 담긴 편지로 마음을 전해보세요',
@@ -115,7 +127,7 @@
             height: 400,
             fontNames: font_name_list,
             fontNamesIgnoreCheck: font_name_list,
-            //toolbar : false
+            toolbar : false
         });
     }
 
