@@ -151,15 +151,21 @@ function get_message_from_id(son_id){
 	});
 };
 
-function formatDate(date) {
-    var month = '' + (date.getMonth() + 1),
-        day = '' + date.getDate(),
-        year = date.getFullYear();
-
-    if (month.length < 2) month = '0' + month;
-    if (day.length < 2) day = '0' + day;
-
-    return [year, month, day].join('-');
+function formatDate(date_time){
+    var yyyy = date_time.getFullYear().toString();
+    var MM = pad(date_time.getMonth() + 1,2);
+    var dd = pad(date_time.getDate(), 2);
+    var hh = pad(date_time.getHours(), 2);
+    var mm = pad(date_time.getMinutes(), 2)
+    var ss = pad(date_time.getSeconds(), 2)
+    return yyyy+'/'+MM+'/'+dd+' '+hh+':'+mm;
+}
+function pad(number, length) {
+    var str = '' + number;
+    while (str.length < length) {
+        str = '0' + str;
+    }
+    return str;
 }
 
 function get_name_from_id(user_id){
