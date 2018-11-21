@@ -37,5 +37,16 @@ router.post('/new/checked', function(req, res) {
 
 });
 
+router.get('/font_service_test', function(req, res) {
+
+    var font_service = require('../../../service/font_service');
+
+    var body = {};
+
+    font_service.get_font_list(2).then(function(result) {
+        res.json(result);
+    })
+});
+
 
 module.exports = router;

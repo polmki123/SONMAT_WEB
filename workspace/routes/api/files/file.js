@@ -25,4 +25,15 @@ router.post('/upload', function(req, res, next) {
 	res.send(body);
 });
 
+router.get('/', function(req, res, next) {
+
+    var REPOSITORY_DIR_PATH = path.join(__dirname, '..', '..', '..', 'repository');
+
+    var request_file_path = REPOSITORY_DIR_PATH + '/' + req.query.path;
+
+    fs.readFile(request_file_path, function(err, data) {
+        res.end(data);
+    });
+});
+
 module.exports = router;

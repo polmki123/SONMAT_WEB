@@ -1,6 +1,23 @@
 <div id="page-start"></div>
 
-<section class="main-container">
+<style>
+    .message-form-background {
+        background: url("../images/message-form-background.jpg") 50% 0px no-repeat;
+    }
+
+    .separator {
+        background:
+                linear-gradient(to right,
+                                transparent 0%,
+                                rgba(0, 0, 0, 0.09) 25%,
+                                transparent 45%,
+                                transparent 55%,
+                                rgba(0, 0, 0, 0.09) 75%,
+                                transparent 100%); !important;
+    }
+</style>
+
+<section class="main-container section pv-40 fixed-bg dark-translucent-bg message-form-background">
 
     <div class="container">
         <div class="row">
@@ -11,29 +28,36 @@
                     <!-- page-title start -->
                     <!-- ================ -->
 
-                    <br/>
-                    <br/>
                     <form class="form-group">
-                        <div class="row">
 
-                            <div class="col-lg-12">
-                                <input type="email" class="form-control" name="inputEmail" placeholder="이메일을 입력하세요">
-                                <div id="email-feedback" class="invalid-feedback" style="display:none;">상대 이메일을 확인해주세요.</div>
-                            </div>
-                        </div>
-                        <br/>
-                        <br/>
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <input class="form-control" type="text" name="inputTitle" placeholder="제목을 입력하세요">
-                            </div>
-                        </div>
-                        <div class="separator"></div>
+                        <div class="pv-20 ph-20 light-gray-bg hc-item-box bordered hc-shadow animated hc-element-invisible hc-element-visible">
 
-                        <div id="summernote" name="inputContents"></div>
-                        <div class="separator"></div>
-                        <div class="text-right">
-                            <button type="button" class="btn btn-success" id="upload_btn"><i class="fa fa-save"></i>저장</button>
+                            <br/>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input type="email" class="form-control" name="inputEmail" placeholder="이메일을 입력하세요">
+                                    <div id="email-feedback" class="invalid-feedback" style="display:none;">상대 이메일을 확인해주세요.</div>
+                                </div>
+                            </div>
+
+                            <br/>
+
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <input class="form-control" type="text" name="inputTitle" placeholder="제목을 입력하세요">
+                                </div>
+                            </div>
+
+                            <div class="separator with-icon"><i class="fa text-default fa-envelope-square"></i></div>
+
+                            <div id="summernote" name="inputContents"></div>
+
+                            <br/>
+
+                            <div class="text-right">
+                                <button type="button" class="btn btn-success" id="upload_btn"><i class="fa fa-envelope"></i>&nbsp;&nbsp;전송</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -47,38 +71,65 @@
 
 <script type="text/javascript">
 
-    // 폰트 리스트 (summernote에 선언 후 폰트 load)
-    var is_sendable_state = {
-        email: false,
-    };
+    // 에디터에 등록할 대표 폰트 리스트
+    var main_font_list = <%- JSON.stringify(main_font_list) %>;
 
-    var font_names = <%- JSON.stringify(font_names) %>;
+    // 실제 사용되는 변형 폰트 리스트
+    var variation_font_list = <%- JSON.stringify(variation_font_list) %>;
 
-    var font_file_path =  <%- JSON.stringify(font_file_path) %> ;
+    // 모든 폰트를 font-face에 등록
+    register_font_to_font_face(main_font_list);
+    register_font_to_font_face(variation_font_list);
 
-    font_names.forEach(function(font_name, index) {
+    // 대표 폰트 등록된 summernote 생성
+    var editor = init_summertnote(main_font_list);
 
-        var font_face = new FontFace(font_name, 'url(' + font_file_path[index] + ')');
 
-        // 폰트 load
-        font_face.load().then(function(loaded_face) {
 
-            // load 된 폰트 추가
-            document.fonts.add(loaded_face);
-        }).catch(function(error) { });
+    // summernote.keyup event
+    $('#summernote').on('summernote.keyup', function(we, e) {
+
+        // enter
+        if (e.keyCode == 13) {
+            var randomFont = getRandomFont();
+            editor.summernote('fontName' , randomFont);
+        }
+
     });
 
 
 
-    var editor = $('#summernote').summernote({
-        placeholder: '당신의 손글씨가 담긴 편지로 마음을 전해보세요',
-        tabsize: 2,
-        height: 400,
-        fontNames: font_names,
-        fontNamesIgnoreCheck: font_names,
-        toolbar : false
-    });
 
+    function register_font_to_font_face(font_list) {
+        font_list.forEach(function(font) {
+            var font_face = new FontFace(font.font_name, 'url(/api/files/?path=' + font.file_path + ')');
+
+            // 폰트 load
+            font_face.load().then(function(loaded_face) {
+                // load 된 폰트 추가
+                document.fonts.add(loaded_face);
+            }).catch(function(error) { });
+        });
+    }
+
+    function init_summertnote(font_list) {
+
+        var font_name_list = [];
+        font_list.forEach(function(font) {
+            font_name_list.push(font.font_name);
+        });
+
+
+        return $('#summernote').summernote({
+            lang: 'ko-KR',
+            placeholder: '당신의 손글씨가 담긴 편지로 마음을 전해보세요',
+            tabsize: 2,
+            height: 400,
+            fontNames: font_name_list,
+            fontNamesIgnoreCheck: font_name_list,
+            toolbar : false
+        });
+    }
 
     function getRandomInt(min, max) {
         min = Math.ceil(min);
@@ -86,13 +137,24 @@
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-
-
     function getRandomFont() {
-        var randomFontIndex = getRandomInt(0 , font_names.length);
-        return font_names[randomFontIndex];
+
+        var selected_font_list = variation_font_list.slice(0, 3);
+
+        var randomFontIndex = getRandomInt(0 , selected_font_list.length - 1);
+
+        return selected_font_list[randomFontIndex].font_name;
     }
 
+
+
+
+
+
+
+    var is_sendable_state = {
+        email: false,
+    };
 
     function getSendableState(){
         var state = true;
@@ -102,15 +164,7 @@
         return state;
     }
 
-    // summernote.change font
-    editor.on('summernote.keyup', function(we, contents, $editable) {
-        var randomFont = getRandomFont();
-        console.log(randomFont);
-        editor.summernote('fontName' , randomFont);
-
-    });
-
-        // 업로드 버튼 - click event
+    // 업로드 버튼 - click event
     $(document).on('click', '#upload_btn', function() {
 
         if (getSendableState()){
