@@ -6,6 +6,7 @@ function create_new_message(body){
 			user_id: body.user_id,
 			title: body.title,
 			contents: body.contents,
+            contents_html: body.contents_html
 		}).then(function(msg){
 			resolve(msg)
 		}).catch(function(err) {

@@ -97,6 +97,8 @@
     var randomFont = getRandomFont();
     editor.summernote('fontName' , randomFont);
 
+    $("input[name=inputEmail]").focus();
+
     // summernote.keyup event
     $('#summernote').on('summernote.keyup', function(we, e) {
 
