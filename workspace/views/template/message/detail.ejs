@@ -105,7 +105,7 @@
     // 변형 폰트를 font-face에 등록
     register_font_to_font_face(variation_font_list);
 
-    var message_contents_html = <%- "'" + msg.sonmat.message.contents_html + "'" %>;
+    var message_contents_html = <%- "`" + msg.sonmat.message.contents_html + "`" %>;
 
     // summernote 생성
     var editor = $('#summernote').summernote({
