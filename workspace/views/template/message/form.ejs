@@ -159,6 +159,13 @@
         return selected_font_list[randomFontIndex].font_name;
     }
 
+    function get_contents_html(raw_html_str) {
+
+        //console.log("raw", raw_html_str);
+        return raw_html_str.replace(/style="/gi, 'style="font-size: 20pt; ');
+        //console.log("raw 2", raw_html_str);
+        //console.log("raw 3", str);
+    }
 
 
 
@@ -184,7 +191,7 @@
             var formData = {}
             formData.email = $("input[name=inputEmail]").val()
             formData.title = $("input[name=inputTitle]").val()
-            formData.contents_html = $("div#summernote").summernote('code');
+            formData.contents_html = get_contents_html($("div#summernote").summernote('code'));
             formData.contents = $($("#summernote").summernote("code")).text();
 
             var MESSAGE_POST_UPLOAD_URL = '/api/message';
