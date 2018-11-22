@@ -90,7 +90,8 @@
 
     // 대표 폰트 등록된 summernote 생성
     var editor = init_summertnote(main_font_list);
-
+    var randomFont = getRandomFont();
+    editor.summernote('fontName' , randomFont);
 
     // summernote.keyup event
     $('#summernote').on('summernote.keyup', function(we, e) {
