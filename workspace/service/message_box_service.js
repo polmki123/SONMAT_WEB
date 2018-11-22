@@ -135,7 +135,7 @@ function get_message_from_id(son_id){
 						{
 							model: models.message,
 							required : true, 
-							attributes : ['title', 'contents'], 
+							attributes : ['title', 'contents', 'contents_html'],
 						}
 					]
 				}

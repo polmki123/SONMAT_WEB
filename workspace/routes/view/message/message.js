@@ -39,11 +39,16 @@ router.get('/to/:toUserId/timeline', function(req, res, next) {
 });
 
 router.get('/to/:sonmat_request_id', function(req, res, next) {
+    var render_data = { opponents :res.opponents };
 	var son_id = req.params.sonmat_request_id;
 	msgB_service.get_message_from_id(son_id) // user
 	.then(function(msg){
-		res.render('message/detail', { 'msg': msg });
-	}).catch(function(err) {
+	    render_data.msg = msg;
+        return font_service.get_font_list(req.user.id);
+	}).then(function(font_list) {
+	    render_data.variation_font_list = font_list.variation_font_list;
+        res.render('message/detail', render_data);
+    }).catch(function(err) {
 		console.log(err);
 		next()
 	});

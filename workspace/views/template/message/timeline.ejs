@@ -30,18 +30,20 @@
 
                                     <div class="timeline-date-label icon default-bg circle mb-0" style="border-radius: 0px; display: block"><i class="fa fa-diamond"></i></div>
 
+                                    <br/>
+
 									<!-- timeline grid item start -->
 									<% msgs.forEach(function(msg){ %>
 										<% if(msg.from_user_id == uid) { %>
-											<div class="timeline-item pull-right">
-										<% } else { %>
 											<div class="timeline-item">
+										<% } else { %>
+											<div class="timeline-item pull-left">
 										<% } %>
 
 												<article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
 													<header>
 														<h2><a href="/message/to/<%= msg.id %>"><%= msg.sonmat.message.title %></a></h2>
-														<div class="post-info">
+														<div class="post-info text-right">
 															<span class="post-date">
 																<i class="fa fa-calendar-o pr-1"></i>
 																<span class="day"><%= msg.send_date %></span>
@@ -59,11 +61,6 @@
 											</div>
 
 									<% }); %>
-
-
-
-
-									
 									<!-- timeline grid item end -->
 								</div>
 								<!-- timeline grid end -->

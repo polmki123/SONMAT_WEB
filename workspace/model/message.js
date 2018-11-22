@@ -22,7 +22,11 @@ module.exports = function(sequelize, DataTypes) {
 		contents: {
 			type: DataTypes.STRING,
 			allowNull: true
-		}
+		},
+        contents_html: {
+            type: DataTypes.STRING,
+            allowNull: true
+        }
 	}, {
 		tableName: 'message',
 		underscored: true,

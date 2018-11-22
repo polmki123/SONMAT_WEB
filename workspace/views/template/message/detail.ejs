@@ -1,3 +1,15 @@
+<style>
+    .note-editable {
+        background-color: white !important;
+
+    }
+
+    .note-editor.note-frame {
+        border: 0 !important;
+    }
+
+</style>
+
 <section class="main-container">
 
 	<div class="container">
@@ -7,71 +19,76 @@
 			<!-- ================ -->
 			<div class="main col-lg-12">
 
-				<!-- page-title start -->
-				<!-- ================ -->
-				<h1 class="page-title"><%= msg.sonmat.message.title %></h1>
-				<!-- page-title end -->
+                <!--<div class="pv-20 ph-20 light-gray-bg hc-item-box bordered hc-shadow animated hc-element-invisible hc-element-visible">
+-->
+                    <!-- page-title start -->
+                    <!-- ================ -->
+                    <h2 class="page-title"><%= msg.sonmat.message.title %></h2>
+                    <!-- page-title end -->
 
-				<!-- blogpost start -->
-				<!-- ================ -->
-				<article class="blogpost full">
-					<header>
-						<div class="post-info mb-4">
-							<span class="post-date">
-								<i class="fa fa-calendar-o pr-1"></i>
-								<span class="day"><%= msg.send_date %></span>
-							</span>
-							<span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#"><%= msg.From.name %></a></span>
-							<span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>
-						</div>
-					</header>
-					<div class="blogpost-content">
-						<div id="carousel-blog-post" class="carousel slide mb-5" data-ride="carousel">
-							<!-- Indicators -->
-							<ol class="carousel-indicators">
-								<li data-target="#carousel-blog-post" data-slide-to="0" class="active"></li>
-								<li data-target="#carousel-blog-post" data-slide-to="1"></li>
-								<li data-target="#carousel-blog-post" data-slide-to="2"></li>
-							</ol>
+                    <!-- blogpost start -->
+                    <!-- ================ -->
+                    <article class="blogpost full">
 
-							<!-- Wrapper for slides -->
-							<div class="carousel-inner" role="listbox">
-								<div class="carousel-item active">
-									<div class="overlay-container">
-										<img src="/images/blog-1.jpg" alt="">
-										<a class="overlay-link popup-img" href="/images/blog-1.jpg"><i class="fa fa-search-plus"></i></a>
-									</div>
-								</div>
-								<div class="carousel-item">
-									<div class="overlay-container">
-										<img src="/images/blog-3.jpg" alt="">
-										<a class="overlay-link popup-img" href="/images/blog-3.jpg"><i class="fa fa-search-plus"></i></a>
-									</div>
-								</div>
-								<div class="carousel-item">
-									<div class="overlay-container">
-										<img src="/images/blog-4.jpg" alt="">
-										<a class="overlay-link popup-img" href="/images/blog-4.jpg"><i class="fa fa-search-plus"></i></a>
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<p class="large"><%= msg.sonmat.message.contents %></p>
-						<h3 class="my-4"><span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> to <a href="#"><%= msg.To.name %></a></span></h3>
-					</div>
-					<footer class="clearfix">
-						<div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div>
-						<div class="link pull-right">
-							<ul class="social-links circle small colored clearfix margin-clear text-right animated-effect-1">
-								<li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li class="googleplus"><a href="#"><i class="fa fa-google-plus"></i></a></li>
-								<li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-							</ul>
-						</div>
-					</footer>
-				</article>
-				<!-- blogpost end -->
+                        <header>
+                            <div class="post-info mb-4 text-right">
+                                <h5 class="post-date">
+                                    <i class="fa fa-calendar-o pr-1"></i>
+                                    <span class="day"><%= msg.send_date %></span>
+                                </h5>
+                            </div>
+                        </header>
+
+                        <div class="blogpost-content light-gray-bg pv-30 ph-20 hc-item-box bordered hc-shadow hc-element-invisible animated hc-element-visible fadeInDownSmall" style="padding-bottom: 0">
+
+                            <!-- section start -->
+                            <!-- ================ -->
+                            <section class="light-gray-bg clearfix">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="call-to-action">
+                                                <div class="row">
+                                                    <div class="col-md-8 mt-10">
+                                                        <h3 class="title logo-font">To.&nbsp;&nbsp;<span class="pen-font"><%= msg.To.name %></span></h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- section end -->
+
+                           <!-- <div class="separator"></div>-->
+                            <div id="summernote"></div>
+                            <!--<div class="separator"></div>-->
+
+                            <!-- section start -->
+                            <!-- ================ -->
+                            <section class="light-gray-bg clearfix">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="call-to-action text-right">
+                                                <div class="row ">
+                                                    <div class="col-md-12 mt-10">
+                                                        <h3 class="title logo-font">From.&nbsp;&nbsp;<span class="pen-font"><%= msg.From.name %></span></h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- section end -->
+                        </div>
+                    </article>
+                    <!-- blogpost end -->
+
+
+                <!--</div>-->
+
 			</div>
 			<!-- main end -->
 
@@ -79,3 +96,41 @@
 		</div>
 	</div>
 </section>
+
+<script>
+
+    // 실제 사용되는 변형 폰트 리스트
+    var variation_font_list = <%- JSON.stringify(variation_font_list) %>;
+
+    // 변형 폰트를 font-face에 등록
+    register_font_to_font_face(variation_font_list);
+
+    var message_contents_html = <%- "'" + msg.sonmat.message.contents_html + "'" %>;
+
+    // summernote 생성
+    var editor = $('#summernote').summernote({
+        lang: 'ko-KR',
+        tabsize: 2,
+        toolbar : false,
+        disableResizeEditor: true
+
+    });
+    editor.summernote('disable');
+    $('.note-statusbar').hide();
+
+    // contents_html display
+    $('#summernote').summernote('code', message_contents_html);
+
+
+    function register_font_to_font_face(font_list) {
+        font_list.forEach(function(font) {
+            var font_face = new FontFace(font.font_name, 'url(/api/files/?path=' + font.file_path + ')');
+
+            // 폰트 load
+            font_face.load().then(function(loaded_face) {
+                // load 된 폰트 추가
+                document.fonts.add(loaded_face);
+            }).catch(function(error) { });
+        });
+    }
+</script>
