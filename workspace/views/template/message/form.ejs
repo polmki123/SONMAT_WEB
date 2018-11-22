@@ -15,6 +15,10 @@
                                 rgba(0, 0, 0, 0.2) 75%,
                                 transparent 100%); !important;
     }
+
+    .note-editable {
+        font-size: 20pt !important;
+    }
 </style>
 
 <section class="main-container section pv-40 fixed-bg dark-translucent-bg message-form-background">
@@ -178,7 +182,8 @@
             var formData = {}
             formData.email = $("input[name=inputEmail]").val()
             formData.title = $("input[name=inputTitle]").val()
-            formData.contents = $("div#summernote").summernote('code');
+            formData.contents_html = $("div#summernote").summernote('code');
+            formData.contents = $($("#summernote").summernote("code")).text();
 
             var MESSAGE_POST_UPLOAD_URL = '/api/message';
 
