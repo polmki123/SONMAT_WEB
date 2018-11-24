@@ -25,6 +25,29 @@ AjaxUtils.get = function (url, params , fnSuccess, fnError) {
     });
 }
 
+AjaxUtils.upload = function (url, data , fnSuccess, fnError) {
+
+    $.ajax({
+        url : url,
+        processData: false,
+        contentType: false,
+        data: data,
+        dataType: "json",
+        type: 'POST',
+        success: function (result) {
+            if (fnSuccess) {
+                fnSuccess(result);
+            }
+        },
+        error: function (request, status, error) {
+            if (fnError) {
+                fnError(request, status, error);
+            }
+        }
+    });
+}
+
+
 AjaxUtils.post = function (url, dataObj, fnSuccess, fnError) {
 
 

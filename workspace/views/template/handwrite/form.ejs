@@ -153,24 +153,19 @@
 
             formData.append("file", file);
 
-            var FILE_UPLOAD_API_URL = '/api/files/upload';
+            var FILE_UPLOAD_API_URL = 'http://file-api.seolgi.com/api/files/upload';
             var FONT_CREATE_API_URL = '/api/font/';
 
-            $.ajax({  // file 형식이라 AjaxUtils의 post는 사용 불가
-                url : FILE_UPLOAD_API_URL,
-                processData: false,
-                contentType: false,
-                data: formData,
-                type: 'POST'
-            }).done( function(body) {
+            AjaxUtils.upload(FILE_UPLOAD_API_URL , formData , function (result) {
+                result.file_path = result.host + result.downloadPath;
+                result.name = $('#font_name').val();
+                result.desc = $('#font_desc').val();
 
-                body.name = $('#font_name').val();
-                body.desc = $('#font_desc').val();
-
-                AjaxUtils.post(FONT_CREATE_API_URL, body, function(res) {
+                AjaxUtils.post(FONT_CREATE_API_URL, result, function(res) {
                     window.location.href = "/handwrite/making";
                 });
             });
+
         });
 
         $(document).on('change', '#input-file', function() {
