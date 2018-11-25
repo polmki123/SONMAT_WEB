@@ -1,5 +1,6 @@
 var createError = require('http-errors');
 var express = require('express');
+var session = require('express-session');
 var expressLayouts = require('express-ejs-layouts');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -26,7 +27,12 @@ function configApp() {
 	app.use(cookieParser());
 	app.use(express.static(path.join(__dirname, 'public')));
 	app.use(require('./config/parsing'));
-    app.use(require('./config/user')); // temporary user
+
+    app.use(session({
+        secret: 'Thsakt!@#123',
+        resave: false,
+        saveUninitialized: true
+    }));
 
 }
 
@@ -67,19 +73,46 @@ function apiRoute() {
     // message
     app.use('/api/message', require(API_BASE_PATH + 'message/message'));
 
+    // account
+    app.use('/api/account' , require(API_BASE_PATH + 'account/account'));
+
+
 }
 
 configApp();
 
+function isSecureAuthPageUrl(originalUrl) {
+
+    if (originalUrl === '/handwrite' || originalUrl === '/message/list' || originalUrl === '/font') {
+        return true;
+    }
+}
+
 app.use(function(req, res, next) {
 
-    msgB_service.get_opponents_name(req.user.id) // user
+
+    var loggedUser = req.session.user;
+
+    var isNeedAuth = isSecureAuthPageUrl(req.originalUrl);
+
+    if (isNeedAuth && loggedUser == null) {
+        res.statusCode = 302;
+        res.setHeader('Location', '/account/sign-in?referer=' + req.originalUrl);
+        res.end();
+    }
+
+    if (loggedUser != null) {
+        
+        req.user = loggedUser;
+        msgB_service.get_opponents_name(req.user.id) // user
         .then(function(opponents){
             res.opponents = opponents;
             next();
         }).catch(function(err) {
-        console.log(err);
-    });
+            console.log(err);
+            next();
+        });
+    }
 });
 
 viewRoute();
