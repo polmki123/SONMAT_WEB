@@ -19,9 +19,19 @@
     .note-editable {
         font-size: 20pt !important;
     }
+
+    .note-custom-toolbar-select {
+        font-weight: bold; background-color: #09afdf; color: white; text-align: right; width: auto; border: none;
+        margin-left: 5px;
+    }
+
+    .note-custom-toolbar-select-item {
+        font-weight: bold; background-color: #09afdf; color: white;
+    }
+
 </style>
 
-<section class="main-container section pv-40 fixed-bg dark-translucent-bg message-form-background">
+<section class="main-container section pv-40 fixed-bg message-form-background">
 
     <div class="container">
         <div class="row">
@@ -34,7 +44,7 @@
 
                     <form class="form-group">
 
-                        <div class="pv-20 ph-20 light-gray-bg hc-item-box bordered hc-shadow animated hc-element-invisible hc-element-visible">
+                        <div class="pv-20 ph-20 light-gray-bg hc-item-box bordered animated hc-element-invisible hc-element-visible">
 
                             <br/>
 
@@ -55,6 +65,20 @@
 
                             <div class="separator with-icon"><i class="fa text-default fa-envelope-square"></i></div>
 
+                            <div class="pt-1 pb-1" style="background-color: #09afdf; color: white; border-radius: 5px; display: flex;">
+
+                                <select class="form-control note-custom-toolbar-select" id="fontname-select"></select>
+
+                                <select class="form-control note-custom-toolbar-select" id="fontsize-select">
+                                    <option>10</option>
+                                    <option>15</option>
+                                    <option>20</option>
+                                    <option>25</option>
+                                    <option>30</option>
+                                </select>
+                            </div>
+
+
                             <div id="summernote" name="inputContents"></div>
 
                             <br/>
@@ -66,9 +90,6 @@
                             <br/>
                             <br/>
 
-<!--                            <div class="text-right">
-                                <button type="button" class="btn btn-success" id="upload_btn"><i class="fa fa-envelope"></i>&nbsp;&nbsp;전송</button>
-                            </div>-->
                         </div>
                     </form>
                 </div>
@@ -92,12 +113,23 @@
     register_font_to_font_face(main_font_list);
     register_font_to_font_face(variation_font_list);
 
-    // 대표 폰트 등록된 summernote 생성
-    var editor = init_summertnote(main_font_list);
+    // custom toolbar에 대표 font 등록
+    add_font_toolbar(main_font_list);
+
+    // summernote 생성
+    var editor = $('#summernote').summernote({
+        lang: 'ko-KR',
+        placeholder: '당신의 손글씨가 담긴 편지로 마음을 전해보세요',
+        tabsize: 2,
+        height: 400,
+        toolbar : false
+    });
+
     var randomFont = getRandomFont();
     editor.summernote('fontName' , randomFont);
 
     $("input[name=inputEmail]").focus();
+
 
     // summernote.keyup event
     $('#summernote').on('summernote.keyup', function(we, e) {
@@ -110,6 +142,12 @@
 
     });
 
+
+    // fontname-select.change event
+    $('#fontname-select').on('change', function(e) {
+
+        console.log($($(this)[0].selectedOptions).data('value'));
+    });
 
 
 
@@ -125,22 +163,18 @@
         });
     }
 
-    function init_summertnote(font_list) {
+    function add_font_toolbar(font_list) {
 
-        var font_name_list = [];
-        font_list.forEach(function(font) {
-            font_name_list.push(font.font_name);
-        });
+        var fontname_select = $('#fontname-select');
 
+        font_list.forEach(function(font, index) {
 
-        return $('#summernote').summernote({
-            lang: 'ko-KR',
-            placeholder: '당신의 손글씨가 담긴 편지로 마음을 전해보세요',
-            tabsize: 2,
-            height: 400,
-            fontNames: font_name_list,
-            fontNamesIgnoreCheck: font_name_list,
-            toolbar : false
+            var option = $('<option/>');
+            option.attr({ 'data-value': JSON.stringify(font) }).text(font.font_name);
+            option.addClass('note-custom-toolbar-select-item');
+
+            fontname_select.append(option);
+
         });
     }
 
