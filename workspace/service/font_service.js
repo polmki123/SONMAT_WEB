@@ -47,6 +47,7 @@ function create_new_font(user_id, body){
 			user_id: user_id,
 			name: body.name,
 			description: body.desc,
+            handwrite_image_path: body.file_path
 		}).then(function(font) {
 			resolve(font)
 		}).catch(function(err) {
@@ -89,25 +90,6 @@ function notify_complete(font_id){
 	});
 };
 
-function get_font_id_name_list_by_user(user_id) {
-    return new Promise(function(resolve, reject){
-        models.font.findAll({
-            where: {
-                user_id: user_id,
-                making_status: 'complete',
-            },
-            attributes: ['id', 'name'],
-            order: [['making_date', 'DESC']],
-        })
-        .then(function(fonts) {
-            fonts_json = JSON.parse(JSON.stringify(fonts));
-            resolve(fonts_json);
-        }).catch(function(err) {
-            reject(err);
-        });
-    });
-}
-
 function get_font_list(user_id) {
 
     // TODO DELETE THIS!
@@ -145,6 +127,25 @@ function get_font_list(user_id) {
             result.variation_font_list = variation_font_list;
 
             return result;
+    });
+}
+
+function get_font_id_name_list_by_user(user_id) {
+    return new Promise(function(resolve, reject){
+        models.font.findAll({
+            where: {
+                user_id: user_id,
+                making_status: 'complete',
+            },
+            attributes: ['id', 'name'],
+            order: [['making_date', 'DESC']],
+        })
+            .then(function(fonts) {
+                fonts_json = JSON.parse(JSON.stringify(fonts));
+                resolve(fonts_json);
+            }).catch(function(err) {
+            reject(err);
+        });
     });
 }
 
