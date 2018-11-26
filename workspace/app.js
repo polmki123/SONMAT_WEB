@@ -90,6 +90,7 @@ function isSecureAuthPageUrl(originalUrl) {
 
 app.use(function(req, res, next) {
 
+    res.render_data = {}
 
     var loggedUser = req.session.user;
 
@@ -104,14 +105,18 @@ app.use(function(req, res, next) {
     if (loggedUser != null) {
         
         req.user = loggedUser;
+        
+        res.render_data.loggedUser = loggedUser;
         msgB_service.get_opponents_name(req.user.id) // user
         .then(function(opponents){
-            res.opponents = opponents;
+            res.render_data.opponents = opponents;
             next();
         }).catch(function(err) {
             console.log(err);
             next();
         });
+    }else{
+        next();
     }
 });
 

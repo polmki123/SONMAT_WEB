@@ -46,7 +46,7 @@ function create_new_sonmat_request(sonmat_id, opponent_id, user_id){
 
 function send_message(body){
 	return new Promise(function(resolve, reject){
-		models.user.find({
+		models.user.findOne({
 			where: {
 				email: body.email,
 			},
@@ -67,7 +67,7 @@ function send_message(body){
 
 function find_user_by_email(email){
 	return new Promise(function(resolve, reject){
-		models.user.find({
+		models.user.findOne({
 			where: {
 				email: email,
 			},

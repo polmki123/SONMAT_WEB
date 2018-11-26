@@ -115,7 +115,7 @@ function get_message_timeline(uid, opponent_uid){
 
 function get_message_from_id(son_id){
 	return new Promise(function(resolve, reject){
-		models.sonmat_request.find({
+		models.sonmat_request.findOne({
 			include: [
 				{
 					model: models.user,
@@ -142,7 +142,7 @@ function get_message_from_id(son_id){
 			],
 			where: { id: son_id },
 		}).then(function(msg) {
-			msg_json = JSON.parse(JSON.stringify(msg));
+			msg_json = msg.get({ plain: true });
 			msg_json.send_date = formatDate(msg.dataValues.send_date);
 			resolve(msg_json)
 		}).catch(function(err) {
@@ -170,7 +170,7 @@ function pad(number, length) {
 
 function get_name_from_id(user_id){
 	return new Promise(function(resolve, reject){
-		models.user.find({
+		models.user.findOne({
 			where: { id: user_id },
 			attributes : ['name'], 
 		}).then(function(name) {

@@ -3,11 +3,11 @@ var router = express.Router();
 
 /* index */
 router.get('/', function(req, res, next) {
-    res.render('font/list', {opponents : res.opponents});
+    res.render('font/list', res.render_data);
 });
 
 router.get('/form', function(req, res, next) {
-    res.render('font/form', {opponents : res.opponents});
+    res.render('font/form', res.render_data);
 });
 
 

@@ -83,8 +83,9 @@
         if ($('#new-badges').is(':visible'))
             $('#new-badges').hide();
     }
-    
-    runCheckNewFont();
+    <% if(locals.loggedUser) { %>
+        runCheckNewFont();
+    <% } %>
 
     jQuery.fn.serializeObject = function () {
         var obj = null;

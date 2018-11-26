@@ -8,13 +8,13 @@ var NOT_AUTH_STATUS = 401;
 
 router.post('/signup', function(req, res) {
 
-    user_service.register_user(req.body.id, req.body.password)
-    .then(function(user, err){
-        if(user == null){
-            res.status(ERROR_STATUS).send({message : err});
+    user_service.register_user(req.body.id, req.body.password, req.body.name)
+    .then(function(result){
+        if(result.user == null){
+            res.status(ERROR_STATUS).send({message : result.err});
         }else{
             var session = req.session;
-            session.user = user;
+            session.user = result.user;
             res.send();
         }
     }).catch(function(err) {
@@ -25,14 +25,14 @@ router.post('/signup', function(req, res) {
 
 router.post('/login', function(req, res) {
     user_service.login_check(req.body.id, req.body.password)
-    .then(function(user, err){
-        if(user == null){
+    .then(function(result){
+        if(result.user == null){
             res.status(NOT_AUTH_STATUS).send({
-                message : err,
+                message : result.err,
             });
         }else{
             var session = req.session;
-            session.user = user;
+            session.user = result.user;
             res.send();
         }
     }).catch(function(err) {

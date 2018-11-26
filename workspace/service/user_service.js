@@ -2,19 +2,19 @@ var models = require('../model');
 
 function login_check(email, password){
 	return new Promise(function(resolve, reject){
-		models.user.find({
+		models.user.findOne({
 			where: {
 				email: email,
 			},
 		}).then(function(user) {
 			if(user == null){
-				resolve(null, 'Email is not correct');
+				resolve({user: null, err: 'Email is not correct'});
 			}else{
 				user = user.get({ plain: true });
 				if(user.password === password){
-					resolve(user, null);
+					resolve({user: user, err: null});
 				} else {
-					resolve(null, 'Password Mismatch');
+					resolve({user: null, err: 'Password Mismatch'});
 				}
 			}
 			
@@ -23,12 +23,12 @@ function login_check(email, password){
 		});
 	});
 };
-function create_new_user(email, password){
+function create_new_user(email, password, name){
 	return new Promise(function(resolve, reject){
 		models.user.create({
 			email: email,
 			password: password,
-			name: "",
+			name: name,
 		}).then(function(user) {
 			resolve(user.get({ plain: true }))
 		}).catch(function(err) {
@@ -37,20 +37,20 @@ function create_new_user(email, password){
 	});
 };
 
-function register_user(email, password){
+function register_user(email, password, name){
 	return new Promise(function(resolve, reject){
-		models.user.find({
+		models.user.findOne({
 			where: {
 				email: email,
 			},
 		}).then(function(user){
 			if(user){
-				resolve(null, 'Email is already exist')
+				resolve({user: null, err: 'Email is already exist'})
 			}else{
-				return create_new_user(email, password);
+				return create_new_user(email, password, name);
 			}
 		}).then(function(user) {
-			resolve(user, null)
+			resolve({user: user, err: null})
 		}).catch(function(err) {
 			reject(err);
 		});
@@ -59,8 +59,6 @@ function register_user(email, password){
 
 var func = {}
 func.login_check = login_check;
-func.login_check = login_check;
-func.login_check = login_check;
-func.login_check = login_check;
+func.register_user = register_user;
 
 module.exports = func;
