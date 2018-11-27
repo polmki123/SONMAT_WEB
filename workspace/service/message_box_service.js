@@ -22,15 +22,16 @@ function get_opponents_name(uid){
 				$or: [{from_user_id: uid}, {to_user_id: uid}]
 			},
 			order: [['send_date', 'DESC']], // index 0 is new, index 1 is old (if DESC)
-		}).then(function(opponents) {
+		}).map(opponent => opponent.get({ plain: true }))
+		.then(function(opponents) {
 
 			opponent_users = [];
 			opponents.forEach(function(oppo){
 				if(oppo.from_user_id != uid) {
-					other = oppo.From.dataValues.name;
+					other = oppo.From.name;
 					id = oppo.from_user_id;
 				}else {
-					other = oppo.To.dataValues.name;
+					other = oppo.To.name;
 					id = oppo.to_user_id;
 				}
 				var found = false;
@@ -100,12 +101,12 @@ function get_message_timeline(uid, opponent_uid){
 			},
 			order: [['send_date', 'DESC']], // index 0 is new, index 1 is old (if DESC)
 			// limit: 5
-		}).then(function(msgs) {
+		}).map(msg => msg.get({ plain: true }))
+		.then(function(msgs) {
 			msgs.forEach(function(msg){
-				msg.dataValues.send_date = formatDate(msg.dataValues.send_date);
+				msg.send_date = formatDate(msg.send_date);
 			})
-			msgs_json = JSON.parse(JSON.stringify(msgs));
-			resolve(msgs_json)
+			resolve(msgs)
 		}).catch(function(err) {
 			reject(err);
 		});

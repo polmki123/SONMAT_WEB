@@ -10,10 +10,9 @@ function find_new_by_userid(user_id){
 				making_status: 'complete',
 			},
 			order: [['making_date', 'DESC']],
-		})
+		}).map(font => font.get({ plain: true }))
 		.then(function(fonts) {
-			fonts_json = JSON.parse(JSON.stringify(fonts));
-			resolve(fonts_json)
+			resolve(fonts)
 		}).catch(function(err) {
 			reject(err);
 		});
@@ -98,10 +97,9 @@ function get_font_id_name_list_by_user(user_id) {
             },
             attributes: ['id', 'name'],
             order: [['making_date', 'DESC']],
-        })
+        }).map(font => font.get({ plain: true }))
         .then(function(fonts) {
-            fonts_json = JSON.parse(JSON.stringify(fonts));
-            resolve(fonts_json);
+            resolve(fonts);
         }).catch(function(err) {
             reject(err);
         });
