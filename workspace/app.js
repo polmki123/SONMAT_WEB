@@ -83,7 +83,7 @@ configApp();
 
 function isSecureAuthPageUrl(originalUrl) {
 
-    if (originalUrl === '/handwrite' || originalUrl === '/message/list' || originalUrl === '/font') {
+    if (originalUrl === '/handwrite' || originalUrl === '/message/list' || originalUrl === '/font' || originalUrl === '/message/form') {
         return true;
     }
 }
@@ -95,14 +95,12 @@ app.use(function(req, res, next) {
     var loggedUser = req.session.user;
 
     var isNeedAuth = isSecureAuthPageUrl(req.originalUrl);
-
+    debugger;
     if (isNeedAuth && loggedUser == null) {
         res.statusCode = 302;
         res.setHeader('Location', '/account/sign-in?referer=' + req.originalUrl);
         res.end();
-    }
-
-    if (loggedUser != null) {
+    } else if (loggedUser != null) {
         
         req.user = loggedUser;
         
@@ -115,7 +113,7 @@ app.use(function(req, res, next) {
             console.log(err);
             next();
         });
-    }else{
+    } else {
         next();
     }
 });
