@@ -63,6 +63,8 @@
 
 <script type="text/javascript">
     $('.loginForm').validator().on('submit', function (event) {
+        console.log('here')
+
 
         if (event.isDefaultPrevented() == false) {
             var $this = $(this);
@@ -83,6 +85,7 @@
 
     // Read a page's GET URL variables and return them as an associative array.
     function getUrlVars() {
+        console.log('hrer')
         var vars = [], hash;
         var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
         for (var i = 0; i < hashes.length; i++) {

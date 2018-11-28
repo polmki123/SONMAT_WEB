@@ -83,9 +83,12 @@ configApp();
 
 function isSecureAuthPageUrl(originalUrl) {
 
-    if (originalUrl === '/handwrite' || originalUrl === '/message/list' || originalUrl === '/font') {
+    login_needed_urls = ['/handwrite' , '/message/list', '/font', '/message/form']
+
+    if (login_needed_urls.includes(originalUrl)) {
         return true;
     }
+    return false;
 }
 
 app.use(function(req, res, next) {
@@ -100,12 +103,8 @@ app.use(function(req, res, next) {
         res.statusCode = 302;
         res.setHeader('Location', '/account/sign-in?referer=' + req.originalUrl);
         res.end();
-    }
-
-    if (loggedUser != null) {
-        
+    }else if (loggedUser != null) {
         req.user = loggedUser;
-        
         res.render_data.loggedUser = loggedUser;
         msgB_service.get_opponents_name(req.user.id) // user
         .then(function(opponents){
