@@ -37,6 +37,16 @@ router.post('/new/checked', function(req, res) {
 
 });
 
+
+// font make complete message from SONMAT-DeepWeb
+router.post('/make/complete', function(req, res) {
+
+    var body = req.body;
+    res.send(body);
+
+});
+
+
 router.get('/font_service_test', function(req, res) {
 
     var font_service = require('../../../service/font_service');
