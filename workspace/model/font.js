@@ -43,6 +43,10 @@ module.exports = function(sequelize, DataTypes) {
                 type: DataTypes.STRING,
                 allowNull: false,
                 defaultValue: 1
+            },
+            handwrite_image_path: {
+                type: DataTypes.STRING,
+                allowNull: false
             }
         },
         {

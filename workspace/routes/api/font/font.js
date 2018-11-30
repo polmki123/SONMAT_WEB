@@ -49,13 +49,48 @@ router.post('/make/complete', function(req, res) {
 
 router.get('/font_service_test', function(req, res) {
 
-    var font_service = require('../../../service/font_service');
+    var http = require('http');
 
-    var body = {};
+    var options = {
+        hostname: 'localhost',
+        port: 3000,
+        path: '/font/make',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
 
-    font_service.get_font_list(2).then(function(result) {
-        res.json(result);
-    })
+    var font = {
+        "id": 1,
+        "file_path": "Aaaaa",
+        "font": "Aaaaaaaa"
+    };
+
+    var data = JSON.stringify({
+        font: {
+            "id": 1,
+            "file_path": "Aaaaa",
+            "font": "Aaaaaaaa"
+        }
+    });
+
+    var responseString = "";
+
+    var req = http.request(options, function (res) {
+        res.on("data", function (data) {
+            responseString += data;
+            // save all the data from response
+        });
+        res.on("end", function () {
+            console.log(responseString);
+            // print to console when response ends
+        });
+    });
+
+    req.write(data);
+    req.end();
+
 });
 
 

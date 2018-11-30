@@ -1,8 +1,7 @@
 'use strict';
 
 var font_service = require('../../../service/font_service');
-var path = require('path');
-var fs = require('fs');
+var http = require('http');
 
 function findNewByUserId(user_id) {
     return new Promise(function(resolve, reject){
@@ -30,42 +29,51 @@ function checkedByUserId(user_id) {
 
 
 function createNewFont(user_id, body) {
-        // create new font item, 
-        // server communication with deep-server
-        // request (font_id)
+
+    // create new font item,
+    // server communication with deep-server
+    // request (font_id)
+
     font_service.create_new_font(user_id, body)
     .then(function(font){
 
-        var temp_file_path = body.file_path;
-        var temp_dirname = path.dirname(temp_file_path);
+        var options = {
+            hostname: 'localhost',
+            port: 3000,
+            path: '/font/make',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
 
-        var base_dirname = path.join(temp_dirname, '..', 'font');
-        var dest_dirname = path.join(temp_dirname, '..', 'font', font.dataValues.id.toString());
-        var dest_file_path = dest_dirname + "\\handwrite" + path.extname(temp_file_path);
+        var req = http.request(options, function (res) {
 
-        // create new directory : (repository_path)/font
-        if (!fs.existsSync(base_dirname)) {
-            fs.mkdirSync(base_dirname, { recursive: true });
-        }
+            var responseString = "";
 
-        // create new directory : (repository_path)/font/{font_id}
-        if (!fs.existsSync(dest_dirname)) {
-            fs.mkdirSync(dest_dirname, { recursive: true });
-        }
-
-        // move file
-        fs.rename(temp_file_path, dest_file_path, function(err) {
-            if ( err ) console.log('ERROR: ' + err);
+            res.on("data", function (data) {
+                responseString += data;
+                // save all the data from response
+            });
+            res.on("end", function () {
+                console.log(responseString);
+                // print to console when response ends
+            });
         });
 
-        setTimeout(function () {
+        req.write(JSON.stringify(font));
+        req.end();
+
+
+
+        /*setTimeout(function () {
             font_service.notify_complete(font.dataValues.id)
             .then(function(result){
                 return true;
             }).catch(function(err) {
                 console.log(err);
             });
-        } , 5000 , 'test');
+        } , 5000 , 'test');*/
 
     }).catch(function(err) {
         console.log(err);
