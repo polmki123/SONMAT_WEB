@@ -44,7 +44,7 @@ router.post('/make/complete', function(req, res) {
 
     var body = req.body;
 
-    font_service.notify_complete(font.dataValues.id)
+    font_service.notify_complete(body.font_id)
         .then(function(result){
             return true;
         }).catch(function(err) {
