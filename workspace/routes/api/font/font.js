@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var FontRepository = require('./FontRepository');
+var font_service = require('../../../service/font_service');
 
 router.post('/', function(req, res) {
 
@@ -42,6 +43,15 @@ router.post('/new/checked', function(req, res) {
 router.post('/make/complete', function(req, res) {
 
     var body = req.body;
+
+    font_service.notify_complete(font.dataValues.id)
+        .then(function(result){
+            return true;
+        }).catch(function(err) {
+        console.log(err);
+    });
+
+
     res.send(body);
 
 });
