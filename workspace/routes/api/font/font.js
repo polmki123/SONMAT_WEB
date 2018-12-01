@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var FontRepository = require('./FontRepository');
+var font_service = require('../../../service/font_service');
 
 router.post('/', function(req, res) {
 
@@ -37,15 +38,72 @@ router.post('/new/checked', function(req, res) {
 
 });
 
+<<<<<<< HEAD
+=======
+
+// font make complete message from SONMAT-DeepWeb
+router.post('/make/complete', function(req, res) {
+
+    var body = req.body;
+
+    font_service.notify_complete(body.font_id)
+        .then(function(result){
+            return true;
+        }).catch(function(err) {
+        console.log(err);
+    });
+
+
+    res.send(body);
+
+});
+
+
+>>>>>>> 764d80d9332026901f54eb40631d16d91c27a8dd
 router.get('/font_service_test', function(req, res) {
 
-    var font_service = require('../../../service/font_service');
+    var http = require('http');
 
-    var body = {};
+    var options = {
+        hostname: 'localhost',
+        port: 3000,
+        path: '/font/make',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    };
 
-    font_service.get_font_list(2).then(function(result) {
-        res.json(result);
-    })
+    var font = {
+        "id": 1,
+        "file_path": "Aaaaa",
+        "font": "Aaaaaaaa"
+    };
+
+    var data = JSON.stringify({
+        font: {
+            "id": 1,
+            "file_path": "Aaaaa",
+            "font": "Aaaaaaaa"
+        }
+    });
+
+    var responseString = "";
+
+    var req = http.request(options, function (res) {
+        res.on("data", function (data) {
+            responseString += data;
+            // save all the data from response
+        });
+        res.on("end", function () {
+            console.log(responseString);
+            // print to console when response ends
+        });
+    });
+
+    req.write(data);
+    req.end();
+
 });
 
 
