@@ -38,8 +38,6 @@ router.post('/new/checked', function(req, res) {
 
 });
 
-<<<<<<< HEAD
-=======
 
 // font make complete message from SONMAT-DeepWeb
 router.post('/make/complete', function(req, res) {
@@ -58,8 +56,6 @@ router.post('/make/complete', function(req, res) {
 
 });
 
-
->>>>>>> 764d80d9332026901f54eb40631d16d91c27a8dd
 router.get('/font_service_test', function(req, res) {
 
     var http = require('http');
