@@ -1429,6 +1429,10 @@ h5 + .separator {
   margin-bottom: 20px;
 }
 
+.mb-50 {
+  margin-bottom: 50px;
+}
+
 .space-top {
   padding-top: 20px;
 }

@@ -37,16 +37,6 @@ router.post('/new/checked', function(req, res) {
 
 });
 
-
-// font make complete message from SONMAT-DeepWeb
-router.post('/make/complete', function(req, res) {
-
-    var body = req.body;
-    res.send(body);
-
-});
-
-
 router.get('/font_service_test', function(req, res) {
 
     var font_service = require('../../../service/font_service');
@@ -57,6 +47,32 @@ router.get('/font_service_test', function(req, res) {
         res.json(result);
     })
 });
+
+
+router.get('/font_service_test2', function(req, res) {
+
+    var font_service = require('../../../service/font_service');
+
+    // [ { id: 73,
+    //     user_id: 2,
+    //     name: '더블썬칩손맛체',
+    //     description: '썬칩 조아 너무 조아',
+    //     making_status: 'complete',
+    //     open_state: 'private',
+    //     making_date: 2018-11-19T02:39:38.000Z,
+    //     read_state: 'read',
+    //     user: { name: '정형호' } },]
+
+    // font_service.find_my_font_userid(req.body.id)
+    // .then(function(font){
+    //     console.log(font)
+    //     res.send(user.name);
+    // }).catch(function(err) {
+    //     console.log(err);
+    // });
+});
+
+
 
 
 module.exports = router;

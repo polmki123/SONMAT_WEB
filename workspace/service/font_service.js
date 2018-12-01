@@ -183,6 +183,7 @@ function get_main_font(font, font_file_path) {
 
     main_font.id = font.id;
     main_font.font_name = font.name;
+    main_font.font_desc = font.description;
     main_font.file_path = font_file_path;
 
     return main_font;
@@ -202,11 +203,41 @@ function get_variation_font(font, font_file_path) {
     return variation_font;
 }
 
+function my_font_gallery(user_id){
+	return new Promise(function(resolve, reject){
+		models.font.findAll({
+			where: {
+				user_id: user_id,
+			},
+			order: [['making_date', 'DESC']],
+		}).map(font => font.get({plain: true}))
+		.then(function(fonts) {
+            fonts.forEach(function(font){
+				font.making_date = formatDate(font.making_date);
+			})
+			resolve(fonts)
+		}).catch(function(err) {
+			reject(err);
+		});
+	});
+};
+
+function formatDate(date_time){
+    var yyyy = date_time.getFullYear().toString();
+    var MM = pad(date_time.getMonth() + 1,2);
+    var dd = pad(date_time.getDate(), 2);
+    var hh = pad(date_time.getHours(), 2);
+    var mm = pad(date_time.getMinutes(), 2)
+    var ss = pad(date_time.getSeconds(), 2)
+    return yyyy+'/'+MM+'/'+dd+' '+hh+':'+mm;
+}
+
 var func = {}
 func.find_new_by_userid = find_new_by_userid;
 func.checked_by_userid = checked_by_userid;
 func.create_new_font = create_new_font;
 func.notify_complete = notify_complete;
 func.get_font_list = get_font_list;
+func.my_font_gallery = my_font_gallery;
 
 module.exports = func;

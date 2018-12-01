@@ -15,113 +15,36 @@
 
                 <br>
                 <br>
-                <h3>새로 만들어진 폰트</h3>
+                <h3>내 손글씨체</h3>
                 <div class="separator"></div>
-                <div class="row">
-                    <div class="col-lg-4 col-md-4">
-                        <article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
-                            <div class="overlay-container">
-                                <img src="/images/thumbnail.png" alt="">
-                                <!--<a class="overlay-link" href="/font/form"><i class="fa fa-link"></i></a>-->
+                  <div class="row">
+                    <div class="row">
+                      <% font.forEach(function(font){ %>
+                        <div class="col-sm-4">
+                          <div class="style-2 mb-50 hc-shadow bordered light-gray-bg text-center">
+                            <div class="main-container h3">
+                              <p>다람쥐 헌 쳇바퀴에 타고파</p>
                             </div>
-                        </article>
+                            <div class="body">
+                              <h4>폰트명 : <%= font.name %></h4>
+                              <div class="separator"></div>
+                                <div class="text-center space-bottom">
+                                  <span>
+                                    <i class="fa fa-calendar-o pr-1"></i>
+                                    <span class="day">제작일 : <%= font.making_date %></span>
+                                  </span>
+                                </div>
+                              <p><%= font.description %></p>
+                              <a href="/font/<%= font.id %>" class="btn btn-default btn-sm margin-clear">Read More<i class="fa fa-arrow-right pl-10"></i></a>                       
+                            </div>
+                          </div>
+                        </div>
+                      <% }); %>
                     </div>
+                  </div>
+                <!-- section end -->
                 </div>
                 <!-- page-title end -->
-
-                <!-- masonry grid start -->
-                <!-- ================ -->
-
-                <h3>2018-11-20 일에 생성한 폰트</h3>
-                <div class="separator"></div>
-
-                <div class="masonry-grid row">
-                    <!-- masonry grid item start -->
-                    <div class="masonry-grid-item col-md-6 col-lg-4">
-                        <!-- blogpost start -->
-                        <article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
-                            <header>
-                                <h2></h2>
-                                <!--<div class="post-info">
-                                    <span class="post-date">
-                                      <i class="fa fa-calendar-o pr-1"></i>
-                                      <span class="day">09</span>
-                                      <span class="month">May 2017</span>
-                                    </span>
-                                    <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">Lorem</a></span>
-                                    <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>
-                                </div>-->
-                            </header>
-                            <div class="blogpost-content">
-                                <h1>&nbsp;</h1>
-                            </div>
-                            <footer class="clearfix">
-                                <!--<div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div>
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="#">Read More</a></div>-->
-                            </footer>
-                        </article>
-                        <!-- blogpost end -->
-                    </div>
-                    <!-- masonry grid item end -->
-
-                    <!-- masonry grid item start -->
-                    <div class="masonry-grid-item col-md-6 col-lg-4">
-                        <!-- blogpost start -->
-                        <article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
-                            <header>
-                                <h2></h2>
-                                <!--<div class="post-info">
-                                    <span class="post-date">
-                                      <i class="fa fa-calendar-o pr-1"></i>
-                                      <span class="day">09</span>
-                                      <span class="month">May 2017</span>
-                                    </span>
-                                    <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">Lorem</a></span>
-                                    <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>
-                                </div>-->
-                            </header>
-                            <div class="blogpost-content">
-                                <h1>&nbsp;</h1>
-                            </div>
-                            <footer class="clearfix">
-                                <!--<div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div>
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="#">Read More</a></div>-->
-                            </footer>
-                        </article>
-                        <!-- blogpost end -->
-                    </div>
-                    <!-- masonry grid item end -->
-
-                    <!-- masonry grid item start -->
-                    <div class="masonry-grid-item col-md-6 col-lg-4">
-                        <!-- blogpost start -->
-                        <article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
-                            <header>
-                                <h2></h2>
-                                <!--<div class="post-info">
-                                    <span class="post-date">
-                                      <i class="fa fa-calendar-o pr-1"></i>
-                                      <span class="day">09</span>
-                                      <span class="month">May 2017</span>
-                                    </span>
-                                    <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">Lorem</a></span>
-                                    <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>
-                                </div>-->
-                            </header>
-                            <div class="blogpost-content">
-                                <h1>&nbsp;</h1>
-                            </div>
-                            <footer class="clearfix">
-                                <!--<div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div>
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="#">Read More</a></div>-->
-                            </footer>
-                        </article>
-                        <!-- blogpost end -->
-                    </div>
-                    <!-- masonry grid item end -->
-
-                </div>
-                <!-- masonry grid end -->
             </div>
             <!-- main end -->
 
