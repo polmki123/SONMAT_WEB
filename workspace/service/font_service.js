@@ -29,7 +29,7 @@ function checked_by_userid(user_id){
 				making_status: 'complete',
 			},
 		})
-		.then(function(result) {
+            .then(function(result) {
 			resolve(result)
 		}).catch(function(err) {
 			reject(err);
@@ -90,9 +90,6 @@ function notify_complete(font_id){
 };
 
 function get_font_list(user_id) {
-
-    // TODO DELETE THIS!
-    user_id = 2;
 
     return get_font_id_name_list_by_user(user_id) // get fonts (id, name) by user id
         .then(function(font_id_name_list) {
@@ -203,11 +200,33 @@ function get_variation_font(font, font_file_path) {
     return variation_font;
 }
 
+function match_font_files(font_id, font_urls) {
+
+    var promises = [];
+
+    font_urls.forEach(function(font_url) {
+        promises.push(
+            models.font_file_map.create({
+                font_id: font_id,
+                file_path: font_url
+            }).then(function(font) {
+                resolve(font)
+            }).catch(function(err) {
+                reject(err);
+            })
+        );
+    });
+
+    return new Promise.all(promises);
+}
+
+
 var func = {}
 func.find_new_by_userid = find_new_by_userid;
 func.checked_by_userid = checked_by_userid;
 func.create_new_font = create_new_font;
 func.notify_complete = notify_complete;
 func.get_font_list = get_font_list;
+func.match_font_files = match_font_files;
 
 module.exports = func;
