@@ -46,22 +46,17 @@ router.post('/make/complete', function(req, res) {
 
     // font의 making_status update
     font_service.notify_complete(body.font_id)
-        .then(function(result){
-            return true;
-        }).catch(function(err) {
-        console.log(err);
-    });
+    .then(function(result){
 
     // font_file_map
-    font_service.match_font_files(body.font_id, body.fontUrls)
-        .then(function() {
-            res.send();
-        }).catch(function(err) {
-            console.log(err);
+        return font_service.match_font_files(body.font_id, body.fontUrls);
+    }).then(function(result) {
+
+        res.send(result);
+
+    }).catch(function(err) {
+        console.log(err);
     });
-
-    res.send(body);
-
 });
 
 

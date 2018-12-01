@@ -205,19 +205,22 @@ function match_font_files(font_id, font_urls) {
     var promises = [];
 
     font_urls.forEach(function(font_url) {
+
         promises.push(
-            models.font_file_map.create({
-                font_id: font_id,
-                file_path: font_url
-            }).then(function(font) {
-                resolve(font)
-            }).catch(function(err) {
-                reject(err);
+            new Promise(function(resolve, reject){
+                models.font_file_map.create({
+                    font_id: font_id,
+                    file_path: font_url
+                }).then(function(font) {
+                    resolve(font)
+                }).catch(function(err) {
+                    reject(err);
+                })
             })
         );
     });
 
-    return new Promise.all(promises);
+    return Promise.all(promises);
 }
 
 
