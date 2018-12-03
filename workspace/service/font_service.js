@@ -29,7 +29,7 @@ function checked_by_userid(user_id){
 				making_status: 'complete',
 			},
 		})
-		.then(function(result) {
+            .then(function(result) {
 			resolve(result)
 		}).catch(function(err) {
 			reject(err);
@@ -73,9 +73,6 @@ function notify_complete(font_id){
 };
 
 function get_font_list(user_id) {
-
-    // TODO DELETE THIS!
-    user_id = 2;
 
     return get_font_id_name_list_by_user(user_id) // get fonts (id, name) by user id
         .then(function(font_id_name_list) {
@@ -232,6 +229,29 @@ function formatDate(date_time){
     return yyyy+'/'+MM+'/'+dd+' '+hh+':'+mm;
 }
 
+function match_font_files(font_id, font_urls) {
+
+    var promises = [];
+
+    font_urls.forEach(function(font_url) {
+
+        promises.push(
+            new Promise(function(resolve, reject){
+                models.font_file_map.create({
+                    font_id: font_id,
+                    file_path: font_url
+                }).then(function(font) {
+                    resolve(font)
+                }).catch(function(err) {
+                    reject(err);
+                })
+            })
+        );
+    });
+
+    return Promise.all(promises);
+}
+
 function pad(number, length) {
     var str = '' + number;
     while (str.length < length) {
@@ -239,6 +259,7 @@ function pad(number, length) {
     }
     return str;
 }
+
 
 var func = {}
 func.find_new_by_userid = find_new_by_userid;
