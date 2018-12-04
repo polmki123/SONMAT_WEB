@@ -1,4 +1,4 @@
-Kakao.init('fff14747687529bb995b68a5b6a08c7e');
+Kakao.init('7a3b0b5e30cecdce9e813e1bb9627390');
 
 function kakao() {
 
@@ -21,20 +21,20 @@ function kakao() {
         });
     };
 
-    this.sendLink = function(label, imgUrl, webText) {
+    this.sendLink = function(title, imgUrl, message , url) {
         Kakao.Link.sendTalkLink({
-            label: label,
+            label: title,
             image: {
                 src: imgUrl,
                 width: '300',
                 height: '200'
             },
             webLink: {
-                text:webText,
-                url: location.href
+                text:message,
+                url: url
             },
             fail: function() {
-                kakao.shareStory(label);
+                kakao.shareStory(title , url);
             }
         });
     }
