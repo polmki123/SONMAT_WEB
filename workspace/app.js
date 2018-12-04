@@ -21,6 +21,7 @@ function configApp() {
     app.set('layout', path.join(__dirname, 'views/template/layout/layout'));
     app.set("layout extractScripts", true);
     app.set("layout extractStyles", true);
+    app.set("layout extractMetas", true);
     app.use(expressLayouts);
 
 	app.use(logger('dev'));
