@@ -3,8 +3,9 @@ var path = require('path');
 var fs = require('fs');
 var router = express.Router();
 var message_service = require('../../../service/message_service');
-
+var smsUtils = require('../../../domain/utils/SmsUtils');
 router.post('/', function(req, res) {
+
     console.log(req.body.email)
     console.log(req.body.title)
     console.log(req.body.contents)
@@ -19,6 +20,15 @@ router.post('/', function(req, res) {
         console.log(err);
     });
 });
+
+
+// sms exa
+router.get('/sms', function(req, res) {
+    // TO아래와 같이 사용 하시요
+    //smsUtils.send('01067021755' , 'test');
+    res.end();
+});
+
 
 router.post('/check_email', function(req, res) {
 

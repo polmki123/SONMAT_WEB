@@ -48,7 +48,7 @@ router.post('/make/complete', function(req, res) {
     .then(function(result){
 
     // font_file_map
-        return font_service.match_font_files(body.font_id, body.fontUrls);
+        return font_service.save_font_urls(body.font_id, body.fontUrls);
     }).then(function(result) {
 
         res.send(result);
