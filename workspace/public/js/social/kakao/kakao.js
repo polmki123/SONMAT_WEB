@@ -2,17 +2,6 @@ Kakao.init('7a3b0b5e30cecdce9e813e1bb9627390');
 
 function kakao() {
 
-    this.getUserProfile = function() {
-        Kakao.API.request({
-            url: '/v1/user/me',
-            success: function(res) {
-                alert(JSON.stringify(res));
-            },
-            fail: function(error) {
-                alert(JSON.stringify(error));
-            }
-        });
-    };
 
     this.shareStory = function(text , url) {
         Kakao.Story.share({
@@ -22,7 +11,7 @@ function kakao() {
     };
 
     this.sendLink = function(title, imgUrl, message , url) {
-        Kakao.Link.sendTalkLink({
+        Kakao.Link.sendDefault({
             label: title,
             image: {
                 src: imgUrl,
