@@ -219,6 +219,23 @@ function my_font_gallery_font_id(font_id){
 	});
 };
 
+function update_font_information(font_id, name, description){
+	return new Promise(function(resolve, reject){
+		models.font.update({
+            name: name,
+            description: description,
+        }, {
+            where:{
+                id: font_id,
+            }
+        }).then(function(_) {
+			resolve(true)
+		}).catch(function(err) {
+			reject(err);
+		});
+	});
+};
+
 function formatDate(date_time){
     var yyyy = date_time.getFullYear().toString();
     var MM = pad(date_time.getMonth() + 1,2);
@@ -269,5 +286,5 @@ func.notify_complete = notify_complete;
 func.get_font_list = get_font_list;
 func.my_font_gallery_font_id = my_font_gallery_font_id;
 func.my_font_gallery_user_id = my_font_gallery_user_id;
-
+func.update_font_information = update_font_information;
 module.exports = func;

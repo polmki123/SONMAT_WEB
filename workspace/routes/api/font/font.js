@@ -105,6 +105,18 @@ router.get('/font_service_test', function(req, res) {
 });
 
 
+router.post('/:font_id', function(req, res) {
+    var body = req.body;
+    var fon_id = req.params.font_id;
+    font_service.update_font_information(fon_id, body.name, body.description)
+    .then(function(result) {
+        res.send(result);
+
+    }).catch(function(err) {
+        console.log(err);
+    });
+});
+
 router.get('/font_service_test2', function(req, res) {
 
     var font_service = require('../../../service/font_service');
