@@ -229,7 +229,7 @@ function formatDate(date_time){
     return yyyy+'/'+MM+'/'+dd+' '+hh+':'+mm;
 }
 
-function match_font_files(font_id, font_urls) {
+function save_font_urls(font_id, font_urls) {
 
     var promises = [];
 
@@ -269,5 +269,6 @@ func.notify_complete = notify_complete;
 func.get_font_list = get_font_list;
 func.my_font_gallery_font_id = my_font_gallery_font_id;
 func.my_font_gallery_user_id = my_font_gallery_user_id;
+func.save_font_urls = save_font_urls;
 
 module.exports = func;
