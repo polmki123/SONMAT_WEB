@@ -156,14 +156,15 @@
     $("._btn_share_kakao").on('click', function () {
         var title = '<%= msg.From.name %> 님이 보낸 메세지 입니다.';
         var image = 'http://son-mat.com/images/logo-sonmat.png';
-        var link = location.href;
-        kakao.sendLink(title, image, link);
+        var dummyLink = "http://son-mat.com";
+        kakao.sendLink(title, image, dummyLink);
     });
 
 
 
     $("._btn_share_facebook").on('click', function () {
-        window.open("https://www.facebook.com/sharer/sharer.php?u=" + location.href);
+        var dummyLink = "http://son-mat.com";
+        window.open("https://www.facebook.com/sharer/sharer.php?u=" + dummyLink);
 
     });
 
