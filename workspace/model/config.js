@@ -25,6 +25,9 @@ var config = {
         db.sonmat.belongsTo(db.message, { foreignKey: 'message_id', targetKey: 'id' });
         db.sonmat.belongsTo(db.font, { foreignKey: 'font_id', targetKey: 'id' });
 
+        // font_file_map
+        db.font_file_map.belongsTo(db.font, { foreignKey: 'font_id', targetKey: 'id' });
+
         // db.Publisher.hasMany(db.Books, {foreignKey: 'pub_id'});
         // db.Books.belongsTo(db.Publisher, {foreignKey: 'pub_id', targetKey: 'pub_id'});
         // db.RentHistory.belongsTo(db.User, {foreignKey: 'user_id', targetKey: 'user_id'});

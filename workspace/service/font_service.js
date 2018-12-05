@@ -1,5 +1,5 @@
 var models = require('../model');
-var date_format = require('./date_format_service');
+var date_format = require('./handler/date_format_handler');
 var fs = require('fs');
 
 function find_new_by_userid(user_id){
@@ -30,7 +30,7 @@ function checked_by_userid(user_id){
 				making_status: 'complete',
 			},
 		})
-		.then(function(result) {
+            .then(function(result) {
 			resolve(result)
 		}).catch(function(err) {
 			reject(err);
@@ -40,7 +40,7 @@ function checked_by_userid(user_id){
 
 function create_new_font(user_id, body){
 
-    if (body.name == "") body.name = date_format.getDate_format();
+    if (body.name == "") body.name = date_format.get_now_format_date();
 
 	return new Promise(function(resolve, reject){
 		models.font.create({
@@ -73,9 +73,6 @@ function notify_complete(font_id){
 };
 
 function get_font_list(user_id) {
-
-    // TODO DELETE THIS!
-    user_id = 2;
 
     return get_font_id_name_list_by_user(user_id) // get fonts (id, name) by user id
         .then(function(font_id_name_list) {
@@ -187,7 +184,7 @@ function get_variation_font(font, font_file_path) {
     return variation_font;
 }
 
-function my_font_gallery(user_id){
+function my_font_gallery_user_id(user_id){
 	return new Promise(function(resolve, reject){
 		models.font.findAll({
 			where: {
@@ -197,7 +194,7 @@ function my_font_gallery(user_id){
 		}).map(font => font.get({plain: true}))
 		.then(function(fonts) {
             fonts.forEach(function(font){
-				font.making_date = date_format.formatDate(font.making_date);
+				font.making_date = date_format.format_date(font.making_date);
 			})
 			resolve(fonts)
 		}).catch(function(err) {
@@ -206,12 +203,53 @@ function my_font_gallery(user_id){
 	});
 };
 
+function my_font_gallery_font_id(font_id){
+	return new Promise(function(resolve, reject){
+		models.font.findOne({
+			where: {
+				id: font_id,
+			},
+		})
+		.then(function(font) {
+            font.making_date = date_format.format_date(font.making_date);
+			resolve(font.get({ plain: true }));
+		}).catch(function(err) {
+			reject(err);
+		});
+	});
+};
+
+function save_font_urls(font_id, font_urls) {
+
+    var promises = [];
+
+    font_urls.forEach(function(font_url) {
+
+        promises.push(
+            new Promise(function(resolve, reject){
+                models.font_file_map.create({
+                    font_id: font_id,
+                    file_path: font_url
+                }).then(function(font) {
+                    resolve(font)
+                }).catch(function(err) {
+                    reject(err);
+                })
+            })
+        );
+    });
+
+    return Promise.all(promises);
+}
+
 var func = {}
 func.find_new_by_userid = find_new_by_userid;
 func.checked_by_userid = checked_by_userid;
 func.create_new_font = create_new_font;
 func.notify_complete = notify_complete;
 func.get_font_list = get_font_list;
-func.my_font_gallery = my_font_gallery;
+func.my_font_gallery_font_id = my_font_gallery_font_id;
+func.my_font_gallery_user_id = my_font_gallery_user_id;
+func.save_font_urls = save_font_urls;
 
 module.exports = func;
