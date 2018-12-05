@@ -172,10 +172,28 @@ function get_name_from_id(user_id){
 	});
 }
 
+function update_message_state(sonmat_id, to){
+	return new Promise(function(resolve, reject){
+		models.sonmat_request.update({
+            read_state: "read",
+        }, {
+            where:{
+				id: sonmat_id,
+				to_user_id: to,
+            }
+        }).then(function(_) {
+			resolve(true)
+		}).catch(function(err) {
+			reject(err);
+		});
+	});
+};
+
 var func = {}
 func.get_opponents_name = get_opponents_name;
 func.get_message_timeline = get_message_timeline;
 func.get_message_from_id = get_message_from_id;
 func.get_name_from_id = get_name_from_id;
+func.update_message_state = update_message_state;
 
 module.exports = func;
