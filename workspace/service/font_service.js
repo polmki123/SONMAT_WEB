@@ -188,7 +188,8 @@ function my_font_gallery_user_id(user_id){
 	return new Promise(function(resolve, reject){
 		models.font.findAll({
 			where: {
-				user_id: user_id,
+                user_id: user_id,
+                making_status: "complete"
 			},
 			order: [['making_date', 'DESC']],
 		}).map(font => font.get({plain: true}))
