@@ -149,27 +149,26 @@
         });
     }
 
+    var kakaoShare = new KakaoShare();
 
-
-    var kakao = new kakao();
-
-    $("._btn_share_kakao").on('click', function () {
-
-
+    function initShareKakao() {
+        var container = '._btn_share_kakao';
         var title = '<%= msg.From.name %> 님이 보낸 메세지 입니다.';
         var image = 'http://son-mat.com/images/logo-sonmat.png';
         var dummyLink = "http://son-mat.com";
         var message = "손맛에서 확인해보세요";
-        kakao.sendLink(title, image, message , dummyLink);
-    });
+        kakaoShare.share(container , title, image, message , dummyLink);
+    }
 
-
+    initShareKakao();
 
     $("._btn_share_facebook").on('click', function () {
         var dummyLink = "http://son-mat.com";
         window.open("https://www.facebook.com/sharer/sharer.php?u=" + dummyLink);
 
     });
+
+
 
 
 </script>

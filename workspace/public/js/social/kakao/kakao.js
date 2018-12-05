@@ -1,30 +1,34 @@
-Kakao.init('7a3b0b5e30cecdce9e813e1bb9627390');
+var KakaoShare = function () {
+    Kakao.init('7a3b0b5e30cecdce9e813e1bb9627390');
+}
 
-function kakao() {
-
-
-    this.shareStory = function(text , url) {
-        Kakao.Story.share({
-            url: url,
-            text: text
-        });
-    };
-
-    this.sendLink = function(title, imgUrl, message , url) {
-        Kakao.Link.sendDefault({
-            label: title,
-            image: {
-                src: imgUrl,
-                width: '300',
-                height: '200'
+KakaoShare.prototype = {
+    share: function (container, title, imgUrl, message, url) {
+        Kakao.Link.createDefaultButton({
+            container: container,
+            objectType: 'feed',
+            content: {
+                title: title,
+                description: message,
+                imageUrl: imgUrl,
+                link: {
+                    webUrl: url,
+                    mobileWebUrl: url
+                }
             },
-            webLink: {
-                text:message,
-                url: url
-            },
-            fail: function() {
-                kakao.shareStory(title , url);
-            }
+            buttons: [
+                {
+                    title: 'Open!',
+                    link: {
+                        mobileWebUrl: url,
+                        webUrl: url
+                    }
+                }
+            ]
         });
     }
 }
+
+
+
+
