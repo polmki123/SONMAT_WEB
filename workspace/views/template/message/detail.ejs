@@ -1,7 +1,7 @@
 <!-- facebook -->
 <meta property="og:title" content="<%= msg.From.name %> 님이 보낸 메세지 입니다.">
-<meta property="og:description" content="http://localhost:9000/message/to/22">
-<meta property="og:image" content="http://son-mat.com/images/logo-sonmat.png">
+<meta property="og:description" content="http://son-mat.com/message/to/22">
+<meta property="og:image" content="http://son-mat.com/images/share_logo.png">
 
 
 <style>
@@ -154,7 +154,7 @@
     function initShareKakao() {
         var container = '._btn_share_kakao';
         var title = '<%= msg.From.name %> 님이 보낸 메세지 입니다.';
-        var image = 'http://son-mat.com/images/logo-sonmat.png';
+        var image = 'http://son-mat.com/images/share_logo.png';
         var dummyLink = "http://son-mat.com";
         var message = "손맛에서 확인해보세요";
         kakaoShare.share(container , title, image, message , dummyLink);
