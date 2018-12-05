@@ -28,24 +28,29 @@ function get_opponents_name(uid){
 
 			opponent_users = [];
 			opponents.forEach(function(oppo){
-				if(oppo.from_user_id != uid) {
+
+			    if(oppo.from_user_id != uid) {
 					other = oppo.From.name;
 					id = oppo.from_user_id;
 				}else {
 					other = oppo.To.name;
 					id = oppo.to_user_id;
 				}
+
 				var found = false;
+
 				opponent_users.forEach(function(user){
 					if(user.id == id){
 						found = true;
-						if(oppo.read_state == 'unread'){
+						if(oppo.to_user_id == uid && oppo.read_state == 'unread'){  // 나에게 온 편지 && 안 읽은 것
 							user.count = user.count + 1;	
 						}
 					}
 				});
+
 				if(found == false){
-					if(oppo.read_state == 'unread'){
+
+					if(oppo.to_user_id == uid && oppo.read_state == 'unread'){   // 나에게 온 편지 && 안 읽은 것
 					    opponent_users.push({id: id, name: other, send_date: date_format.format_date(oppo.send_date), count: 1})
 					}else {
                        opponent_users.push({id: id, name: other, send_date: date_format.format_date(oppo.send_date), count: 0})
