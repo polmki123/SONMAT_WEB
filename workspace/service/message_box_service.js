@@ -167,13 +167,14 @@ function get_name_from_id(user_id){
 	});
 }
 
-function update_message_state(sonmat_id){
+function update_message_state(sonmat_id, to){
 	return new Promise(function(resolve, reject){
 		models.sonmat_request.update({
             read_state: "read",
         }, {
             where:{
-                id: sonmat_id,
+				id: sonmat_id,
+				to_user_id: to,
             }
         }).then(function(_) {
 			resolve(true)

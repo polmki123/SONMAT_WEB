@@ -43,7 +43,7 @@ router.get('/to/:sonmat_request_id', function(req, res, next) {
 	msgB_service.get_message_from_id(son_id) // user
 	.then(function(msg){
 		res.render_data.msg = msg;
-		msgB_service.update_message_state(msg.id)
+		msgB_service.update_message_state(msg.id, req.user.id)
         return font_service.get_font_list(req.user.id);
 	}).then(function(font_list) {
 		res.render_data.variation_font_list = font_list.variation_font_list;
