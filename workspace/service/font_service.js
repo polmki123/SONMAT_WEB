@@ -1,4 +1,5 @@
 var models = require('../model');
+var date_format = require('./handler/date_format_handler');
 var fs = require('fs');
 
 function find_new_by_userid(user_id){
@@ -39,8 +40,7 @@ function checked_by_userid(user_id){
 
 function create_new_font(user_id, body){
 
-    var date_time = new Date();
-    if (body.name == "") body.name = formatDate(date_time);
+    if (body.name == "") body.name = date_format.get_now_format_date();
 
 	return new Promise(function(resolve, reject){
 		models.font.create({
@@ -194,7 +194,7 @@ function my_font_gallery_user_id(user_id){
 		}).map(font => font.get({plain: true}))
 		.then(function(fonts) {
             fonts.forEach(function(font){
-				font.making_date = formatDate(font.making_date);
+				font.making_date = date_format.format_date(font.making_date);
 			})
 			resolve(fonts)
 		}).catch(function(err) {
@@ -211,7 +211,7 @@ function my_font_gallery_font_id(font_id){
 			},
 		})
 		.then(function(font) {
-            font.making_date = formatDate(font.making_date);
+            font.making_date = date_format.format_date(font.making_date);
 			resolve(font.get({ plain: true }));
 		}).catch(function(err) {
 			reject(err);
@@ -236,16 +236,6 @@ function update_font_information(font_id, name, description){
 	});
 };
 
-function formatDate(date_time){
-    var yyyy = date_time.getFullYear().toString();
-    var MM = pad(date_time.getMonth() + 1,2);
-    var dd = pad(date_time.getDate(), 2);
-    var hh = pad(date_time.getHours(), 2);
-    var mm = pad(date_time.getMinutes(), 2)
-    var ss = pad(date_time.getSeconds(), 2)
-    return yyyy+'/'+MM+'/'+dd+' '+hh+':'+mm;
-}
-
 function save_font_urls(font_id, font_urls) {
 
     var promises = [];
@@ -268,15 +258,6 @@ function save_font_urls(font_id, font_urls) {
 
     return Promise.all(promises);
 }
-
-function pad(number, length) {
-    var str = '' + number;
-    while (str.length < length) {
-        str = '0' + str;
-    }
-    return str;
-}
-
 
 var func = {}
 func.find_new_by_userid = find_new_by_userid;

@@ -60,48 +60,38 @@ router.post('/make/complete', function(req, res) {
 
 router.get('/font_service_test', function(req, res) {
 
-    var http = require('http');
+    function formatDate(date_time){
 
-    var options = {
-        hostname: 'localhost',
-        port: 3000,
-        path: '/font/make',
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
+        var utc = date_time.getTime() + (date_time.getTimezoneOffset() * 60000);
+        var SEOUL_TIME_OFF_SET = 9;
+        date_time = new Date(utc + (3600000*SEOUL_TIME_OFF_SET));
+
+        var yyyy = date_time.getFullYear().toString();
+        var MM = pad(date_time.getMonth() + 1,2);
+        var dd = pad(date_time.getDate(), 2);
+        var hh = pad(date_time.getHours(), 2);
+        var mm = pad(date_time.getMinutes(), 2)
+        var ss = pad(date_time.getSeconds(), 2)
+        return yyyy+'/'+MM+'/'+dd+' '+hh+':'+mm;
+    }
+
+    function pad(number, length) {
+        var str = '' + number;
+        while (str.length < length) {
+            str = '0' + str;
         }
-    };
+        return str;
+    }
 
-    var font = {
-        "id": 1,
-        "file_path": "Aaaaa",
-        "font": "Aaaaaaaa"
-    };
+    var body = {};
 
-    var data = JSON.stringify({
-        font: {
-            "id": 1,
-            "file_path": "Aaaaa",
-            "font": "Aaaaaaaa"
-        }
-    });
+    var date = new Date();
 
-    var responseString = "";
 
-    var req = http.request(options, function (res) {
-        res.on("data", function (data) {
-            responseString += data;
-            // save all the data from response
-        });
-        res.on("end", function () {
-            console.log(responseString);
-            // print to console when response ends
-        });
-    });
+    body.date = date;
+    body.date_toString = formatDate(date);
 
-    req.write(data);
-    req.end();
-
+    res.send(body);
 });
 
 

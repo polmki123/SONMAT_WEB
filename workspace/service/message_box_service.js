@@ -1,4 +1,5 @@
 var models = require('../model');
+var date_format = require('./handler/date_format_handler');
 
 function get_opponents_name(uid){
 	return new Promise(function(resolve, reject){
@@ -45,9 +46,9 @@ function get_opponents_name(uid){
 				});
 				if(found == false){
 					if(oppo.read_state == 'unread'){
-						opponent_users.push({id: id, name: other, send_date: formatDate(oppo.send_date), count: 1})
+					    opponent_users.push({id: id, name: other, send_date: date_format.format_date(oppo.send_date), count: 1})
 					}else {
-						opponent_users.push({id: id, name: other, send_date: formatDate(oppo.send_date), count: 0})
+                       opponent_users.push({id: id, name: other, send_date: date_format.format_date(oppo.send_date), count: 0})
 					}
 				}
 			});
@@ -104,7 +105,7 @@ function get_message_timeline(uid, opponent_uid){
 		}).map(msg => msg.get({ plain: true }))
 		.then(function(msgs) {
 			msgs.forEach(function(msg){
-				msg.send_date = formatDate(msg.send_date);
+				msg.send_date = date_format.format_date(msg.send_date);
 			})
 			resolve(msgs)
 		}).catch(function(err) {
@@ -144,7 +145,7 @@ function get_message_from_id(son_id){
 			where: { id: son_id },
 		}).then(function(msg) {
 			msg_json = msg.get({ plain: true });
-			msg_json.send_date = formatDate(msg.dataValues.send_date);
+			msg_json.send_date = date_format.format_date(msg.dataValues.send_date);
 			resolve(msg_json)
 		}).catch(function(err) {
 			reject(err);
@@ -152,22 +153,6 @@ function get_message_from_id(son_id){
 	});
 };
 
-function formatDate(date_time){
-    var yyyy = date_time.getFullYear().toString();
-    var MM = pad(date_time.getMonth() + 1,2);
-    var dd = pad(date_time.getDate(), 2);
-    var hh = pad(date_time.getHours(), 2);
-    var mm = pad(date_time.getMinutes(), 2)
-    var ss = pad(date_time.getSeconds(), 2)
-    return yyyy+'/'+MM+'/'+dd+' '+hh+':'+mm;
-}
-function pad(number, length) {
-    var str = '' + number;
-    while (str.length < length) {
-        str = '0' + str;
-    }
-    return str;
-}
 
 function get_name_from_id(user_id){
 	return new Promise(function(resolve, reject){
