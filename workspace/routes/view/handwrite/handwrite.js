@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function (req, res) {
-    res.render('handwrite/form', res.render_data);
+    res.render('handwrite/writing', res.render_data);
 });
 
 router.get('/form', function (req, res) {

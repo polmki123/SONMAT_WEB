@@ -5,35 +5,70 @@
     <section class="main-container">
 
         <div class="container">
-            <div class="row justify-content-lg-center">
+            <div class="row">
 
                 <!-- main start -->
                 <!-- ================ -->
-                <div class="main col-lg-9 order-lg-2 pv-40 ml-xl-auto fixed-bg border-clear text-center margin-clear hc-element-invisible" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
-                    <h1 class="page-title large"><span class="text-default font-weight-bold">폰트 제작 중 입니다</span></h1>
-                    <h3 class="mt-4">
-                        선택한 손글씨 사진으로 내 손맛나는 글씨를 만들고 있습니다. <br>
-                        제작되는 동안 다른 사람들이 올린 다양한 손글씨를 보러 가볼까요?
-                    </h3>
-                    <a href="/font" class="btn btn-default btn-animated btn-lg">Go<i class="fa fa-arrow-right"></i></a>
+                <div class="main col-lg-8 order-lg-2 ml-xl-auto">
+
+                    <!-- page-title start -->
+                    <!-- ================ -->
+                    <h1 class="page-title">손글씨를 작성하세요</h1>
+                    <div class="separator-2"></div>
+                    <!-- page-title end -->
+    
+                    <!-- blogpost start -->
+                    <article class="blogpost">
+                    <div class="row grid-space-10">
+                        <div class="col-lg-6">
+                        <div id="carousel-blog-post" class="carousel slide" data-ride="carousel">
+                               
+                            <!-- Wrapper for slides -->
+                            <div class="carousel-inner" role="listbox">
+                            <div class="carousel-item active">
+                                <div class="overlay-container">
+                                <img src="images/guide_paper_line.png" alt="" style="width:1140px;">
+                                <!-- src="/images/guide_paper_line.png" -->
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-lg-6">
+                        <header>
+                            <h2>손글씨</h2>
+                            
+                        </header>
+                        <div class="blogpost-content">
+                            <p>가이드라인에 맞춰 손글씨를 작성하세요</p>
+                        </div>
+                        </div>
+                    </div>
+                    <footer class="clearfix">
+                        <div class="col-lg-3 pull-right">
+                            <btn id="next_btn" class="btn btn-default btn-lg btn-animated margin-clear">다음&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-right fa-2x"></i></btn>
+                        </div>
+                    </footer>
+                    </article>
+                    <!-- blogpost end -->
                 </div>
                 <!-- main end -->
-
+                
                 <!-- sidebar start -->
                 <!-- ================ -->
                 <aside class="col-lg-2 col-xl-3 order-lg-1">
                     <div class="sidebar">
                         <div class="block clearfix">
-                            <h3 class="title">내 손글씨 폰트 만들기</h3>
+
                             <h3>&nbsp;</h3>
 
                             <div class="separator-2"></div>
                             <nav>
                                 <ul class="nav flex-column">
                                     <div class="hc-item-box-2 hc-element-invisible" data-animation-effect="fadeInLeftSmall" style="animation-delay: 0.1s; vertical-align: middle">
-                                        <span class="icon dark-bg small">1</span>
+                                        <span class="icon default-bg small">1</span>
                                         <div class="body">
-                                            <h5 class="title" style="vertical-align:middle;">손글씨 쓰기</h5>
+                                            <h5 class="title">손글씨 쓰기</h5>
                                         </div>
                                     </div>
                                     <div class="separator-2"></div>
@@ -52,7 +87,7 @@
                                     </div>
                                     <div class="separator-2"></div>
                                     <div class="hc-item-box-2 hc-element-invisible" data-animation-effect="fadeInLeftSmall" style="animation-delay: 0.7s">
-                                        <span class="icon default-bg small">4</span>
+                                        <span class="icon dark-bg small">4</span>
                                         <div class="body">
                                             <h5 class="title">제작 시작</h5>
                                         </div>
@@ -69,3 +104,11 @@
         </div>
     </section>
     <!-- main-container end -->
+
+
+
+    <script>
+        $(document).on('click', '#next_btn', function() {
+            window.location.href = "/handwrite/form";
+        });
+    </script>
