@@ -63,7 +63,7 @@
             <div class="block clearfix">
                 <% opponents.forEach(function(user){ %>
 
-                    <div class="media mb-3  white-bg hc-item-box bordered round-corners">
+                    <div class="media mb-3  white-bg hc-item-box bordered round-corners" onclick="location.href='/message/to/<%= user.id %>/timeline'">
 
                         <div class="d-flex pr-2">
                             <div class="">
@@ -75,7 +75,7 @@
                         <div class="media-body container">
                             <div class="row pt-3">
                                 <div class="col-lg-9">
-                                    <h4 class="media-heading" style="font-weight: bold"><a href="/message/to/<%= user.id %>/timeline"><%= user.name %> </a></h4>
+                                    <h4 class="media-heading" style="font-weight: bold"><%= user.name %></h4>
                                     <p class="small margin-clear"><i class="fa fa-calendar pr-2"></i><%= user.send_date %></p>
                                 </div>
                                 <div class="col-lg-3">
