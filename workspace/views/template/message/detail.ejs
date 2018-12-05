@@ -1,3 +1,9 @@
+<!-- facebook -->
+<meta property="og:title" content="<%= msg.From.name %> 님이 보낸 메세지 입니다.">
+<meta property="og:description" content="http://son-mat.com/message/to/22">
+<meta property="og:image" content="http://son-mat.com/images/share_logo.png">
+
+
 <style>
     .note-editable {
         background-color: white !important;
@@ -82,6 +88,13 @@
                                 </div>
                             </section>
                             <!-- section end -->
+
+                        </div>
+
+                        <div class="text-right">
+                            <button class="btn _btn_share_facebook">facebook <i class="pl-1 fa fa-share"></i></button>
+                            <button class="btn _btn_share_kakao">kakao <i class="pl-1 fa fa-share"></i></button>
+
                         </div>
                     </article>
                     <!-- blogpost end -->
@@ -97,6 +110,8 @@
 	</div>
 </section>
 
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="/js/social/kakao/kakao.js"></script>
 <script>
 
     // 실제 사용되는 변형 폰트 리스트
@@ -133,4 +148,27 @@
             }).catch(function(error) { });
         });
     }
+
+    var kakaoShare = new KakaoShare();
+
+    function initShareKakao() {
+        var container = '._btn_share_kakao';
+        var title = '<%= msg.From.name %> 님이 보낸 메세지 입니다.';
+        var image = 'http://son-mat.com/images/share_logo.png';
+        var dummyLink = "http://son-mat.com";
+        var message = "손맛에서 확인해보세요";
+        kakaoShare.share(container , title, image, message , dummyLink);
+    }
+
+    initShareKakao();
+
+    $("._btn_share_facebook").on('click', function () {
+        var dummyLink = "http://son-mat.com";
+        window.open("https://www.facebook.com/sharer/sharer.php?u=" + dummyLink);
+
+    });
+
+
+
+
 </script>

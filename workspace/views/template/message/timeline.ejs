@@ -35,14 +35,14 @@
 									<!-- timeline grid item start -->
 									<% msgs.forEach(function(msg){ %>
 										<% if(msg.from_user_id == uid) { %>
-											<div class="timeline-item">
+											<div class="timeline-item" onclick="location.href='/message/to/<%= msg.id %>'">
 										<% } else { %>
-											<div class="timeline-item pull-left">
+											<div class="timeline-item pull-left" onclick="location.href='/message/to/<%= msg.id %>'">
 										<% } %>
 
 												<article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
 													<header>
-														<h2><a href="/message/to/<%= msg.id %>"><%= msg.sonmat.message.title %></a></h2>
+														<h2><%= msg.sonmat.message.title %></h2>
 														<div class="post-info text-right">
 															<span class="post-date">
 																<i class="fa fa-calendar-o pr-1"></i>
@@ -54,9 +54,6 @@
 													<div class="blogpost-content">
 														<p><%= msg.sonmat.message.contents %></p>
 													</div>
-													<footer class="clearfix">
-														<div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="/message/to/<%= msg.id %>">Read More</a></div>
-													</footer>
 												</article>
 											</div>
 
@@ -75,3 +72,10 @@
 		</div>
 	</div>
 </section>
+
+<script>
+    function myFunction() {
+        var element = document.getElementById("myDIV");
+        element.classList.add("mystyle");
+    }
+</script>
