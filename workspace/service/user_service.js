@@ -1,4 +1,11 @@
 var models = require('../model');
+var crypto = require('crypto');
+
+var secret_salt = "SonmatZZang"
+
+function make_secret_password(password){
+	return crypto.pbkdf2Sync(password, secret_salt, 100, 64, 'sha256').toString('base64');
+}
 
 function login_check(email, password){
 	return new Promise(function(resolve, reject){
@@ -11,7 +18,7 @@ function login_check(email, password){
 				resolve({user: null, err: 'Email is not correct'});
 			}else{
 				user = user.get({ plain: true });
-				if(user.password === password){
+				if(user.password === make_secret_password(password)){
 					resolve({user: user, err: null});
 				} else {
 					resolve({user: null, err: 'Password Mismatch'});
@@ -27,7 +34,7 @@ function create_new_user(email, password, name){
 	return new Promise(function(resolve, reject){
 		models.user.create({
 			email: email,
-			password: password,
+			password: make_secret_password(password),
 			name: name,
 		}).then(function(user) {
 			resolve(user.get({ plain: true }))
@@ -60,5 +67,6 @@ function register_user(email, password, name){
 var func = {}
 func.login_check = login_check;
 func.register_user = register_user;
+func.make_secret_password = make_secret_password;
 
 module.exports = func;
