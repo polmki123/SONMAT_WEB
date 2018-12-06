@@ -294,13 +294,13 @@
                 var title = response.user_name + ' 님이 보낸 메세지 입니다.';
                 var image = 'http://son-mat.com/images/share_logo.png';
                 var link = response.url;
-                var message = "손맛에서 확인해보세요";
+                var message = response.message_title;
                 kakaoShare.share(container , title, image, message , link);
             }
 
             initShareKakao();
 
-            //window.location.href = "/message/to/" + sonmat_req_id;
+            window.location.href = response.url;
         }
 
         AjaxUtils.postResult(MESSAGE_KAKAO_POST_UPLOAD_URL, formData, fn_success);

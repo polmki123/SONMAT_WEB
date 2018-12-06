@@ -63,6 +63,7 @@ router.post('/share', function(req, res) {
             var response = {};
             response.url = temp_url;
             response.user_name = req.body.user_name;
+            response.message_title = req.body.title;
 
             res.send(response);
         })

@@ -18,7 +18,7 @@ KakaoShare.prototype = {
             },
             buttons: [
                 {
-                    title: 'Open!',
+                    title: '손맛에서 확인해보세요',
                     link: {
                         mobileWebUrl: url,
                         webUrl: url
