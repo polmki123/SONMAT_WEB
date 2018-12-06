@@ -38,7 +38,7 @@ function createNewFont(user_id, body) {
     .then(function(font){
 
         var options = {
-            hostname: '106.10.34.221',
+            hostname: '106.10.36.130',
             port: 9000,
             path: '/font/make',
             method: 'POST',
