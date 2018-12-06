@@ -58,42 +58,6 @@ router.post('/make/complete', function(req, res) {
     });
 });
 
-router.get('/font_service_test', function(req, res) {
-
-    function formatDate(date_time){
-
-        var utc = date_time.getTime() + (date_time.getTimezoneOffset() * 60000);
-        var SEOUL_TIME_OFF_SET = 9;
-        date_time = new Date(utc + (3600000*SEOUL_TIME_OFF_SET));
-
-        var yyyy = date_time.getFullYear().toString();
-        var MM = pad(date_time.getMonth() + 1,2);
-        var dd = pad(date_time.getDate(), 2);
-        var hh = pad(date_time.getHours(), 2);
-        var mm = pad(date_time.getMinutes(), 2)
-        var ss = pad(date_time.getSeconds(), 2)
-        return yyyy+'/'+MM+'/'+dd+' '+hh+':'+mm;
-    }
-
-    function pad(number, length) {
-        var str = '' + number;
-        while (str.length < length) {
-            str = '0' + str;
-        }
-        return str;
-    }
-
-    var body = {};
-
-    var date = new Date();
-
-
-    body.date = date;
-    body.date_toString = formatDate(date);
-
-    res.send(body);
-});
-
 
 router.post('/:font_id', function(req, res) {
     var body = req.body;
@@ -106,31 +70,6 @@ router.post('/:font_id', function(req, res) {
         console.log(err);
     });
 });
-
-router.get('/font_service_test2', function(req, res) {
-
-    var font_service = require('../../../service/font_service');
-
-    // [ { id: 73,
-    //     user_id: 2,
-    //     name: '더블썬칩손맛체',
-    //     description: '썬칩 조아 너무 조아',
-    //     making_status: 'complete',
-    //     open_state: 'private',
-    //     making_date: 2018-11-19T02:39:38.000Z,
-    //     read_state: 'read',
-    //     user: { name: '정형호' } },]
-
-    // font_service.find_my_font_userid(req.body.id)
-    // .then(function(font){
-    //     console.log(font)
-    //     res.send(user.name);
-    // }).catch(function(err) {
-    //     console.log(err);
-    // });
-});
-
-
 
 
 module.exports = router;
