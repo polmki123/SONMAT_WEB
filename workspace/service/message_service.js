@@ -51,7 +51,9 @@ function send_message(body){
 				email: body.email,
 			},
 		}).then(function(opponent){
-			body.opponent_id = opponent.dataValues.id;
+		    if (opponent == null) body.opponent_id = null;
+		    else body.opponent_id = opponent.dataValues.id;
+
 			return create_new_message(body);
 		}).then(function(msg) {
 			return create_new_sonmat(msg.dataValues.id, body.font_id);

@@ -54,5 +54,9 @@ router.get('/to/:sonmat_request_id', function(req, res, next) {
 	});
 });
 
+router.get('/share/list', function(req, res, next) {
+
+    res.render('message/share_list', res.render_data);
+});
 
 module.exports = router;

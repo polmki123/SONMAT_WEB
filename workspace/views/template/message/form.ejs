@@ -50,6 +50,7 @@
 
                             <div class="row">
                                 <div class="col-lg-12">
+                                    <div class="valid-feedback" style="display: block;"><i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;카카오톡으로 전송하려면 입력하지 않으셔도 됩니다</div>
                                     <input type="email" class="form-control" name="inputEmail" placeholder="이메일을 입력하세요">
                                     <div id="email-feedback" class="invalid-feedback" style="display:none;">상대 이메일을 확인해주세요.</div>
                                 </div>
@@ -84,6 +85,7 @@
                             <br/>
 
                             <div class="text-right pull-right">
+                                <button type="button" id="kakao_send_btn" class="btn _btn_share_kakao btn-default btn-lg margin-clear">카카오톡 전송&nbsp;&nbsp;&nbsp;<img src="/images/kakaolink_btn_very_small_ov.png" class="image" style="display: inline"></button>
                                 <button type="button" id="upload_btn" class="btn btn-default btn-lg btn-animated margin-clear">전송&nbsp;&nbsp;<i class="fa fa-envelope-o"></i></button>
                             </div>
 
@@ -101,6 +103,8 @@
     </div>
 </section>
 
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="/js/social/kakao/kakao.js"></script>
 <script type="text/javascript">
 
     // 에디터에 등록할 대표 폰트 리스트
@@ -218,19 +222,30 @@
         return state;
     }
 
+    function getMessageFormData() {
+
+        var formData = {}
+        formData.email = $("input[name=inputEmail]").val()
+        formData.title = $("input[name=inputTitle]").val()
+        formData.contents_html = get_contents_html($("div#summernote").summernote('code'));
+        formData.contents = $($("#summernote").summernote("code")).text();
+
+        // TODO
+        formData.font_id = 1;
+
+        return formData;
+    }
+
     // 업로드 버튼 - click event
     $(document).on('click', '#upload_btn', function() {
 
         if (getSendableState()){
-            var formData = {}
-            formData.email = $("input[name=inputEmail]").val()
-            formData.title = $("input[name=inputTitle]").val()
-            formData.contents_html = get_contents_html($("div#summernote").summernote('code'));
-            formData.contents = $($("#summernote").summernote("code")).text();
 
+            var formData = getMessageFormData();
             var MESSAGE_POST_UPLOAD_URL = '/api/message';
 
             function fn_success(sonmat_req_id) {
+                alert("편지 전송이 완료되었습니다");
                 window.location.href = "/message/to/" + sonmat_req_id;
             }
 
@@ -239,7 +254,6 @@
             if (is_sendable_state.email == false)  $('#email-feedback').css('display', '');
         }
     });
-
 
     $(document).on('focusout', 'input[name=inputEmail]', function() {
 
@@ -260,6 +274,36 @@
         }
         AjaxUtils.postResult(CHECK_EMAIL_URL, formData, fn_success);
 
+    });
+
+
+    /* 카카오톡으로 전송하기 */
+
+    // 카카오톡 전송 버튼 - click event
+    $(document).on('click', '#kakao_send_btn', function() {
+
+        var formData = getMessageFormData();
+        var MESSAGE_KAKAO_POST_UPLOAD_URL = '/api/message/share';
+
+        function fn_success(response) {
+            
+            var kakaoShare = new KakaoShare();
+
+            function initShareKakao() {
+                var container = '._btn_share_kakao';
+                var title = response.user_name + ' 님이 보낸 메세지 입니다.';
+                var image = 'http://son-mat.com/images/share_logo.png';
+                var link = response.url;
+                var message = "손맛에서 확인해보세요";
+                kakaoShare.share(container , title, image, message , link);
+            }
+
+            initShareKakao();
+
+            //window.location.href = "/message/to/" + sonmat_req_id;
+        }
+
+        AjaxUtils.postResult(MESSAGE_KAKAO_POST_UPLOAD_URL, formData, fn_success);
     });
 
 </script>

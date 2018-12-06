@@ -12,6 +12,12 @@
 
     <%- include('./css') -%>
     <%- style %>
+
+    <style>
+        .btn_share_kakao {
+            background: url("/images/kakaolink_btn_small.png") 0px no-repeat;}
+    </style>
+
 </head>
 
 <!-- body classes:  -->
@@ -47,55 +53,75 @@
 
 <% if(locals.opponents) { %>
 
-<% if(locals.show_opponent) { %>
+    <% if(locals.show_opponent) { %>
 <div class="style-switcher opened" style="left: 0px;">
-<% } else { %>
-<div class="style-switcher closed">
-<% } %>
+    <% } else { %>
+    <div class="style-switcher closed">
+        <% } %>
 
-    <div class="header">
-        <a class="trigger" href="#"><i class="fa fa-envelope"></i></a>
-        <h2>Messages</h2>
-    </div>
-    <div class="clearfix body light-gray-bg col-lg-12 col-xl-12">
-        <div class="sidebar">
-            <div class="pv-20"></div>
-            <div class="block clearfix">
-                <% opponents.forEach(function(user){ %>
+        <div class="header">
+            <a class="trigger" href="#"><i class="fa fa-envelope"></i></a>
+            <h2>Messages</h2>
+        </div>
+        <div class="clearfix body light-gray-bg col-lg-12 col-xl-12">
+            <div class="sidebar">
+                <div class="pv-20"></div>
+                <div class="block clearfix">
+                    <% opponents.forEach(function(user){ %>
 
-                    <div class="media mb-3  white-bg hc-item-box bordered round-corners" onclick="location.href='/message/to/<%= user.id %>/timeline'">
+                        <div class="media mb-3  white-bg hc-item-box bordered round-corners" onclick="location.href='/message/to/<%= user.id %>/timeline'">
 
-                        <div class="d-flex pr-2">
-                            <div class="">
+                            <div class="d-flex pr-2">
+                                <div class="">
 
-                                <span class="icon default-bg mt-2 mb-2 ml-2 mr-2 circle"><i class="fa fa-user"></i></span>
+                                    <span class="icon default-bg mt-2 mb-2 ml-2 mr-2 circle"><i class="fa fa-user"></i></span>
 
-                            </div>
-                        </div>
-                        <div class="media-body container">
-                            <div class="row pt-3">
-                                <div class="col-lg-9">
-                                    <h4 class="media-heading" style="font-weight: bold"><%= user.name %></h4>
-                                    <p class="small margin-clear"><i class="fa fa-calendar pr-2"></i><%= user.send_date %></p>
                                 </div>
-                                <div class="col-lg-3">
-                                    <div class="header-dropdown-buttons padding-top-clear">
-                                        <div class="btn-group">
-                                            <a href="/message/to/<%= user.id %>/timeline" class="btn btn-default "><i class="fa fa-envelope text-dark"></i><span class="cart-count bg-danger text-white"><%= user.count %></span></a>
+                            </div>
+                            <div class="media-body container">
+                                <div class="row pt-3">
+                                    <div class="col-lg-9">
+                                        <h4 class="media-heading" style="font-weight: bold"><%= user.name %></h4>
+                                        <p class="small margin-clear"><i class="fa fa-calendar pr-2"></i><%= user.send_date %></p>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="header-dropdown-buttons padding-top-clear">
+                                            <div class="btn-group">
+                                                <a href="/message/to/<%= user.id %>/timeline" class="btn btn-default "><i class="fa fa-envelope text-dark"></i><span class="cart-count bg-danger text-white"><%= user.count %></span></a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+        </div>
+        <!-- footer top start -->
+        <!-- ================ -->
+        <section class="footer section default-bg clearfix">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="call-to-action text-center">
+                            <div class="row">
+                                <h4 class="pt-3" style="width: 100%;">
+                                    <a href="/message/share/list" class="btn btn-gray-transparent btn-animated" style="width: 100%;">
+                                        <img src="/images/kakaolink_btn_small_ov.png" class="image" style="display: inline">
+                                        &nbsp;&nbsp;&nbsp;카카오톡으로 공유한 편지<i class="fa fa-arrow-right mt-2 pl-20"></i></a></h4>
+                            </div>
                         </div>
 
                     </div>
-                <% }); %>
+                </div>
             </div>
-        </div>
+        </section>
+        <!-- footer top end -->
     </div>
-</div>
-<!-- Color Switcher End -->
-<!-- Color Switcher (Remove these lines) -->
-<% } %>
+    <!-- Color Switcher End -->
+    <!-- Color Switcher (Remove these lines) -->
+    <% } %>
 </body>
 </html>
