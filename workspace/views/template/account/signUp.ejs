@@ -54,7 +54,7 @@
                             <div class="form-group has-feedback row">
                                 <label for="inputName" class="col-md-3 control-label text-md-right col-form-label">이름 <span class="text-danger small">*</span></label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" id="inputName" name="name" placeholder="이름을 입력해주세요" required>
+                                    <input type="text" class="form-control" id="inputName" name="name" placeholder="이름을 입력해주세요." required>
                                     <i class="fa fa-user form-control-feedback pr-4"></i>
                                     <div class="help-block with-errors"></div>
                                 </div>
@@ -63,7 +63,7 @@
                             <div class="form-group has-feedback row">
                                 <label for="inputNumber" class="col-md-3 control-label text-md-right col-form-label">전화번호 <span class="text-danger small">*</span></label>
                                 <div class="col-md-8">
-                                    <input type="text" class="form-control" id="inputNumber" name="number" placeholder="'-' 제외하고 전화번호를 입력해주세요" required>
+                                    <input type="text" class="form-control" id="inputNumber" name="phone" pattern="^[0-9]+$" placeholder="'-' 제외하고 전화번호를 입력해주세요" data-error="번호만 입력해주세요." required>
                                     <i class="fa fa-info-circle form-control-feedback pr-4"></i>
                                     <div class="help-block with-errors"></div>
                                 </div>
