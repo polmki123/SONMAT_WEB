@@ -10,349 +10,57 @@
             <!-- ================ -->
             <div class="main col-12">
 
-                <!-- page-title start -->
-                <!-- ================ -->
+              <!-- page-title start -->
+              <!-- ================ -->
 
-                <br>
-                <br>
-                <h3>내 손글씨체</h3>
-                <div class="separator"></div>
+              <br>
+              <br>
+              <h1>내 손글씨체</h1>
+              <div class="separator"></div>
                 <!-- masonry grid start -->
                 <!-- ================ -->
                 <div class="masonry-grid row">
                     <!-- masonry grid item start -->
-                    <div class="masonry-grid-item col-md-6 col-lg-4">
-                        <!-- blogpost start -->
+                    <% font.forEach(function(font){ %>
+                      <div class="masonry-grid-item col-md-6 col-lg-4" onclick="location.href='font/<%=font.id %>'">
+                          <!-- blogpost start -->
 
-                        <article class="blogpost hc-shadow-2 light-gray-bg bordered">
-                            <div id="carousel-blog-post" class="carousel slide" data-ride="carousel">
-                                <!-- Indicators -->
-                                <ol class="carousel-indicators bottom margin-clear">
-                                    <li data-target="#carousel-blog-post" data-slide-to="0" class="active"></li>
-                                    <li data-target="#carousel-blog-post" data-slide-to="1"></li>
-                                    <li data-target="#carousel-blog-post" data-slide-to="2"></li>
-                                </ol>
+                          <article class="blogpost hc-shadow-2 light-gray-bg bordered">
+                              <div id="carousel-blog-post" class="carousel slide" data-ride="carousel">
 
-                                <!-- Wrapper for slides -->
-                                <div class="carousel-inner" role="listbox">
-                                    <div class="carousel-item active">
-                                        <div class="overlay-container">
-                                            <img src="images/blog-1.jpg" alt="">
-                                            <a class="overlay-link" href="blog-post.html"><i class="fa fa-link"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="overlay-container">
-                                            <img src="images/blog-3.jpg" alt="">
-                                            <a class="overlay-link" href="blog-post.html"><i class="fa fa-link"></i></a>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item">
-                                        <div class="overlay-container">
-                                            <img src="images/blog-4.jpg" alt="">
-                                            <a class="overlay-link" href="blog-post.html"><i class="fa fa-link"></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <header>
-                                <div class="text-right js-new-badge" data-id="1">
-                                    <span class="badge badge-pill badge-danger">New</span>
-                                </div>
-
-                                <h2>Bootstrap heading</h2>
-                                <div class="post-info">
-                        <span class="post-date">
-                          <i class="fa fa-calendar-o pr-1"></i>
-                          <span class="day">12</span>
-                          <span class="month">May 2017</span>
-                        </span>
-                                    <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">Lorem</a></span>
-                                    <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>
-                                </div>
-                            </header>
-                            <div class="blogpost-content">
-                                <p>Mauris dolor sapien, malesuada at interdum ut, hendrerit eget lorem. Nunc interdum mi neque, et  sollicitudin purus fermentum ut. Suspendisse faucibus nibh odio, a vehicula eros pharetra in. Maecenas  ullamcorper commodo rutrum.</p>
-                            </div>
-                            <footer class="clearfix">
-                                <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div>
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="#">Read More</a></div>
-                            </footer>
-                        </article>
-                        <!-- blogpost end -->
-                    </div>
-                    <!-- masonry grid item end -->
-
-                    <!-- masonry grid item start -->
-                    <div class="masonry-grid-item col-md-6 col-lg-4">
-                        <!-- blogpost start -->
-                        <article class="blogpost hc-shadow-2 light-gray-bg bordered">
-                            <div class="overlay-container">
-                                <img src="images/blog-2.jpg" alt="">
-                                <a class="overlay-link" href="blog-post.html"><i class="fa fa-link"></i></a>
-                            </div>
-                            <header>
-                                <h2><a href="blog-post.html">Cute Robot</a></h2>
-                                <div class="post-info">
-                        <span class="post-date">
-                          <i class="fa fa-calendar-o pr-1"></i>
-                          <span class="day">10</span>
-                          <span class="month">May 2017</span>
-                        </span>
-                                    <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">Lorem</a></span>
-                                    <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>
-                                </div>
-                            </header>
-                            <div class="blogpost-content">
-                                <p>Mauris dolor sapien, malesuada at interdum ut, hendrerit eget lorem. Nunc interdum mi neque, et  sollicitudin purus fermentum ut. Suspendisse faucibus nibh odio, a vehicula eros pharetra in. Maecenas  ullamcorper commodo rutrum. In iaculis lectus vel augue eleifend dignissim. Aenean viverra semper sollicitudin.</p>
-                            </div>
-                            <footer class="clearfix">
-                                <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div>
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="#">Read More</a></div>
-                            </footer>
-                        </article>
-                        <!-- blogpost end -->
-                    </div>
-                    <!-- masonry grid item end -->
-
-                    <!-- masonry grid item start -->
-                    <div class="masonry-grid-item col-md-6 col-lg-4">
-                        <!-- blogpost start -->
-                        <article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
-                            <header>
-                                <h2><a href="blog-post.html">Text Post</a></h2>
-                                <div class="post-info">
-                        <span class="post-date">
-                          <i class="fa fa-calendar-o pr-1"></i>
-                          <span class="day">09</span>
-                          <span class="month">May 2017</span>
-                        </span>
-                                    <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">Lorem</a></span>
-                                    <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>
-                                </div>
-                            </header>
-                            <div class="blogpost-content">
-                                <p>Mauris dolor sapien, malesuada at interdum ut, hendrerit eget lorem. Nunc interdum mi neque, et  sollicitudin purus fermentum ut. Suspendisse faucibus nibh odio, a vehicula eros pharetra in. Maecenas  ullamcorper commodo rutrum. In iaculis lectus vel augue eleifend dignissim. Aenean viverra semper sollicitudin.</p>
-                            </div>
-                            <footer class="clearfix">
-                                <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div>
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="#">Read More</a></div>
-                            </footer>
-                        </article>
-                        <!-- blogpost end -->
-                    </div>
-                    <!-- masonry grid item end -->
-
-                    <!-- masonry grid item start -->
-                    <div class="masonry-grid-item col-md-6 col-lg-4">
-                        <!-- blogpost start -->
-                        <article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
-
-                            <header>
-                                <h2><a href="blog-post.html">Lorem upsoum dolor is</a></h2>
-                                <div class="post-info">
-                        <span class="post-date">
-                          <i class="fa fa-calendar-o pr-1"></i>
-                          <span class="day">08</span>
-                          <span class="month">May 2017</span>
-                        </span>
-                                    <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">Lorem</a></span>
-                                    <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>
-                                </div>
-                            </header>
-                            <div class="blogpost-content">
-                                <p>Mauris dolor sapien, malesuada at interdum ut, hendrerit eget lorem. Nunc interdum mi neque, et  sollicitudin purus fermentum ut. Suspendisse faucibus nibh odio, a vehicula eros pharetra in. Maecenas  ullamcorper commodo rutrum. In iaculis lectus vel augue eleifend dignissim. Aenean viverra semper sollicitudin.</p>
-                            </div>
-                            <footer class="clearfix">
-                                <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div>
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="#">Read More</a></div>
-                            </footer>
-                        </article>
-                        <!-- blogpost end -->
-                    </div>
-                    <!-- masonry grid item end -->
-
-                    <!-- masonry grid item start -->
-                    <div class="masonry-grid-item col-md-6 col-lg-4">
-                        <!-- blogpost start -->
-                        <article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
-                            <div class="overlay-container">
-                                <img src="images/page-about-2.jpg" alt="">
-                                <a class="overlay-link" href="#"><i class="fa fa-link"></i></a>
-                            </div>
-                            <header>
-                                <h2><a href="blog-post.html">Excepteur sint occaecat cupidatat non</a></h2>
-                                <div class="post-info">
-                        <span class="post-date">
-                          <i class="fa fa-calendar-o pr-1"></i>
-                          <span class="day">07</span>
-                          <span class="month">May 2017</span>
-                        </span>
-                                    <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">Lorem</a></span>
-                                    <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>
-                                </div>
-                            </header>
-                            <div class="blogpost-content">
-                                <p>Mauris dolor sapien, malesuada at interdum ut, hendrerit eget lorem. Nunc interdum mi neque, et  sollicitudin purus fermentum ut. Suspendisse faucibus nibh odio, a vehicula eros pharetra in. Maecenas  ullamcorper commodo rutrum. In iaculis lectus vel augue eleifend dignissim.</p>
-                            </div>
-                            <footer class="clearfix">
-                                <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div>
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="#">Read More</a></div>
-                            </footer>
-                        </article>
-                        <!-- blogpost end -->
-                    </div>
-                    <!-- masonry grid item end -->
-
-                    <!-- masonry grid item start -->
-                    <div class="masonry-grid-item col-md-6 col-lg-4">
-                        <!-- blogpost start -->
-                        <article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
-                            <div class="overlay-container">
-                                <img src="images/blog-3.jpg" alt="">
-                                <a class="overlay-link" href="blog-post.html"><i class="fa fa-link"></i></a>
-                            </div>
-                            <header>
-                                <h2><a href="blog-post.html">Nunc interdum mi neque</a></h2>
-                                <div class="post-info">
-                        <span class="post-date">
-                          <i class="fa fa-calendar-o pr-1"></i>
-                          <span class="day">07</span>
-                          <span class="month">May 2017</span>
-                        </span>
-                                    <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">Lorem</a></span>
-                                    <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>
-                                </div>
-                            </header>
-                            <div class="blogpost-content">
-                                <p>Mauris dolor sapien, malesuada at interdum ut, hendrerit eget lorem. Nunc interdum mi neque, et  sollicitudin purus fermentum ut. Suspendisse faucibus nibh odio, a vehicula eros pharetra in. Maecenas  ullamcorper commodo rutrum. In iaculis lectus vel augue eleifend dignissim. Aenean viverra semper sollicitudin.</p>
-                            </div>
-                            <footer class="clearfix">
-                                <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div>
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="#">Read More</a></div>
-                            </footer>
-                        </article>
-                        <!-- blogpost end -->
-                    </div>
-                    <!-- masonry grid item end -->
-
-                    <!-- masonry grid item start -->
-                    <div class="masonry-grid-item col-md-6 col-lg-4">
-                        <!-- blogpost start -->
-                        <article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
-                            <div class="overlay-container">
-                                <img src="images/blog-4.jpg" alt="">
-                                <a class="overlay-link" href="blog-post.html"><i class="fa fa-link"></i></a>
-                            </div>
-                            <header>
-                                <h2><a href="blog-post.html">Distinctio magni aut illum</a></h2>
-                                <div class="post-info">
-                        <span class="post-date">
-                          <i class="fa fa-calendar-o pr-1"></i>
-                          <span class="day">06</span>
-                          <span class="month">May 2017</span>
-                        </span>
-                                    <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">Lorem</a></span>
-                                    <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>
-                                </div>
-                            </header>
-                            <div class="blogpost-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio magni aut illum animi laboriosam esse quidem sit illo fugit est culpa facilis amet, ab doloremque magnam, sapiente architecto natus. Voluptatem esse optio explicabo dolore impedit debitis deleniti porro doloribus provident perferendis nostrum quasi nobis magni atque mollitia, quas, quos corporis!</p>
-                            </div>
-                            <footer class="clearfix">
-                                <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div>
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="#">Read More</a></div>
-                            </footer>
-                        </article>
-                        <!-- blogpost end -->
-                    </div>
-                    <!-- masonry grid item end -->
-
-                    <!-- masonry grid item start -->
-                    <div class="masonry-grid-item col-md-6 col-lg-4">
-                        <!-- blogpost start -->
-                        <article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
-                            <header>
-                                <h2><a href="blog-post.html">Voluptatem esse optio explicabo dolore impedit</a></h2>
-                                <div class="post-info">
-                        <span class="post-date">
-                          <i class="fa fa-calendar-o pr-1"></i>
-                          <span class="day">06</span>
-                          <span class="month">May 2017</span>
-                        </span>
-                                    <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">Lorem</a></span>
-                                    <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>
-                                </div>
-                            </header>
-                            <div class="blogpost-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Distinctio magni aut illum animi laboriosam esse quidem sit illo fugit est culpa facilis amet, ab doloremque magnam, sapiente architecto natus. Voluptatem esse optio explicabo dolore impedit debitis deleniti porro doloribus provident perferendis nostrum quasi nobis magni atque mollitia, quas, quos corporis!</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto veniam, perspiciatis libero quasi, iusto delectus sed accusantium fugit inventore iure molestiae amet voluptatem, ut dolorem ex dolorum ea impedit quae!</p>
-                            </div>
-                            <footer class="clearfix">
-                                <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div>
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="#">Read More</a></div>
-                            </footer>
-                        </article>
-                        <!-- blogpost end -->
-                    </div>
-                    <!-- masonry grid item end -->
-
-                    <!-- masonry grid item start -->
-                    <div class="masonry-grid-item col-md-6 col-lg-4">
-                        <!-- blogpost start -->
-                        <article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
-                            <div class="overlay-container">
-                                <img src="images/blog-1.jpg" alt="">
-                                <a class="overlay-link" href="blog-post.html"><i class="fa fa-link"></i></a>
-                            </div>
-                            <header>
-                                <h2><a href="blog-post.html">Successful business ideas</a></h2>
-                                <div class="post-info">
-                        <span class="post-date">
-                          <i class="fa fa-calendar-o pr-1"></i>
-                          <span class="day">06</span>
-                          <span class="month">May 2017</span>
-                        </span>
-                                    <span class="submitted"><i class="fa fa-user pr-1 pl-1"></i> by <a href="#">Lorem</a></span>
-                                    <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>
-                                </div>
-                            </header>
-                            <div class="blogpost-content">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto veniam, perspiciatis libero quasi, iusto delectus sed accusantium fugit inventore iure molestiae amet voluptatem, ut dolorem ex dolorum ea impedit quae!</p>
-                            </div>
-                            <footer class="clearfix">
-                                <div class="tags pull-left"><i class="fa fa-tags pr-1"></i> <a href="#">tag 1</a>, <a href="#">tag 2</a>, <a href="#">long tag 3</a></div>
-                                <div class="link pull-right"><i class="fa fa-link pr-1"></i><a href="#">Read More</a></div>
-                            </footer>
-                        </article>
-                        <!-- blogpost end -->
-                    </div>
-                    <!-- masonry grid item end -->
-                </div>
-                <!-- masonry grid end -->
-                  <div class="row">
-                      <% font.forEach(function(font){ %>
-                        <div class="col-sm-4">
-                          <div class="style-2 mb-50 hc-shadow bordered light-gray-bg text-center">
-                            <div class="main-container h3">
-                              <p>다람쥐 헌 쳇바퀴에 타고파</p>
-                            </div>
-                            <div class="body">
-                              <h4>폰트명 : <%= font.name %></h4>
-                              <div class="separator"></div>
-                                <div class="text-center space-bottom">
-                                  <span>
-                                    <i class="fa fa-calendar-o pr-1"></i>
-                                    <span class="day">제작일 : <%= font.making_date %></span>
-                                  </span>
-                                </div>
-                              <p><%= font.description %></p>
-                              <a href="/font/<%= font.id %>" class="btn btn-default btn-sm margin-clear">Read More<i class="fa fa-arrow-right pl-10"></i></a>                       
-                            </div>
-                          </div>
-                        </div>
-                      <% }); %>
-                  </div>
+                                  <!-- Wrapper for slides -->
+                                  <div class="carousel-inner" role="listbox">
+                                      <div class="carousel-item active text-center mt-20">
+                                        <% if(font.read_state=="unread") { %>
+                                          <div class="text-right js-new-badge mr-2" data-id="1">
+                                              <span class="badge badge-pill badge-danger">New</span>
+                                          </div>
+                                        <% } %>
+                                          <h2>다람쥐 헌 쳇바퀴에 타고파</h2>
+                                      </div>
+                                  </div>
+                              </div>
+                              <header>
+                                  <div class="post-info text-right mb-2">
+                                      <span class="post-date">
+                                        <i class="fa fa-calendar-o pr-1"></i>
+                                        <span class="day"><%= font.making_date %></span>
+                                      </span>
+                                      <span class="comments"><i class="fa fa-comments-o pl-1 pr-1"></i> <a href="#">22 comments</a></span>
+                                  </div>
+                                  <h5><%= font.name %></h5>
+                              </header>
+                              <div class="blogpost-content">
+                                  <p><%= font.description %></p>
+                              </div>
+                              <footer class="clearfix">
+                              </footer>
+                          </article>
+                          <!-- blogpost end -->
+                      </div>
+                      <!-- masonry grid item end -->
+                    <% }); %>
+                    
                 <!-- section end -->
                 </div>
                 <!-- page-title end -->

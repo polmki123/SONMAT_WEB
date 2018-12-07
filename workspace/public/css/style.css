@@ -1405,8 +1405,16 @@ h5 + .separator {
   padding-bottom: 45px;
 }
 
+.mr-2 {
+  margin-right:2px;
+}
+
 .mt-5 {
   margin-top: 5px;
+}
+
+.mb-2 {
+  margin-bottom: 2px;
 }
 
 .mb-5 {
