@@ -57,10 +57,22 @@
         <a class="trigger" href="#"><i class="fa fa-envelope"></i></a>
         <h2>Messages</h2>
     </div>
-    <div class="clearfix body light-gray-bg col-lg-12 col-xl-12">
+    <!-- <% if(opponents==0) {%>
+        <div class="clearfix body light-gray-bg col-lg-12 col-xl-12">
+        <div class="text-center mt-30">손편지함이 비어있습니다</div>
+        <p class="mt-3"><a href="#" class="btn btn-animated btn-sm btn-gray-transparent">손편지 쓰기<i class="fa fa-envelope pl-20"></i></a></p>
+    <% } else { %> -->
+        <div class="clearfix body light-gray-bg col-lg-12 col-xl-12">
+    <!-- <% } %> -->
         <div class="sidebar">
+            <% if(opponents==0) {%>
+                <div class="text-center mt-40 mb-2">손편지함이 비어있습니다</div>
+                <p class="pv-5 pr-4 text-right"><a href="#" class="btn btn-animated btn-sm btn-gray-transparent">손편지 쓰기<i class="fa fa-envelope pl-20"></i></a></p>
+            <% } else { %>
             <div class="pv-20"></div>
-            <div class="block clearfix">
+            <div class="block clearfix"></div>
+            <% } %>
+                
                 <% opponents.forEach(function(user){ %>
 
                     <div class="media mb-3  white-bg hc-item-box bordered round-corners" onclick="location.href='/message/to/<%= user.id %>/timeline'">
