@@ -132,7 +132,7 @@ function get_message_from_id(son_id){
 				},{
 					model: models.user,
 					as: 'To',
-					required : true, 
+					required : false,
 					attributes : ['name'], 
 				},{
 					model: models.sonmat,
@@ -149,8 +149,11 @@ function get_message_from_id(son_id){
 			],
 			where: { id: son_id },
 		}).then(function(msg) {
+
 			msg_json = msg.get({ plain: true });
 			msg_json.send_date = date_format.format_date(msg.dataValues.send_date);
+
+            console.log("<<<<<<<<<<< " , msg_json);
 			resolve(msg_json)
 		}).catch(function(err) {
 			reject(err);

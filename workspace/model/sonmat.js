@@ -19,10 +19,6 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER.UNSIGNED,
             allowNull: true,
             references: { model: models.font, key: 'id' }
-        },
-        share_url: {
-            type: DataTypes.STRING,
-            allowNull: true
         }
     }, {
         tableName: 'sonmat',

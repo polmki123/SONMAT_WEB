@@ -33,6 +33,10 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: false,
             defaultValue: 1
+        },
+        share_url: {
+            type: DataTypes.STRING,
+            allowNull: true
         }
     }, {
         tableName: 'sonmat_request',

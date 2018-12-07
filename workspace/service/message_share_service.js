@@ -2,40 +2,23 @@ var models = require('../model');
 
 function generate_temp_url(sonmat_request_id) {
 
-    var SHARE_MESSAGE_TEMP_URL_PRIFIX = 'localhost:9000/share/';
-
-    var temp_url = SHARE_MESSAGE_TEMP_URL_PRIFIX + generation_random_string();
+    var SHARE_MESSAGE_TEMP_URL_PRIFIX = 'localhost:9000/message/share/';
+    var temp_url = generation_random_string();
 
     return new Promise(function(resolve, reject){
-        models.sonmat_request.findOne({
-            where: {
+        models.sonmat_request.update({
+            share_url: temp_url
+        }, {
+            where:{
                 id: sonmat_request_id,
             }
-        }).then(function(sonmat_request) {
-            return update_sonmat_url(sonmat_request.sonmat_id, temp_url);
-        }).then(function() {
-            resolve(temp_url);
+        }).then(function(_) {
+            resolve(SHARE_MESSAGE_TEMP_URL_PRIFIX + temp_url);
         }).catch(function(err) {
             reject(err);
         });
     });
 }
-
-function update_sonmat_url(sonmat_id, share_url){
-    return new Promise(function(resolve, reject){
-        models.sonmat.update({
-            share_url: share_url
-        }, {
-            where:{
-                id: sonmat_id,
-            }
-        }).then(function(_) {
-            resolve(share_url);
-        }).catch(function(err) {
-            reject(err);
-        });
-    });
-};
 
 function generation_random_string() {
 
@@ -49,7 +32,22 @@ function generation_random_string() {
     return uuid.toUpperCase();
 }
 
+function get_sonmat_request_id_from_url(temp_url) {
+
+    return new Promise(function(resolve, reject){
+        models.sonmat_request.findOne({
+            where: {
+                share_url: temp_url,
+            }
+        }).then(function(sonmat_request) {
+            resolve(sonmat_request.id);
+        }).catch(function(err) {
+            reject(err);
+        });
+    });
+}
+
 var func = {}
 func.generate_temp_url = generate_temp_url;
-
+func.get_sonmat_request_id_from_url = get_sonmat_request_id_from_url;
 module.exports = func;

@@ -286,7 +286,7 @@
         var MESSAGE_KAKAO_POST_UPLOAD_URL = '/api/message/share';
 
         function fn_success(response) {
-            
+
             var kakaoShare = new KakaoShare();
 
             function initShareKakao() {
@@ -300,7 +300,7 @@
 
             initShareKakao();
 
-            window.location.href = response.url;
+            //window.location.href = response.url;
         }
 
         AjaxUtils.postResult(MESSAGE_KAKAO_POST_UPLOAD_URL, formData, fn_success);
