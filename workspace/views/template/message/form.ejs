@@ -50,6 +50,7 @@
 
                             <div class="row">
                                 <div class="col-lg-12">
+                                    <div class="valid-feedback" style="display: block;"><i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;카카오톡으로 전송하려면 입력하지 않으셔도 됩니다</div>
                                     <input type="email" class="form-control" name="inputEmail" placeholder="이메일을 입력하세요">
                                     <div id="email-feedback" class="invalid-feedback" style="display:none;">상대 이메일을 확인해주세요.</div>
                                 </div>
@@ -84,6 +85,7 @@
                             <br/>
 
                             <div class="text-right pull-right">
+                                <button type="button" id="kakao_send_btn" class="btn _btn_share_kakao btn-default btn-lg margin-clear">카카오톡 전송&nbsp;&nbsp;&nbsp;<img src="/images/kakaolink_btn_very_small_ov.png" class="image" style="display: inline"></button>
                                 <button type="button" id="upload_btn" class="btn btn-default btn-lg btn-animated margin-clear">전송&nbsp;&nbsp;<i class="fa fa-envelope-o"></i></button>
                             </div>
 
@@ -101,20 +103,22 @@
     </div>
 </section>
 
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="/js/social/kakao/kakao.js"></script>
 <script type="text/javascript">
 
-    // 에디터에 등록할 대표 폰트 리스트
-    var main_font_list = <%- JSON.stringify(main_font_list) %>;
+    var font_map = <%- JSON.stringify(font_list) %>;
+    Object.keys(font_map).forEach(function(font_id) {
 
-    // 실제 사용되는 변형 폰트 리스트
-    var variation_font_list = <%- JSON.stringify(variation_font_list) %>;
+            var font = font_map[font_id];
 
-    // 모든 폰트를 font-face에 등록
-    register_font_to_font_face(main_font_list);
-    register_font_to_font_face(variation_font_list);
+            // font-face에 등록
+            register_font_face(font);
 
-    // custom toolbar에 대표 font 등록
-    add_font_toolbar(main_font_list);
+            // font dropdown에 등록
+            $("#fontname-select").append(new Option(font.name, font.id));
+        }
+    );
 
     // summernote 생성
     var editor = $('#summernote').summernote({
@@ -125,11 +129,30 @@
         toolbar : false
     });
 
-    var randomFont = getRandomFont();
-    editor.summernote('fontName' , randomFont);
+   /* var randomFont = getRandomFont();
+    editor.summernote('fontName' , randomFont);*/
 
     $("input[name=inputEmail]").focus();
 
+
+
+    /* 폰트 등록 */
+
+    function register_font_face(font) {
+        font.file_path.forEach(function(_, index) {
+            var font_face = new FontFace(font.file_name[index], 'url(' + font.file_path[index] + ')');
+
+            // 폰트 load
+            font_face.load().then(function(loaded_face) {
+                // load 된 폰트 추가
+                document.fonts.add(loaded_face);
+            }).catch(function(error) { });
+        });
+    }
+
+
+
+    /* 랜덤화 */
 
     // summernote.keyup event
     $('#summernote').on('summernote.keyup', function(we, e) {
@@ -142,42 +165,6 @@
 
     });
 
-
-    // fontname-select.change event
-    $('#fontname-select').on('change', function(e) {
-
-        console.log($($(this)[0].selectedOptions).data('value'));
-    });
-
-
-
-    function register_font_to_font_face(font_list) {
-        font_list.forEach(function(font) {
-            var font_face = new FontFace(font.font_name, 'url(/api/files/?path=' + font.file_path + ')');
-
-            // 폰트 load
-            font_face.load().then(function(loaded_face) {
-                // load 된 폰트 추가
-                document.fonts.add(loaded_face);
-            }).catch(function(error) { });
-        });
-    }
-
-    function add_font_toolbar(font_list) {
-
-        var fontname_select = $('#fontname-select');
-
-        font_list.forEach(function(font, index) {
-
-            var option = $('<option/>');
-            option.attr({ 'data-value': JSON.stringify(font) }).text(font.font_name);
-            option.addClass('note-custom-toolbar-select-item');
-
-            fontname_select.append(option);
-
-        });
-    }
-
     function getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
@@ -186,60 +173,25 @@
 
     function getRandomFont() {
 
-        var selected_font_list = variation_font_list.slice(0, 3);
-
+        var selected_font_list = font_map[$('#fontname-select').val()].file_name;
         var randomFontIndex = getRandomInt(0 , selected_font_list.length - 1);
 
-        return selected_font_list[randomFontIndex].font_name;
-    }
-
-    function get_contents_html(raw_html_str) {
-
-        //console.log("raw", raw_html_str);
-        return raw_html_str.replace(/style="/gi, 'style="font-size: 20pt; ');
-        //console.log("raw 2", raw_html_str);
-        //console.log("raw 3", str);
+        return selected_font_list[randomFontIndex];
     }
 
 
 
+    /* 폰트 변경 */
 
+    // fontname-select.change event
+    $('#fontname-select').on('change', function(e) {
 
+        console.log($(this).val());
 
-    var is_sendable_state = {
-        email: false,
-    };
-
-    function getSendableState(){
-        var state = true;
-        for (var item in is_sendable_state){
-            if (is_sendable_state[item] == false) state = false;
-        }
-        return state;
-    }
-
-    // 업로드 버튼 - click event
-    $(document).on('click', '#upload_btn', function() {
-
-        if (getSendableState()){
-            var formData = {}
-            formData.email = $("input[name=inputEmail]").val()
-            formData.title = $("input[name=inputTitle]").val()
-            formData.contents_html = get_contents_html($("div#summernote").summernote('code'));
-            formData.contents = $($("#summernote").summernote("code")).text();
-
-            var MESSAGE_POST_UPLOAD_URL = '/api/message';
-
-            function fn_success(sonmat_req_id) {
-                window.location.href = "/message/to/" + sonmat_req_id;
-            }
-
-            AjaxUtils.postResult(MESSAGE_POST_UPLOAD_URL, formData, fn_success);
-        } else {
-            if (is_sendable_state.email == false)  $('#email-feedback').css('display', '');
-        }
     });
 
+
+    /* email 유효성 확인 */
 
     $(document).on('focusout', 'input[name=inputEmail]', function() {
 
@@ -260,6 +212,89 @@
         }
         AjaxUtils.postResult(CHECK_EMAIL_URL, formData, fn_success);
 
+    });
+
+
+
+    /* 메세지 전송 */
+
+    var is_sendable_state = {
+        email: false,
+    };
+
+    function getSendableState(){
+        var state = true;
+        for (var item in is_sendable_state){
+            if (is_sendable_state[item] == false) state = false;
+        }
+        return state;
+    }
+
+    function get_contents_html(raw_html_str) {
+
+        return raw_html_str;
+        //return raw_html_str.replace(/style="/gi, 'style="font-size: 20pt; ');
+    }
+
+    function getMessageFormData() {
+
+        var formData = {}
+        formData.email = $("input[name=inputEmail]").val()
+        formData.title = $("input[name=inputTitle]").val()
+        formData.contents_html = get_contents_html($("div#summernote").summernote('code'));
+        formData.contents = $($("#summernote").summernote("code")).text();
+        formData.font_id = $('#fontname-select').val();
+
+        return formData;
+    }
+
+    // 업로드 버튼 - click event
+    $(document).on('click', '#upload_btn', function() {
+
+        if (getSendableState()){
+
+            var formData = getMessageFormData();
+            var MESSAGE_POST_UPLOAD_URL = '/api/message';
+
+            function fn_success(sonmat_req_id) {
+                alert("편지 전송이 완료되었습니다");
+                window.location.href = "/message/to/" + sonmat_req_id;
+            }
+
+            AjaxUtils.postResult(MESSAGE_POST_UPLOAD_URL, formData, fn_success);
+        } else {
+            if (is_sendable_state.email == false)  $('#email-feedback').css('display', '');
+        }
+    });
+
+
+    /* 카카오톡으로 전송하기 */
+
+    // 카카오톡 전송 버튼 - click event
+    $(document).on('click', '#kakao_send_btn', function() {
+
+        var formData = getMessageFormData();
+        var MESSAGE_KAKAO_POST_UPLOAD_URL = '/api/message/share';
+
+        function fn_success(response) {
+
+            var kakaoShare = new KakaoShare();
+
+            function initShareKakao() {
+                var container = '._btn_share_kakao';
+                var title = response.user_name + ' 님이 보낸 메세지 입니다.';
+                var image = 'http://son-mat.com/images/share_logo.png';
+                var link = response.url;
+                var message = response.message_title;
+                kakaoShare.share(container , title, image, message , link);
+            }
+
+            initShareKakao();
+
+            //window.location.href = response.url;
+        }
+
+        AjaxUtils.postResult(MESSAGE_KAKAO_POST_UPLOAD_URL, formData, fn_success);
     });
 
 </script>

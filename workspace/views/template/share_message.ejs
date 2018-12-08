@@ -1,0 +1,156 @@
+<!-- facebook -->
+<meta property="og:title" content="<%= msg.From.name %> 님이 보낸 메세지 입니다.">
+<meta property="og:description" content="http://son-mat.com/message/to/22">
+<meta property="og:image" content="http://son-mat.com/images/share_logo.png">
+
+
+<style>
+    .note-editable {
+        background-color: white !important;
+
+    }
+
+    .note-editor.note-frame {
+        border: 0 !important;
+    }
+
+</style>
+
+<section class="main-container">
+
+	<div class="container">
+		<div class="row">
+
+			<!-- main start -->
+			<!-- ================ -->
+			<div class="main col-lg-12">
+
+                <!--<div class="pv-20 ph-20 light-gray-bg hc-item-box bordered hc-shadow animated hc-element-invisible hc-element-visible">
+-->
+                    <!-- page-title start -->
+                    <!-- ================ -->
+                    <h2 class="page-title"><%= msg.sonmat.message.title %></h2>
+                    <!-- page-title end -->
+
+                    <!-- blogpost start -->
+                    <!-- ================ -->
+                    <article class="blogpost full">
+
+                        <header>
+                            <div class="post-info mb-4 text-right">
+                                <h5 class="post-date">
+                                    <i class="fa fa-calendar-o pr-1"></i>
+                                    <span class="day"><%= msg.send_date %></span>
+                                </h5>
+                            </div>
+                        </header>
+
+                        <div class="blogpost-content light-gray-bg pv-30 ph-20 hc-item-box bordered hc-shadow hc-element-invisible animated hc-element-visible fadeInDownSmall" style="padding-bottom: 0">
+
+
+                           <!-- <div class="separator"></div>-->
+                            <div id="summernote"></div>
+                            <!--<div class="separator"></div>-->
+
+                            <!-- section start -->
+                            <!-- ================ -->
+                            <section class="light-gray-bg clearfix">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="call-to-action text-right">
+                                                <div class="row ">
+                                                    <div class="col-md-12 mt-10">
+                                                        <h3 class="title logo-font">From.&nbsp;&nbsp;<span class="pen-font"><%= msg.From.name %></span></h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <!-- section end -->
+
+                        </div>
+
+                        <div class="text-right">
+                            <button class="btn _btn_share_facebook">facebook <i class="pl-1 fa fa-share"></i></button>
+                            <button class="btn _btn_share_kakao">kakao <i class="pl-1 fa fa-share"></i></button>
+
+                        </div>
+                    </article>
+                    <!-- blogpost end -->
+
+
+                <!--</div>-->
+
+			</div>
+			<!-- main end -->
+
+
+		</div>
+	</div>
+</section>
+
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script src="/js/social/kakao/kakao.js"></script>
+<script>
+
+    // 실제 사용되는 변형 폰트 리스트
+    var variation_font_list = <%- JSON.stringify(variation_font_list) %>;
+
+    // 변형 폰트를 font-face에 등록
+    register_font_to_font_face(variation_font_list);
+
+    var message_contents_html = <%- "`" + msg.sonmat.message.contents_html + "`" %>;
+
+    // summernote 생성
+    var editor = $('#summernote').summernote({
+        lang: 'ko-KR',
+        tabsize: 2,
+        toolbar : false,
+        disableResizeEditor: true
+
+    });
+    editor.summernote('disable');
+    $('.note-statusbar').hide();
+
+    // contents_html display
+    $('#summernote').summernote('code', message_contents_html);
+
+
+    function register_font_to_font_face(font_list) {
+        font_list.forEach(function(font) {
+            var font_face = new FontFace(font.font_name, 'url(/api/files/?path=' + font.file_path + ')');
+
+            // 폰트 load
+            font_face.load().then(function(loaded_face) {
+                // load 된 폰트 추가
+                document.fonts.add(loaded_face);
+            }).catch(function(error) { });
+        });
+    }
+
+    var kakaoShare = new KakaoShare();
+
+    function initShareKakao() {
+        var container = '._btn_share_kakao';
+        var title = '<%= msg.From.name %> 님이 보낸 메세지 입니다.';
+        var image = 'http://son-mat.com/images/share_logo.png';
+        var dummyLink = "http://son-mat.com";
+        var message = "손맛에서 확인해보세요";
+        kakaoShare.share(container , title, image, message , dummyLink);
+    }
+
+    initShareKakao();
+
+    $("._btn_share_facebook").on('click', function () {
+        var dummyLink = "http://son-mat.com";
+        window.open("https://www.facebook.com/sharer/sharer.php?u=" + dummyLink);
+
+    });
+
+
+
+
+</script>
