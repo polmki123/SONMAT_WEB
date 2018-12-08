@@ -12,7 +12,6 @@ router.post('/', function(req, res) {
     console.log(req.body.title)
     console.log(req.body.contents)
 
-    req.body.font_id = 1
     req.body.user_id = req.user.id;
 
     message_service.send_message(req.body)

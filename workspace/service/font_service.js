@@ -139,7 +139,18 @@ function get_font_file_by_id(font_id) {
             attributes: ['file_path'],
         }).map(font_file => font_file.get({ plain: true }))
             .then(function(font_files) {
-                resolve(font_files);
+
+                var res = [];
+
+                font_files.forEach(function(font_file) {
+
+                    var file_path = font_file.file_path;
+                    var file_name = file_path.substring(file_path.lastIndexOf('/')+1, file_path.lastIndexOf('\.'));
+                    res.push({'file_path' : file_path, 'file_name' : file_name});
+                });
+
+                resolve(res);
+
             }).catch(function(err) {
             reject(err);
         });

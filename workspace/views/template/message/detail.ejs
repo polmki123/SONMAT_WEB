@@ -114,11 +114,10 @@
 <script src="/js/social/kakao/kakao.js"></script>
 <script>
 
-    // 실제 사용되는 변형 폰트 리스트
-    var variation_font_list = <%- JSON.stringify(variation_font_list) %>;
+    var font_list = <%- JSON.stringify(font_list) %>;
 
-    // 변형 폰트를 font-face에 등록
-    register_font_to_font_face(variation_font_list);
+    // font-face에 등록
+    register_font_face(font_list);
 
     var message_contents_html = <%- "`" + msg.sonmat.message.contents_html + "`" %>;
 
@@ -137,9 +136,9 @@
     $('#summernote').summernote('code', message_contents_html);
 
 
-    function register_font_to_font_face(font_list) {
-        font_list.forEach(function(font) {
-            var font_face = new FontFace(font.font_name, 'url(/api/files/?path=' + font.file_path + ')');
+    function register_font_face(font) {
+        font.forEach(function(font_file) {
+            var font_face = new FontFace(font_file.file_name, 'url(' + font_file.file_path + ')');
 
             // 폰트 load
             font_face.load().then(function(loaded_face) {
