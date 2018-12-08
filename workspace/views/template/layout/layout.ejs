@@ -59,11 +59,10 @@
     <div class="style-switcher closed">
         <% } %>
 
-
-    <div class="header">
-        <a class="trigger" href="#"><i class="fa fa-envelope"></i></a>
-        <h2>Messages</h2>
-    </div>
+        <div class="header">
+            <a class="trigger" href="#"><i class="fa fa-envelope"></i></a>
+            <h2>Messages</h2>
+        </div>
         <div class="clearfix body light-gray-bg col-lg-12 col-xl-12">
             <div class="sidebar">
                 <% if(opponents==0) {%>
@@ -72,7 +71,7 @@
                 <% } else { %>
                     <div class="pv-20"></div>
                 <% } %>
-                    
+
                 <% opponents.forEach(function(user){ %>
 
                         <div class="media mb-3  white-bg hc-item-box bordered round-corners" onclick="location.href='/message/to/<%= user.id %>/timeline'">
@@ -104,7 +103,6 @@
                     <% }); %>
                 </div>
             </div>
-        </div>
         <!-- footer top start -->
         <!-- ================ -->
         <section class="footer section default-bg clearfix">
