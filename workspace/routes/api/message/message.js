@@ -8,10 +8,6 @@ var smsUtils = require('../../../domain/utils/SmsUtils');
 
 router.post('/', function(req, res) {
 
-    console.log(req.body.email)
-    console.log(req.body.title)
-    console.log(req.body.contents)
-
     req.body.font_id = 1
     req.body.user_id = req.user.id;
 
@@ -27,7 +23,7 @@ router.post('/', function(req, res) {
 // sms exa
 router.get('/sms', function(req, res) {
     // TO아래와 같이 사용 하시요
-    //smsUtils.send('01067021755' , 'test');
+    smsUtils.send('01026527549' , 'test');
     res.end();
 });
 

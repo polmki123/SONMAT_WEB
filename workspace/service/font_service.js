@@ -1,5 +1,6 @@
 var models = require('../model');
 var date_format = require('./handler/date_format_handler');
+var smsUtils = require('../domain/utils/SmsUtils');
 var fs = require('fs');
 
 function find_new_by_userid(user_id){
@@ -56,7 +57,11 @@ function create_new_font(user_id, body){
 	});
 };
 
-function notify_complete(font_id){
+function notify_complete(font_id, phone){
+
+    if (phone.length > 0){
+        smsUtils.send(phone , '제작을 요청한 폰트가 완성되었습니다.');    
+    }
 	return new Promise(function(resolve, reject){
 		models.font.update({making_status: 'complete'},
 		{

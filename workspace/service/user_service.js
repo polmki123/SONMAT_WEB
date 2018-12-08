@@ -35,15 +35,8 @@ function form_validator(email, phone){
 	var emailExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
 
 	if (phoneExp.test(phone) && emailExp.test(email)){
-		console.log(phoneExp.test(phone))
-		console.log(emailExp.test(email))
-		console.log(phoneExp.test(phone) && emailExp.test(email))
 		return true;
 	}else{
-		console.log(phone)
-		console.log(phoneExp.test(phone))
-		console.log(emailExp.test(email))
-		console.log(phoneExp.test(phone) && emailExp.test(email))
 		return false;
 	}
 }
