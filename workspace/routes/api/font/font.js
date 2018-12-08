@@ -5,7 +5,7 @@ var font_service = require('../../../service/font_service');
 
 router.post('/', function(req, res) {
 
-    font_id = FontRepository.createNewFont(req.user.id, req.body);
+    font_id = FontRepository.createNewFont(req.user, req.body);
 
     res.send();
 });
