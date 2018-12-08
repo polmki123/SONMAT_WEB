@@ -5,7 +5,7 @@ var font_service = require('../../../service/font_service');
 
 router.post('/', function(req, res) {
 
-    font_id = FontRepository.createNewFont(req.user.id, req.body);
+    font_id = FontRepository.createNewFont(req.user, req.body);
 
     res.send();
 });
@@ -44,7 +44,7 @@ router.post('/make/complete', function(req, res) {
     var body = req.body;
 
     // font의 making_status update
-    font_service.notify_complete(body.font_id)
+    font_service.notify_complete(body.font_id, body.phone)
     .then(function(result){
 
     // font_file_map

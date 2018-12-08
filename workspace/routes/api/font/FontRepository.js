@@ -28,13 +28,13 @@ function checkedByUserId(user_id) {
 };
 
 
-function createNewFont(user_id, body) {
+function createNewFont(user, body) {
 
     // create new font item,
     // server communication with deep-server
     // request (font_id)
 
-    font_service.create_new_font(user_id, body)
+    font_service.create_new_font(user.id, body)
     .then(function(font){
 
         var options = {
@@ -61,19 +61,11 @@ function createNewFont(user_id, body) {
             });
         });
 
+        // add user phone number to body
+        font.phone = user.phone;
+
         req.write(JSON.stringify(font));
         req.end();
-
-
-
-        /*setTimeout(function () {
-            font_service.notify_complete(font.dataValues.id)
-            .then(function(result){
-                return true;
-            }).catch(function(err) {
-                console.log(err);
-            });
-        } , 5000 , 'test');*/
 
     }).catch(function(err) {
         console.log(err);

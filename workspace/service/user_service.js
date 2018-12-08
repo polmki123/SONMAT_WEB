@@ -30,12 +30,24 @@ function login_check(email, password){
 		});
 	});
 };
-function create_new_user(email, password, name){
+function form_validator(email, phone){
+	var phoneExp = /^[0-9]+$/;
+	var emailExp = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+
+	if (phoneExp.test(phone) && emailExp.test(email)){
+		return true;
+	}else{
+		return false;
+	}
+}
+
+function create_new_user(email, password, name, phone){
 	return new Promise(function(resolve, reject){
 		models.user.create({
 			email: email,
 			password: make_secret_password(password),
 			name: name,
+			phone: phone,
 		}).then(function(user) {
 			resolve(user.get({ plain: true }))
 		}).catch(function(err) {
@@ -44,8 +56,10 @@ function create_new_user(email, password, name){
 	});
 };
 
-function register_user(email, password, name){
+function register_user(email, password, name, phone){
 	return new Promise(function(resolve, reject){
+		if(!form_validator(email, phone))
+			resolve({user: null, err: 'register form is not correct'})
 		models.user.findOne({
 			where: {
 				email: email,
@@ -54,7 +68,7 @@ function register_user(email, password, name){
 			if(user){
 				resolve({user: null, err: 'Email is already exist'})
 			}else{
-				return create_new_user(email, password, name);
+				return create_new_user(email, password, name, phone);
 			}
 		}).then(function(user) {
 			resolve({user: user, err: null})

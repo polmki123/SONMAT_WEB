@@ -27,6 +27,8 @@ var config = {
 
         // font_file_map
         db.font_file_map.belongsTo(db.font, { foreignKey: 'font_id', targetKey: 'id' });
+        db.font.hasMany(db.font_file_map, { foreignKey: 'font_id'});
+        //db.font_file_map.hasOne(db.font, {foreignKey: 'font_id'});
 
         // db.Publisher.hasMany(db.Books, {foreignKey: 'pub_id'});
         // db.Books.belongsTo(db.Publisher, {foreignKey: 'pub_id', targetKey: 'pub_id'});

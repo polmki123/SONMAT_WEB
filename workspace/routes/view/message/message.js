@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var msgB_service = require('../../../service/message_box_service');
 var font_service = require('../../../service/font_service');
+var message_share_service = require('../../../service/message_share_service');
 
 /* index */
 router.get('/list', function(req, res, next) {
@@ -13,9 +14,7 @@ router.get('/form', function(req, res, next) {
 
     font_service.get_font_list(req.user.id).then(function(font_list) {
 
-    	res.render_data.main_font_list = font_list.main_font_list;
-    	res.render_data.variation_font_list = font_list.variation_font_list;
-
+    	res.render_data.font_list = font_list;
         res.render('message/form' , res.render_data);
     });
 });
@@ -54,5 +53,33 @@ router.get('/to/:sonmat_request_id', function(req, res, next) {
 	});
 });
 
+router.get('/share/list', function(req, res, next) {
+
+    res.render('message/share_list', res.render_data);
+});
+
+router.get('/share/:temp_url', function(req, res, next) {
+
+    var temp_url = req.params.temp_url;
+
+    message_share_service.get_sonmat_request_id_from_url(temp_url)
+    .then(function(sonmat_request_id) {
+        console.log("sonmat_request_id : ", sonmat_request_id);
+        return msgB_service.get_message_from_id(sonmat_request_id);
+    })
+    .then(function(msg){
+        res.render_data.msg = msg;
+
+        return font_service.get_font_used_in_message(msg.id);
+    })
+    .then(function(fonts){
+        res.render_data.msg = msg;
+        res.render('share_message', res.render_data);
+
+    }).catch(function(err) {
+        console.log(err);
+        next()
+    });
+});
 
 module.exports = router;

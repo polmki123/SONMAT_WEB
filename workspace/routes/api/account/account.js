@@ -8,7 +8,7 @@ var NOT_AUTH_STATUS = 401;
 
 router.post('/signup', function(req, res) {
 
-    user_service.register_user(req.body.id, req.body.password, req.body.name)
+    user_service.register_user(req.body.id, req.body.password, req.body.name, req.body.phone)
     .then(function(result){
         if(result.user == null){
             res.status(ERROR_STATUS).send({message : result.err});
