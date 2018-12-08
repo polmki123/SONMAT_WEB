@@ -64,17 +64,6 @@ function createNewFont(user_id, body) {
         req.write(JSON.stringify(font));
         req.end();
 
-
-
-        /*setTimeout(function () {
-            font_service.notify_complete(font.dataValues.id)
-            .then(function(result){
-                return true;
-            }).catch(function(err) {
-                console.log(err);
-            });
-        } , 5000 , 'test');*/
-
     }).catch(function(err) {
         console.log(err);
     });
