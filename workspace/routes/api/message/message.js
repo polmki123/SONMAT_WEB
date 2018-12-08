@@ -20,6 +20,12 @@ router.post('/', function(req, res) {
 });
 
 
+router.get('/download_paper', function(req, res) {
+    var file_path = path.join(__dirname, '..', '..', '..', 'repository', 'font', '54', 'handwrite.jpg');
+
+    res.download(file_path); 
+});
+
 // sms exa
 router.get('/sms', function(req, res) {
     // TO아래와 같이 사용 하시요
