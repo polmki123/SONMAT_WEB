@@ -35,9 +35,9 @@
 									<!-- timeline grid item start -->
 									<% msgs.forEach(function(msg){ %>
 										<% if(msg.from_user_id == uid) { %>
-											<div class="timeline-item" onclick="location.href='/message/to/<%= msg.id %>'">
+											<div class="timeline-item" style="clear: both; margin-bottom: 15px; margin-top:15px" onclick="location.href='/message/to/<%= msg.id %>'">
 										<% } else { %>
-											<div class="timeline-item pull-left" onclick="location.href='/message/to/<%= msg.id %>'">
+											<div class="timeline-item pull-left" style="clear: both; margin-top: 15px; margin-bottom: 15px;" onclick="location.href='/message/to/<%= msg.id %>'">
 										<% } %>
 
 												<article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">

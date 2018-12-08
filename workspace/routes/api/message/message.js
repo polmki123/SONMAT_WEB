@@ -7,8 +7,7 @@ var message_share_service = require('../../../service/message_share_service');
 var smsUtils = require('../../../domain/utils/SmsUtils');
 
 router.post('/', function(req, res) {
-
-    req.body.font_id = 1
+    
     req.body.user_id = req.user.id;
 
     message_service.send_message(req.body)
