@@ -14,9 +14,7 @@ router.get('/form', function(req, res, next) {
 
     font_service.get_font_list(req.user.id).then(function(font_list) {
 
-    	res.render_data.main_font_list = font_list.main_font_list;
-    	res.render_data.variation_font_list = font_list.variation_font_list;
-
+    	res.render_data.font_list = font_list;
         res.render('message/form' , res.render_data);
     });
 });

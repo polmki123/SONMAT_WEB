@@ -20,8 +20,9 @@ module.exports = function(sequelize, DataTypes) {
             allowNull: true
         }
     }, {
-        tableName: 'font_file_map',
         underscored: true,
-        timestamps: false
+        timestamps: false,
+        freezeTableName: true,
+        tableName: 'font_file_map'
     });
 };
