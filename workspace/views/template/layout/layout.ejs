@@ -92,7 +92,11 @@
                                     <div class="col-lg-3">
                                         <div class="header-dropdown-buttons padding-top-clear">
                                             <div class="btn-group">
-                                                <a href="/message/to/<%= user.id %>/timeline" class="btn btn-default "><i class="fa fa-envelope text-dark"></i><span class="cart-count bg-danger text-white"><%= user.count %></span></a>
+                                                <a href="/message/to/<%= user.id %>/timeline" class="btn btn-default "><i class="fa fa-envelope text-dark"></i>
+                                                    <% if(user.count>0) { %>
+                                                        <span class="cart-count bg-danger text-white"><%= user.count %></span>
+                                                    <% } %>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
