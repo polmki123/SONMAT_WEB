@@ -21,7 +21,7 @@ router.post('/', function(req, res) {
 
 
 router.get('/download_paper', function(req, res) {
-    var file_path = path.join(__dirname, '..', '..', '..', 'repository', 'font', '54', 'handwrite.jpg');
+    var file_path = path.join(__dirname, '..', '..', '..', 'repository', 'my-font.pdf');
 
     res.download(file_path); 
 });
