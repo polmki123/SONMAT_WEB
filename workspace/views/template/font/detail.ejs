@@ -1,5 +1,7 @@
 <div id="page-start"></div>
 
+<!-- main-container start -->
+<!-- ================ -->
 <section class="main-container">
 
     <div class="container">
@@ -7,19 +9,23 @@
 
             <!-- main start -->
             <!-- ================ -->
-            <div class="main col-lg-9">
+            <div class="main col-lg-10 order-lg-2 center">
 
                 <!-- section start -->
                 <!-- ================ -->
                 <section class="section clearfix">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-12">
+                            <div class="col-md-11 center">
                                 <div class="call-to-action p-20 light-gray-bg hc-shadow bordered" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
                                     <div class="row justify-content-md-center">
                                         <div class="row col-lg-10">
                                             <div class="col-lg-12">
-                                                <h2 class="page-title"> <%= font.name%></h2>
+                                                <h2 class="page-title"> <%= font.name%>
+                                                    <div class="pull-right">
+                                                        <btn id="next_btn" class="btn btn-default btn-md btn-animated margin-clear" onclick="history.back(-1);">뒤로가기&nbsp;<i class="fa fa-arrow-left fa-1x"></i></btn>
+                                                    </div>
+                                                </h2>
                                             </div>
                                         </div>
                                     </div>
@@ -57,12 +63,18 @@
                                 <div class="row justify-content-md-center">
                                     <div class="row col-lg-10">
                                         <div class="col-lg-12">
-                                            <h4 class="page-title">내 손글씨 이미지</h4>
+                                            <h4 class="page-title">내 손글씨 이미지
+                                                <div class="pull-right">
+                                                    <p class=""><a href="#" class="btn btn-animated btn-md btn-gray-transparent" data-toggle="modal" data-target="#myModal">폰트 정보 수정하기<i class="fa fa-wrench pl-20"></i></a></p>
+                                                </div>
+                                            </h4>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="separator-2"></div>
-                                <img src="<%= font.handwrite_image_path %>" class="center">
+                                <div class="column col-lg-10 center">
+                                    <img src="<%= font.handwrite_image_path %>">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -70,52 +82,38 @@
             </section>
         </div>
         <!-- main end -->
+        <!-- Modals start -->
+        <!-- ============================================================================== -->
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalFont" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form class="form-horizontal fontForm" role="form" method="post" action="/api/font/<%=font.id %>">             
 
-        <!-- sidebar start -->
-        <!-- ================ -->
-        <aside class="col-lg-4 col-xl-3 ml-xl-auto">
-            <div class="sidebar">
-                <div class="block clearfix">
-                    <h3 class="title">Setting</h3>
-                    <div class="separator-2"></div>
-                    <p class="mt-3"><a href="#" class="btn btn-animated btn-lg btn-gray-transparent" data-toggle="modal" data-target="#myModal">폰트 정보 수정하기<i class="fa fa-wrench pl-20"></i></a></p>
-                    <!-- Modals start -->
-                    <!-- ============================================================================== -->
-                    <!-- Modal -->
-					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="modalFont" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<form class="form-horizontal fontForm" role="form" method="post" action="/api/font/<%=font.id %>">             
-
-									<div class="modal-header">
-										<h4 class="modal-title" id="modalFont">폰트 정보</h4>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-									</div>
-									<div class="modal-body">
-											<div class="form-group">
-												<label for="fontName" class="col-form-label">폰트 이름</label>
-												<input type="text" class="form-control" id="fontName" name="name" value="<%=font.name %>">
-											</div>
-											<div class="form-group">
-												<label for="fontDescription" class="col-form-label">설명</label>
-												<textarea class="form-control" rows="5" id="fontDescription" name="description"><%=font.description %></textarea>
-											</div>
-										
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-sm btn-dark" data-dismiss="modal">Close</button>
-										<button type="submit" class="btn btn-sm btn-default">저장</button>
-									</div>
-								</form>
-							</div>
-						</div>
-					<!-- Modals End -->
-					</div>
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modalFont">폰트 정보</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        </div>
+                        <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="fontName" class="col-form-label">폰트 이름</label>
+                                    <input type="text" class="form-control" id="fontName" name="name" value="<%=font.name %>">
+                                </div>
+                                <div class="form-group">
+                                    <label for="fontDescription" class="col-form-label">설명</label>
+                                    <textarea class="form-control" rows="5" id="fontDescription" name="description"><%=font.description %></textarea>
+                                </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-dark" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-sm btn-default">저장</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-        </aside>
-        <!-- sidebar end -->
-        
+        </div>
+        <!-- Modals End -->
     </div>
 </section>
 <!-- main-container end --> 
