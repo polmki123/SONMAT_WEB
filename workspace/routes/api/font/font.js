@@ -42,6 +42,7 @@ router.post('/new/checked', function(req, res) {
 router.post('/make/complete', function(req, res) {
 
     var body = req.body;
+    res.send();
 
     // font의 making_status update
     font_service.notify_complete(body.font_id, body.phone)
@@ -50,8 +51,6 @@ router.post('/make/complete', function(req, res) {
     // font_file_map
         return font_service.save_font_urls(body.font_id, body.fontUrls);
     }).then(function(result) {
-
-        res.send(result);
 
     }).catch(function(err) {
         console.log(err);
