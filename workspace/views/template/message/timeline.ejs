@@ -43,7 +43,7 @@
 												<article class="blogpost hc-shadow-2 light-gray-bg bordered hc-element-invisible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
 													<header>
 														<h2><%= msg.sonmat.message.title %>
-															<% if (msg.read_state=="unread") { %>
+															<% if (msg.read_state=="unread" && msg.from_user_id != uid) { %>
 															<span class="badge badge-pill badge-danger" style="float:right;">New</span>
 															<% } %>
 														</h2>
