@@ -27,6 +27,13 @@ body.canvas-slid {
   transition: none !important;
 }
 
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 img {
   display: block;
   max-width: 100%;
