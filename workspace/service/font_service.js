@@ -173,7 +173,7 @@ function my_font_gallery_user_id(user_id){
 		}).map(font => font.get({plain: true}))
 		.then(function(fonts) {
             fonts.forEach(function(font){
-				font.making_date = date_format.format_date(font.making_date);
+                font.making_date = date_format.format_date(font.making_date);
 			})
 			resolve(fonts)
 		}).catch(function(err) {
@@ -190,8 +190,9 @@ function my_font_gallery_font_id(font_id){
 			},
 		})
 		.then(function(font) {
-            font.making_date = date_format.format_date(font.making_date);
-			resolve(font.get({ plain: true }));
+            font_json = font.get({plain: true});
+            font_json.making_date = date_format.format_date(font_json.making_date);
+			resolve(font_json);
 		}).catch(function(err) {
 			reject(err);
 		});
