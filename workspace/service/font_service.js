@@ -167,7 +167,8 @@ function my_font_gallery_user_id(user_id){
 		models.font.findAll({
 			where: {
                 user_id: user_id,
-                making_status: "complete"
+                making_status: "complete",
+                open_state: "private"
 			},
 			order: [['making_date', 'DESC']],
 		}).map(font => font.get({plain: true}))
@@ -193,6 +194,27 @@ function my_font_gallery_font_id(font_id){
             font_json = font.get({plain: true});
             font_json.making_date = date_format.format_date(font_json.making_date);
 			resolve(font_json);
+		}).catch(function(err) {
+			reject(err);
+		});
+	});
+};
+
+function public_font_gallery_user_id(user_id){
+	return new Promise(function(resolve, reject){
+		models.font.findAll({
+			where: {
+                user_id: user_id,
+                making_status: "complete",
+                open_state: "public"
+			},
+			order: [['making_date', 'DESC']],
+		}).map(font => font.get({plain: true}))
+		.then(function(fonts) {
+            fonts.forEach(function(font){
+                font.making_date = date_format.format_date(font.making_date);
+			})
+			resolve(fonts)
 		}).catch(function(err) {
 			reject(err);
 		});
@@ -250,5 +272,6 @@ func.my_font_gallery_user_id = my_font_gallery_user_id;
 func.update_font_information = update_font_information;
 func.save_font_urls = save_font_urls;
 func.get_font_file_by_id = get_font_file_by_id;
+func.public_font_gallery_user_id = public_font_gallery_user_id;
 
 module.exports = func;

@@ -13,9 +13,11 @@ router.get('/', function(req, res, next) {
 
 	font_service.my_font_gallery_user_id(req.user.id) // user
 	.then(function(font){
-        res.render_data.font = font;
+		res.render_data.font = font;
+		return font_service.public_font_gallery_user_id(1);
+	}).then(function(default_font){
+		res.render_data.default_font = default_font;
 		res.render('font/list', res.render_data);
-
 	}).catch(function(err) {
 		console.log(err);
 		next()

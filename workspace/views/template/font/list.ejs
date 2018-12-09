@@ -120,7 +120,7 @@
               <br>
               <br>
               <h1>내 손글씨체</h1>
-              <div class="separator"></div>
+              <div class="separator-2"></div>
                 <!-- masonry grid start -->
                 <!-- ================ -->
                 <div class="masonry-grid row">
@@ -167,8 +167,59 @@
                 <!-- section end -->
                 </div>
                 <!-- page-title end -->
-            </div>
-            <!-- main end -->
+
+                <br>
+                <br>
+                <h1>기본 손글씨체</h1>
+                <div class="separator-2"></div>
+                    <!-- masonry grid start -->
+                    <!-- ================ -->
+                    <div class="masonry-grid row">
+                        <!-- masonry grid item start -->
+                        <% default_font.forEach(function(font){ %>
+                        <div class="masonry-grid-item col-md-6 col-lg-4" onclick="location.href='font/<%=font.id %>'">
+                            <!-- blogpost start -->
+
+                            <article class="blogpost hc-shadow-2 light-gray-bg bordered">
+                                <div id="carousel-blog-post" class="carousel slide" data-ride="carousel">
+
+                                    <!-- Wrapper for slides -->
+                                    <div class="carousel-inner" role="listbox">
+                                        <div class="carousel-item active text-center mt-20">
+                                            <% if(font.read_state=="unread") { %>
+                                            <div class="text-right js-new-badge mr-2" data-id="1">
+                                                <span class="badge badge-pill badge-danger">New</span>
+                                            </div>
+                                            <% } %>
+                                            <h2>다람쥐 헌 쳇바퀴에 타고파</h2>
+                                        </div>
+                                    </div>
+                                </div>
+                                <header>
+                                        <div class="post-info text-right mb-2">
+                                            <span class="post-date">
+                                                <i class="fa fa-calendar-o pr-1"></i>
+                                                <span class="day"><%= font.making_date %></span>
+                                            </span>
+                                        </div>
+                                    <h5><%= font.name %></h5>
+                                </header>
+                                <div class="blogpost-content">
+                                    <p><%= font.description %></p>
+                                </div>
+                                <footer class="clearfix">
+                                </footer>
+                            </article>
+                            <!-- blogpost end -->
+                        </div>
+                        <!-- masonry grid item end -->
+                        <% }); %>
+                        
+                    <!-- section end -->
+                    </div>
+                    <!-- page-title end -->
+                </div>
+                <!-- main end -->
 
         </div>
     </div>
