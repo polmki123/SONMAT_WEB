@@ -49,7 +49,7 @@ router.post('/make/complete', function(req, res) {
     .then(function(result){
 
     // font_file_map
-        return font_service.save_font_urls(body.font_id, body.fontUrls);
+        return font_service.save_font_urls(body.font_id, JSON.parse(body.fontUrls));
     }).then(function(result) {
 
     }).catch(function(err) {
