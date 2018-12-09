@@ -1,6 +1,7 @@
+<div id="page-start"></div>
 
-<% if(font==0) { %>
-<body class=" ">
+<% if(font==0 && default_font==0) { %>
+<body class="">
 
     <div class="page-wrapper">
 
@@ -242,5 +243,8 @@
         }
         return true;
     }
+    $(document).on("pageload",function(){
+        window.location.reload(true);
+    });
 
 </script>
