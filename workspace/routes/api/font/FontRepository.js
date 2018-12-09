@@ -63,9 +63,17 @@ function createNewFont(user, body) {
         });
 
         // add user phone number to body
-        font.phone = user.phone;
+        //console.log("<< user >> : ", JSON.stringify(user));
 
-        req.write(JSON.stringify(font));
+        var body = {};
+        body.id = font.id;
+        body.user_id = font.user_id;
+        body.handwrite_image_path = font.handwrite_image_path;
+        body.phone = user.phone;
+
+        //console.log("<< font >> : ", JSON.stringify(body));
+
+        req.write(JSON.stringify(body));
         req.end();
 
     }).catch(function(err) {
