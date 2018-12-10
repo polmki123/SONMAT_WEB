@@ -16,10 +16,6 @@
                                 transparent 100%); !important;
     }
 
-    .note-editable {
-        font-size: 20pt !important;
-    }
-
     .note-custom-toolbar-select {
         font-weight: bold; background-color: #09afdf; color: white; text-align: right; width: auto; border: none;
         margin-left: 5px;
@@ -71,11 +67,12 @@
                                 <select class="form-control note-custom-toolbar-select" id="fontname-select"></select>
 
                                 <select class="form-control note-custom-toolbar-select" id="fontsize-select">
-                                    <option>10</option>
-                                    <option>15</option>
-                                    <option>20</option>
-                                    <option>25</option>
-                                    <option>30</option>
+                                    <option value="10">10</option>
+                                    <option value="15">15</option>
+                                    <option value="20">20</option>
+                                    <option value="25">25</option>
+                                    <option value="30">30</option>
+                                    <option value="35">35</option>
                                 </select>
                             </div>
 
@@ -107,6 +104,27 @@
 <script src="/js/social/kakao/kakao.js"></script>
 <script type="text/javascript">
 
+    function setEndOfContenteditable(contentEditableElement)
+    {
+        var range,selection;
+        if(document.createRange)//Firefox, Chrome, Opera, Safari, IE 9+
+        {
+            range = document.createRange();//Create a range (a range is a like the selection but invisible)
+            range.selectNodeContents(contentEditableElement);//Select the entire contents of the element with the range
+            range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+            selection = window.getSelection();//get the selection object (allows you to change selection)
+            selection.removeAllRanges();//remove any selections already made
+            selection.addRange(range);//make the range you have just created the visible selection
+        }
+        else if(document.selection)//IE 8 and lower
+        {
+            range = document.body.createTextRange();//Create a range (a range is a like the selection but invisible)
+            range.moveToElementText(contentEditableElement);//Select the entire contents of the element with the range
+            range.collapse(false);//collapse the range to the end point. false means collapse to end rather than the start
+            range.select();//Select the range (make it the visible selection
+        }
+    }
+
     var font_map = <%- JSON.stringify(font_list) %>;
     Object.keys(font_map).forEach(function(font_id) {
 
@@ -129,8 +147,12 @@
         toolbar : false
     });
 
-   /* var randomFont = getRandomFont();
-    editor.summernote('fontName' , randomFont);*/
+    // 폰트 init
+    var randomFont = getRandomFont();
+    editor.summernote('fontName', randomFont);
+
+    // 폰트 크기 init
+    //applyFontSize();
 
     $("input[name=inputEmail]").focus();
 
@@ -150,20 +172,35 @@
         });
     }
 
-
-
     /* 랜덤화 */
 
     // summernote.keyup event
     $('#summernote').on('summernote.keyup', function(we, e) {
 
-        // enter
-        if (e.keyCode == 13) {
-            var randomFont = getRandomFont();
-            editor.summernote('fontName' , randomFont);
-        }
+        var append = $('.note-editable').html();
+        //console.log('append : ', append);
 
+        //console.log('append2 : ', $("#summernote").summernote("code"));
+
+
+
+        // enter
+        if (e.keyCode == 32) {
+
+            //$('.note-editable').text('');
+            //$('.note-editable').append(append);
+
+            var randomFont = getRandomFont();
+            editor.summernote('fontName', randomFont);
+
+            setEndOfContenteditable(document.getElementsByClassName('note-editable')[0]);
+
+            //editor.summernote('fontSize', $('#fontsize-select').val());
+        }
     });
+
+
+
 
     function getRandomInt(min, max) {
         min = Math.ceil(min);
@@ -181,13 +218,23 @@
 
 
 
-    /* 폰트 변경 */
+    /* 폰트 속성 변경 */
 
-    // fontname-select.change event
+    // 폰트 변경
     $('#fontname-select').on('change', function(e) {
 
-        console.log($(this).val());
+        //console.log($(this).val());
 
+        var randomFont = getRandomFont();
+        editor.summernote('fontName', randomFont);
+
+    });
+
+    //  폰트 크기 변경
+    $('#fontsize-select').on('change', function(e) {
+
+        var fontsize = $(this).val();
+        $(".note-editable").attr('style', 'font-size: ' + fontsize + 'px; height: 400px; !important');
     });
 
 
@@ -232,8 +279,8 @@
 
     function get_contents_html(raw_html_str) {
 
-        return raw_html_str;
-        //return raw_html_str.replace(/style="/gi, 'style="font-size: 20pt; ');
+        var font_size = $('#fontsize-select').val();
+        return raw_html_str.replace(/style="/gi, 'style="font-size: ' + font_size + 'pt; ');
     }
 
     function getMessageFormData() {
