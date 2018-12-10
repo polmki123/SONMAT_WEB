@@ -152,8 +152,7 @@ function get_message_from_id(son_id){
 
 			msg_json = msg.get({ plain: true });
 			msg_json.send_date = date_format.format_date(msg.dataValues.send_date);
-
-            console.log("<<<<<<<<<<< " , msg_json);
+			
 			resolve(msg_json)
 		}).catch(function(err) {
 			reject(err);
