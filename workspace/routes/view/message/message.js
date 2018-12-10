@@ -27,7 +27,6 @@ router.get('/to/:toUserId/timeline', function(req, res, next) {
 	msgB_service.get_message_timeline(req.user.id, opponent_uid) // user
 	.then(function(msgs){
         res.render_data.msgs = msgs;
-        console.log(msgs);
 		return msgB_service.get_name_from_id(opponent_uid);
 	}).then(function(oppo_info){
         res.render_data.oppo_name = oppo_info.dataValues.name;
@@ -45,14 +44,16 @@ router.get('/to/:sonmat_request_id', function(req, res, next) {
 	var son_id = req.params.sonmat_request_id;
 	msgB_service.get_message_from_id(son_id) // user
 	.then(function(msg){
-		res.render_data.msg = msg;
-		msgB_service.update_message_state(msg.id, req.user.id)
-        return font_service.get_font_file_by_id(msg.sonmat.font_id);
-	}).then(function(font_list) {
+        res.render_data.msg = msg;
+        return msgB_service.update_message_state(msg.id, req.user.id);
+    }).then(function(){
+        return font_service.get_font_file_by_id(res.render_data.msg.sonmat.font_id);
+    }).then(function(font_list) {
         res.render_data.font_list = font_list;
         return msgB_service.get_opponents_name(req.user.id)
     }).then(function(opponents) {
         res.render_data.opponents = opponents;
+        res.render_data.user_id = req.user.id;
         res.render('message/detail', res.render_data);
     }).catch(function(err) {
 		console.log(err);

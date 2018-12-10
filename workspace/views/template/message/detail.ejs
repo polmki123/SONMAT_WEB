@@ -50,7 +50,11 @@
 
                 <div style="  overflow:hidden;">
                     <div style="float: left;">
-                        <a href="javascript:history.back()" class="btn btn-default pull-right"><i class="fa fa-chevron-left pr-10"></i> 뒤로</a>
+                        <% if(user_id == msg.To.id) { %>
+                            <a href="/message/to/<%= msg.From.id %>/timeline" class="btn btn-default pull-right"><i class="fa fa-chevron-left pr-10"></i> 뒤로</a>
+                        <% } else { %>
+                            <a href="/message/to/<%= msg.To.id %>/timeline" class="btn btn-default pull-right"><i class="fa fa-chevron-left pr-10"></i> 뒤로</a>
+                        <% } %>
                     </div>
                     <% if(msg.To != null) { %>
                         <div style="float: right;">
