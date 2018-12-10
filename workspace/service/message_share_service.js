@@ -5,7 +5,7 @@ var date_format = require('./handler/date_format_handler');
 
 function generate_temp_url(sonmat_request_id) {
 
-    var SHARE_MESSAGE_TEMP_URL_PRIFIX = 'son-mat.com/message/share/';
+    var SHARE_MESSAGE_TEMP_URL_PRIFIX = 'http://son-mat.com/message/share/';
     var temp_url = generation_random_string();
 
     return new Promise(function(resolve, reject){
