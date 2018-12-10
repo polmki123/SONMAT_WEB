@@ -27,12 +27,7 @@
                                         </div>
 
                                         <div class="col-lg-10">
-                                            <div class="slim"
-                                                 data-ratio="512:64"
-                                                 data-force-size="512,64"
-                                                 data-push="true"
-                                                 data-label="손글씨 이미지를 선택해주세요"
-                                                 data-will-crop-initial="determineInitialCropRect">
+                                            <div>
                                                 <input type="file" name="slim[]" id="myCropper">
                                             </div>
                                             <h5 class="text-default text-center mt-2"><i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;문장이 잘 보일 수 있도록 사진을 잘라주세요</h5>
@@ -178,33 +173,35 @@
         return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
     }
 
-    //var imageCrop = new Slim(document.getElementById('myCropper'));
-    var imageCrop = $('#myCropper');
+    var imageCrop = new Slim(document.getElementById('myCropper'), {
+        ratio: '512:64',
+        forceSize: {
+            width: 512,
+            height: 64,
+        },
+        push: "true",
+        label: '손글씨 이미지를 선택해주세요.',
+        willCropInitial: function(file, done) {
+            var image_width = file.input.width;
+            var image_height = file.input.height;
 
-    function determineInitialCropRect(file, done) {
+            var rec_ratio_width = 512;
+            var rec_ratio_height = 64;
 
-        //console.log("file : ", file);
+            var rec_width = image_width;
+            var rec_height = rec_ratio_height / rec_ratio_width * rec_width;
 
-        var image_width = file.input.width;
-        var image_height = file.input.height;
+            // determine the initial crop rectangle based on the input file
+            var rect = {
+                x: 0,
+                y: (image_height - rec_height) / 2,
+                width: rec_width,
+                height: rec_height
+            };
 
-        var rec_ratio_width = 512;
-        var rec_ratio_height = 64;
-
-        var rec_width = image_width;
-        var rec_height = rec_ratio_height / rec_ratio_width * rec_width;
-
-        // determine the initial crop rectangle based on the input file
-        var rect = {
-            x: 0,
-            y: (image_height - rec_height) / 2,
-            width: rec_width,
-            height: rec_height
-        };
-
-        // return the rectangle back to Slim
-        done(rect);
-    }
-
+            // return the rectangle back to Slim
+            done(rect);
+        },
+    });
 
 </script>
