@@ -23,16 +23,19 @@
                                             <div class="col-lg-12">
                                                 <h2 class="title row">손글씨 이미지 선택</h2>
                                                 <div class="separator-2"></div>
-                                                <div class="row">
-                                                    <p>손글씨 이미지를 선택해주세요</p>
-                                                </div>
                                             </div>
                                         </div>
 
                                         <div class="col-lg-10">
-                                            <div>
-                                                <input type="file" name="slim[]" id="myCropper"/>
+                                            <div class="slim"
+                                                 data-ratio="512:64"
+                                                 data-force-size="512,64"
+                                                 data-push="true"
+                                                 data-label="손글씨 이미지를 선택해주세요"
+                                                 data-will-crop-initial="determineInitialCropRect">
+                                                <input type="file" name="slim[]" id="myCropper">
                                             </div>
+                                            <h5 class="text-default text-center mt-2"><i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;문장이 잘 보일 수 있도록 사진을 잘라주세요</h5>
 
                                             <div class="mt-4 pv-30 ph-20 hc-item-box bordered hc-shadow text-center hc-element-invisible animated hc-element-visible fadeInDownSmall">
 
@@ -165,6 +168,7 @@
     });
 
 
+
     function dataURItoBlob(dataURI) {
         var binary = atob(dataURI.split(',')[1]);
         var array = [];
@@ -174,7 +178,33 @@
         return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
     }
 
-    var imageCrop = new Slim(document.getElementById('myCropper'));
+    //var imageCrop = new Slim(document.getElementById('myCropper'));
+    var imageCrop = $('#myCropper');
+
+    function determineInitialCropRect(file, done) {
+
+        //console.log("file : ", file);
+
+        var image_width = file.input.width;
+        var image_height = file.input.height;
+
+        var rec_ratio_width = 512;
+        var rec_ratio_height = 64;
+
+        var rec_width = image_width;
+        var rec_height = rec_ratio_height / rec_ratio_width * rec_width;
+
+        // determine the initial crop rectangle based on the input file
+        var rect = {
+            x: 0,
+            y: (image_height - rec_height) / 2,
+            width: rec_width,
+            height: rec_height
+        };
+
+        // return the rectangle back to Slim
+        done(rect);
+    }
 
 
 </script>
