@@ -192,15 +192,8 @@
 
         //console.log('append2 : ', $("#summernote").summernote("code"));
 
-        var kCd = e.keyCode || e.which;
-        if (kCd == 0 || kCd == 229) { //for android chrome keycode fix
-            kCd = getKeyCode(this.value);
-        }
-
-        alert(kCd);
-
         // space
-        if (kCd == 13 || kCd == 32) {
+        if (e.keyCode == 13 || e.keyCode == 32) {
 
 
 
