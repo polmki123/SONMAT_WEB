@@ -1,111 +1,5 @@
 <div id="page-start"></div>
 
-<% if(font==0 && default_font==0) { %>
-<body class="">
-
-    <div class="page-wrapper">
-
-        <!-- banner start -->
-        <!-- ================ -->
-        <div class="banner clearfix">
-
-            <!-- slideshow start -->
-            <!-- ================ -->
-            <div class="slideshow">
-
-                <!-- slider revolution start -->
-                <!-- ================ -->
-                <div class="slider-revolution-5-container">
-                    <div id="slider-banner-fullwidth-hero" class="slider-banner-fullwidth-hero rev_slider" data-version="5.0">
-                        <ul class="slides">
-                            <!-- slide 1 start -->
-                            <!-- ================ -->
-                            <li class="text-right" data-transition="crossfade" data-slotamount="default" data-masterspeed="default" data-title="Boost your online presence">
-
-                                <!-- main image -->
-                                <img src="/images/font-gallery.jpg" alt="" data-bgposition="center center"  data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
-
-                                <!-- Transparent Background -->
-                                <div class="tp-caption dark-translucent-bg"
-                                     data-x="center"
-                                     data-y="center"
-                                     data-start="0"
-                                     data-transform_in="opacity:0;s:600;e:Power2.easeInOut;"
-                                     data-transform_out="opacity:0;s:600;s:300;"
-                                     data-width="5000"
-                                     data-height="5000">
-                                </div>
-                                
-                                <!-- LAYER NR. 1 -->
-                                <div class="tp-caption large_white"
-                                     data-x="right"
-                                     data-y="150"
-                                     data-start="1000"
-                                     data-transform_idle="o:1;"
-                                     data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1100;e:Power4.easeInOut;"
-                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
-                                    <span class="logo-font" style="font-weight: bold">손맛나는<br/>나의 폰트 갤러리입니다</span>
-                                </div>
-
-                                <!-- LAYER NR. 2 -->
-                                <div class="tp-caption large_white tp-resizeme"
-                                     data-x="right"
-                                     data-y="270"
-                                     data-start="1100"
-                                     data-transform_idle="o:1;"
-                                     data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1100;e:Power4.easeInOut;"
-                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;">
-                                    <div class="separator-3 light"></div>
-                                </div>
-
-                                <!-- LAYER NR. 3 -->
-                                <div class="tp-caption medium_white"
-                                     data-x="right"
-                                     data-y="290"
-                                     data-start="1100"
-                                     data-transform_idle="o:1;"
-                                     data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1100;e:Power4.easeInOut;"
-                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">나만의 손글씨체를 만들어보세요
-                                </div>
-
-                                <!-- LAYER NR. 4 -->
-                                <div class="tp-caption small_white"
-                                     data-x="right"
-                                     data-y="380"
-                                     data-start="1200"
-                                     data-transform_idle="o:1;"
-                                     data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1100;e:Power4.easeInOut;"
-                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
-                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
-                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
-                                    <a href="/handwrite" class="btn btn-default btn-animated margin-clear">손글씨 만들기&nbsp;<i class="fa fa-play"></i></a>
-                                </div>
-
-                            </li>
-                            <!-- slide 1 end -->
-
-                        </ul>
-                        <div class="tp-bannertimer"></div>
-                    </div>
-                </div>
-                <!-- slider revolution end -->
-
-            </div>
-            <!-- slideshow end -->
-
-        </div>
-        <!-- banner end -->
-
-    </div>
-
-</body>
-<% } else { %>
-<div id="page-start"></div>
-
 <section class="main-container">
 
     <div class="container">
@@ -122,6 +16,17 @@
               <br>
               <h1>내 손글씨체</h1>
               <div class="separator-2"></div>
+                <% if(font==0) { %>
+                    <div class="call-to-action p-20 light-gray-bg hc-shadow bordered" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                        <div class="row justify-content-md-center">
+                            <div class="row col-lg-11 center text-center">
+                                <p class="logo-font text-center pt-2" style="font-weight: bold;">만들어진 손글씨가 없습니다.
+                                    <a href="/handwrite" class="btn btn-default btn-animated margin-clear pull-right pb-2">손글씨 만들기&nbsp;<i class="fa fa-play"></i></a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                <% } else { %> 
                 <!-- masonry grid start -->
                 <!-- ================ -->
                 <div class="masonry-grid row">
@@ -164,9 +69,9 @@
                       </div>
                       <!-- masonry grid item end -->
                     <% }); %>
-                    
                 <!-- section end -->
                 </div>
+                <% } %>
                 <!-- page-title end -->
 
                 <br>
@@ -225,7 +130,6 @@
         </div>
     </div>
 </section>
-<% } %>
 
 <script type="text/javascript">
 
