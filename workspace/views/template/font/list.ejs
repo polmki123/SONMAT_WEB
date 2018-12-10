@@ -46,7 +46,7 @@
                                               <span class="badge badge-pill badge-danger">New</span>
                                           </div>
                                         <% } %>
-                                          <h2>다람쥐 헌 쳇바퀴에 타고파</h2>
+                                            <h2><span style="font-family: &quot;<%= font.main_font_name %>&quot;;">다람쥐 헌 쳇바퀴에 타고파</span></h2>
                                       </div>
                                   </div>
                               </div>
@@ -97,7 +97,7 @@
                                                 <span class="badge badge-pill badge-danger">New</span>
                                             </div>
                                             <% } %>
-                                            <h2>다람쥐 헌 쳇바퀴에 타고파</h2>
+                                                <h2><span style="font-family: &quot;<%= font.main_font_name %>&quot;;">다람쥐 헌 쳇바퀴에 타고파</span></h2>
                                         </div>
                                     </div>
                                 </div>
@@ -132,6 +132,34 @@
 </section>
 
 <script type="text/javascript">
+
+    var private_fonts = <%- JSON.stringify(font) %>;
+    var public_fonts = <%- JSON.stringify(default_font)%>;
+
+    private_fonts.forEach(function(private_font) {
+
+        var font_face = new FontFace(private_font.main_font_name, 'url(' + private_font.main_font_file + ')');
+
+        // 폰트 load
+        font_face.load().then(function(loaded_face) {
+            // load 된 폰트 추가
+            document.fonts.add(loaded_face);
+        }).catch(function(error) { });
+    });
+
+    public_fonts.forEach(function(public_font) {
+
+        var font_face = new FontFace(public_font.main_font_name, 'url(' + public_font.main_font_file + ')');
+
+        // 폰트 load
+        font_face.load().then(function(loaded_face) {
+            // load 된 폰트 추가
+            document.fonts.add(loaded_face);
+        }).catch(function(error) { });
+    });
+
+    console.log(font);
+    console.log(default_font);
 
     function checkedNewFontToServer() {
         AjaxUtils.post("/api/font/new/checked" , null , function () {

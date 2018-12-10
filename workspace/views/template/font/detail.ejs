@@ -41,7 +41,7 @@
                                                     <div class="carousel-inner" role="listbox">
                                                         <div class="carousel-item active">
                                                             <div class="overlay-container h2">
-                                                                <p>내가 그린 기린 그림은 긴 기린 그림이냐, <br>그냥 그린 기린 그림이냐?</p>
+                                                                <p><span style="font-family: &quot;<%= font.main_font_name %>&quot;;">내가 그린 기린 그림은 긴 기린 그림이냐 <br>그냥 그린 기린 그림이냐</span></p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -135,6 +135,16 @@
 <!-- main-container end --> 
 
 <script type="text/javascript">
+
+    var main_font_name = <%= "`" + font.main_font_name + "`" %>;
+    var main_font_file = <%= "`"+ font.main_font_file + "`" %>;
+    var font_face = new FontFace(main_font_name, 'url(' + main_font_file + ')');
+
+    // 폰트 load
+    font_face.load().then(function(loaded_face) {
+        // load 된 폰트 추가
+        document.fonts.add(loaded_face);
+    }).catch(function(error) { });
 
 
     $('.fontForm').validator().on('submit', function (event) {
