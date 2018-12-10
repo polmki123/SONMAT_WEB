@@ -120,8 +120,19 @@ function get_font_list_by_user(user_id) {
                 attributes: ['file_path'],
             }],
             where: {
-                user_id: user_id,
-                making_status: 'complete',
+                $or: [{
+                    $and:[
+                        { user_id: user_id,
+                            making_status: 'complete'},
+                    ]
+                },{
+                    $and:[
+                        { making_status: 'complete',
+                            open_state: 'public' },
+                    ]
+                }]
+
+
             },
             attributes: ['id', 'name', 'description'],
             order: [['making_date', 'DESC']],
