@@ -180,6 +180,10 @@
 
     /* 랜덤화 */
 
+    var getKeyCode = function (str) {
+        return str.charCodeAt(str.length - 1);
+    }
+
     // summernote.keyup event
     $('#summernote').on('summernote.keyup', function(we, e) {
 
@@ -188,21 +192,15 @@
 
         //console.log('append2 : ', $("#summernote").summernote("code"));
 
-        var edit = this;
-        var kc = e.which || e.keyCode;
-
-        // if we are on a crazy mobile device, then determine the last
-        // character typed based on where the selection start is located
-        if( !kc || kc == 229 ) {
-            var ss = edit.selectionStart - 1;
-            var ssv = ss || 0;
-            var char = edit.value.substr(ssv,1);
-            kc = char.charCodeAt(0);
+        var kCd = e.keyCode || e.which;
+        if (kCd == 0 || kCd == 229) { //for android chrome keycode fix
+            kCd = getKeyCode(this.value);
         }
 
+        alert(kCd);
 
         // space
-        if (kc == 13 || kc == 32) {
+        if (kCd == 13 || kCd == 32) {
 
 
 
