@@ -176,6 +176,11 @@ function get_font_file_by_id(font_id) {
 function my_font_gallery_user_id(user_id){
 	return new Promise(function(resolve, reject){
 		models.font.findAll({
+            include: [{
+                model: models.font_file_map,
+                required: false,
+                attributes: ['file_path'],
+            }],
 			where: {
                 user_id: user_id,
                 making_status: "complete",
@@ -185,7 +190,10 @@ function my_font_gallery_user_id(user_id){
 		}).map(font => font.get({plain: true}))
 		.then(function(fonts) {
             fonts.forEach(function(font){
+
                 font.making_date = date_format.format_date(font.making_date);
+                font.main_font_file = font.font_file_maps[0].file_path;
+                font.main_font_name = font.main_font_file.substring(font.main_font_file.lastIndexOf('/')+1, font.main_font_file.lastIndexOf('\.'));
 			})
 			resolve(fonts)
 		}).catch(function(err) {
@@ -197,6 +205,11 @@ function my_font_gallery_user_id(user_id){
 function my_font_gallery_font_id(font_id){
 	return new Promise(function(resolve, reject){
 		models.font.findOne({
+            include: [{
+                model: models.font_file_map,
+                required: false,
+                attributes: ['file_path'],
+            }],
 			where: {
 				id: font_id,
 			},
@@ -204,6 +217,9 @@ function my_font_gallery_font_id(font_id){
 		.then(function(font) {
             font_json = font.get({plain: true});
             font_json.making_date = date_format.format_date(font_json.making_date);
+            font_json.main_font_file = font.font_file_maps[0].file_path;
+            font_json.main_font_name = font_json.main_font_file.substring(font_json.main_font_file.lastIndexOf('/')+1, font_json.main_font_file.lastIndexOf('\.'));
+
 			resolve(font_json);
 		}).catch(function(err) {
 			reject(err);
@@ -211,11 +227,15 @@ function my_font_gallery_font_id(font_id){
 	});
 };
 
-function public_font_gallery_user_id(user_id){
+function public_font_gallery_user_id(){
 	return new Promise(function(resolve, reject){
 		models.font.findAll({
+            include: [{
+                model: models.font_file_map,
+                required: false,
+                attributes: ['file_path'],
+            }],
 			where: {
-                user_id: user_id,
                 making_status: "complete",
                 open_state: "public"
 			},
@@ -224,6 +244,8 @@ function public_font_gallery_user_id(user_id){
 		.then(function(fonts) {
             fonts.forEach(function(font){
                 font.making_date = date_format.format_date(font.making_date);
+                font.main_font_file = font.font_file_maps[0].file_path;
+                font.main_font_name = font.main_font_file.substring(font.main_font_file.lastIndexOf('/')+1, font.main_font_file.lastIndexOf('\.'));
 			})
 			resolve(fonts)
 		}).catch(function(err) {

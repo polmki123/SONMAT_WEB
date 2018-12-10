@@ -339,12 +339,20 @@
                 var image = 'http://son-mat.com/images/share_logo.png';
                 var link = response.url;
                 var message = response.message_title;
-                kakaoShare.share(container , title, image, message , link);
+                kakaoShare.share(container , title, image, message , link,
+                    // success
+                    function() {
+                        //console.log("success")
+                    },
+                    // callback
+                    function() {
+
+                        alert("카카오톡으로 손편지가 전송 완료 되었습니다.");
+                        window.location.href = '/message/to/' + response.message_id;
+                    });
             }
 
             initShareKakao();
-
-            //window.location.href = response.url;
         }
 
         AjaxUtils.postResult(MESSAGE_KAKAO_POST_UPLOAD_URL, formData, fn_success);

@@ -54,17 +54,21 @@ router.post('/share', function(req, res) {
     req.body.user_id = req.user.id;
     req.body.user_name = req.user.name;
 
+    var response = {};
+
     message_service.send_message(req.body)
         .then(function(sonmat_request_id) {
 
+            response.message_id = sonmat_request_id;
             return message_share_service.generate_temp_url(sonmat_request_id);
         })
         .then(function(temp_url) {
 
-            var response = {};
             response.url = temp_url;
             response.user_name = req.body.user_name;
             response.message_title = req.body.title;
+
+            //console.log("Res>>>>>> ", response);
 
             res.send(response);
         })

@@ -3,7 +3,8 @@ var KakaoShare = function () {
 }
 
 KakaoShare.prototype = {
-    share: function (container, title, imgUrl, message, url) {
+    share: function (container, title, imgUrl, message, url, success , callback) {
+
         Kakao.Link.createDefaultButton({
             container: container,
             objectType: 'feed',
@@ -24,7 +25,9 @@ KakaoShare.prototype = {
                         webUrl: url
                     }
                 }
-            ]
+            ],
+            success: success,
+            callback: callback
         });
     }
 }

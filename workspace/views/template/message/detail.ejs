@@ -50,11 +50,17 @@
 
                 <div style="  overflow:hidden;">
                     <div style="float: left;">
-                        <a href="javascript:history.back()" class="btn btn-default pull-right"><i class="fa fa-chevron-left pr-10"></i> 뒤로</a>
+                        <% if(user_id == msg.To.id) { %>
+                            <a href="/message/to/<%= msg.From.id %>/timeline" class="btn btn-default pull-right"><i class="fa fa-chevron-left pr-10"></i> 뒤로</a>
+                        <% } else { %>
+                            <a href="/message/to/<%= msg.To.id %>/timeline" class="btn btn-default pull-right"><i class="fa fa-chevron-left pr-10"></i> 뒤로</a>
+                        <% } %>
                     </div>
                     <% if(msg.To != null) { %>
                         <div style="float: right;">
-                            <h5 class="float-right">카카오톡으로 공유&nbsp;&nbsp;<button type="button" class="btn _btn_share_kakao"><img src="/images/kakaolink_btn_small_ov.png"></button></h5>
+                            <h5 class="float-right">카카오톡으로 공유&nbsp;&nbsp;
+                                <a id="kakao_send_btn" class="btn _btn_share_kakao" data-toggle="modal" data-target="#kakao-modal"><img class="float-right" src="/images/kakaolink_btn_small_ov.png"></a>
+                            </h5>
                         </div>
                     <% } %>
                 </div>
@@ -123,8 +129,6 @@
 
 			</div>
 			<!-- main end -->
-
-
 		</div>
 	</div>
 </section>
@@ -167,26 +171,47 @@
         });
     }
 
+    /* 카카오톡으로 전송하기 */
     var kakaoShare = new KakaoShare();
 
-    function initShareKakao() {
-        var container = '._btn_share_kakao';
-        var title = '<%= msg.From.name %> 님이 보낸 메세지 입니다.';
-        var image = 'http://son-mat.com/images/share_logo.png';
-        var dummyLink = "http://son-mat.com";
-        var message = "손맛에서 확인해보세요";
-        kakaoShare.share(container , title, image, message , dummyLink);
-    }
+    // 카카오톡 전송 버튼 - click event
+    $(document).on('click', '#kakao_send_btn', function() {
 
-    initShareKakao();
+        console.log("message send");
 
-    $("._btn_share_facebook").on('click', function () {
-        var dummyLink = "http://son-mat.com";
-        window.open("https://www.facebook.com/sharer/sharer.php?u=" + dummyLink);
+        var messageData = <%- JSON.stringify(msg.sonmat) %>;
 
+        var formData = {};
+        formData.title = messageData.message.title;
+        formData.contents_html = messageData.message.contents_html;
+        formData.contents = messageData.message.contents;
+        formData.font_id = messageData.font_id;
+
+        var MESSAGE_KAKAO_POST_UPLOAD_URL = '/api/message/share';
+
+        function fn_success(response) {
+
+            function initShareKakao() {
+                var container = '._btn_share_kakao';
+                var title = response.user_name + ' 님이 보낸 메세지 입니다.';
+                var image = 'http://son-mat.com/images/share_logo.png';
+                var link = response.url;
+                var message = response.message_title;
+                kakaoShare.share(container , title, image, message , link,
+                    // success
+                    function() {
+                        //console.log("success")
+                    },
+                    // callback
+                    function() {
+                        //console.log("callback")
+                        alert("카카오톡으로 공유가 완료되었습니다.");
+                    });
+            }
+
+            initShareKakao();
+        }
+
+        AjaxUtils.postResult(MESSAGE_KAKAO_POST_UPLOAD_URL, formData, fn_success);
     });
-
-
-
-
 </script>

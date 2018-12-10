@@ -128,12 +128,12 @@ function get_message_from_id(son_id){
 					model: models.user,
 					as: 'From',
 					required : true, 
-					attributes : ['name'], 
+					attributes : ['id', 'name'], 
 				},{
 					model: models.user,
 					as: 'To',
 					required : false,
-					attributes : ['name'], 
+					attributes : ['id', 'name'], 
 				},{
 					model: models.sonmat,
 					required : true, 
@@ -152,8 +152,6 @@ function get_message_from_id(son_id){
 
 			msg_json = msg.get({ plain: true });
 			msg_json.send_date = date_format.format_date(msg.dataValues.send_date);
-
-            console.log("<<<<<<<<<<< " , msg_json);
 			resolve(msg_json)
 		}).catch(function(err) {
 			reject(err);
@@ -198,7 +196,7 @@ function update_message_state(sonmat_id, to){
 				to_user_id: to,
             }
         }).then(function(_) {
-			resolve(true)
+			resolve()
 		}).catch(function(err) {
 			reject(err);
 		});
