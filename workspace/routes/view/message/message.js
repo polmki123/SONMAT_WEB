@@ -26,12 +26,16 @@ router.get('/to/:toUserId/timeline', function(req, res, next) {
 	var opponent_uid = req.params.toUserId;
 	msgB_service.get_message_timeline(req.user.id, opponent_uid) // user
 	.then(function(msgs){
-		res.render_data.msgs = msgs;
+        res.render_data.msgs = msgs;
+        console.log(msgs);
 		return msgB_service.get_name_from_id(opponent_uid);
-	}).then(function(oppo_name){
-		res.render_data.oppo_name = oppo_name.dataValues.name;;
-		res.render('message/timeline', res.render_data);
-	}).catch(function(err) {
+	}).then(function(oppo_info){
+        res.render_data.oppo_name = oppo_info.dataValues.name;
+		return msgB_service.get_email_from_id(opponent_uid);
+	}).then(function(oppo_email){
+        res.render_data.oppo_email = oppo_email.dataValues.email;
+        res.render('message/timeline', res.render_data);
+    }).catch(function(err) {
 		console.log(err);
 		next()
 	});
