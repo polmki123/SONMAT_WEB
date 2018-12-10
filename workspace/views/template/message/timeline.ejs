@@ -23,6 +23,9 @@
 									<h1><%= oppo_name %>&nbsp;</h1>
 									<h3>(<%= oppo_email %>)</h3>
 								</div>
+								<div class="pull-right">
+									<a href="/message/form?email=<%=oppo_email%>" class="btn btn-default pull-right" onclick="pass_email(<%= oppo_email %>)">답장&nbsp;&nbsp;<i class="fa fa-envelope"></i></a>
+								</div>
 								
 								<div class="separator-2"></div>
 								<!-- page-title end -->
@@ -84,5 +87,12 @@
     function myFunction() {
         var element = document.getElementById("myDIV");
         element.classList.add("mystyle");
-    }
+	}
+	
+	function pass_email(email) {
+		console.log("#########3")
+		console.log(email);
+		console.log("#########3")
+		window.location.href = "/message/form?email=" + email;
+	}
 </script>

@@ -11,6 +11,11 @@ router.get('/list', function(req, res, next) {
 });
 
 router.get('/form', function(req, res, next) {
+    if (req.query.email){
+        res.render_data.send_email = req.query.email;
+    }else{
+        res.render_data.send_email = null;
+    }
 
     font_service.get_font_list(req.user.id).then(function(font_list) {
 
@@ -27,7 +32,6 @@ router.get('/to/:toUserId/timeline', function(req, res, next) {
 	msgB_service.get_message_timeline(req.user.id, opponent_uid) // user
 	.then(function(msgs){
         res.render_data.msgs = msgs;
-        console.log(msgs);
 		return msgB_service.get_name_from_id(opponent_uid);
 	}).then(function(oppo_info){
         res.render_data.oppo_name = oppo_info.dataValues.name;
@@ -77,7 +81,6 @@ router.get('/share/:temp_url', function(req, res, next) {
 
     message_share_service.get_sonmat_request_id_from_url(temp_url)
     .then(function(sonmat_request_id) {
-        console.log("sonmat_request_id : ", sonmat_request_id);
         return msgB_service.get_message_from_id(sonmat_request_id);
     })
     .then(function(msg){

@@ -46,9 +46,15 @@
 
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="valid-feedback" style="display: block;"><i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;카카오톡으로 전송하려면 입력하지 않으셔도 됩니다</div>
-                                    <input type="email" class="form-control" name="inputEmail" placeholder="이메일을 입력하세요">
-                                    <div id="email-feedback" class="invalid-feedback" style="display:none;">상대 이메일을 확인해주세요.</div>
+                                        <div class="valid-feedback" style="display: block;"><i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;카카오톡으로 전송하려면 입력하지 않으셔도 됩니다</div>
+                                            <% if(send_email == null){%>
+                                                <input type="email" class="form-control" name="inputEmail" placeholder="이메일을 입력하세요">
+                                            <% } else { %>
+                                                <input type="email" class="form-control" name="inputEmail" placeholder="이메일을 입력하세요" value="<%= send_email %>">
+                                            <% } %>
+
+                                        <div id="email-feedback" class="invalid-feedback" style="display:none;">상대 이메일을 확인해주세요.</div>
+                                    
                                 </div>
                             </div>
 
@@ -342,6 +348,13 @@
         }
 
         AjaxUtils.postResult(MESSAGE_KAKAO_POST_UPLOAD_URL, formData, fn_success);
+    });
+
+    $(document).ready(function () {
+        var val = location.href.substr(
+            location.href.lastIndexOf('=') + 1
+        );
+        // console.log('val : ' + val);
     });
 
 </script>
