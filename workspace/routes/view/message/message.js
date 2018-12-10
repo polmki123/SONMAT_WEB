@@ -49,14 +49,16 @@ router.get('/to/:sonmat_request_id', function(req, res, next) {
 		msgB_service.update_message_state(msg.id, req.user.id)
         return font_service.get_font_file_by_id(msg.sonmat.font_id);
 	}).then(function(font_list) {
-		res.render_data.font_list = font_list;
+        res.render_data.font_list = font_list;
+        return msgB_service.get_opponents_name(req.user.id)
+    }).then(function(opponents) {
+        res.render_data.opponents = opponents;
         res.render('message/detail', res.render_data);
     }).catch(function(err) {
 		console.log(err);
 		next()
 	});
 });
-
 router.get('/share/list', function(req, res, next) {
 
     message_share_service.get_share_message(req.user.id)
