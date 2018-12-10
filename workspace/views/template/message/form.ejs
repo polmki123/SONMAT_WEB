@@ -188,10 +188,21 @@
 
         //console.log('append2 : ', $("#summernote").summernote("code"));
 
+        var edit = this;
+        var kc = e.which || e.keyCode;
+
+        // if we are on a crazy mobile device, then determine the last
+        // character typed based on where the selection start is located
+        if( !kc || kc == 229 ) {
+            var ss = edit.selectionStart - 1;
+            var ssv = ss || 0;
+            var char = edit.value.substr(ssv,1);
+            kc = char.charCodeAt(0);
+        }
 
 
         // space
-        if (e.key === 'Enter' || e.key === ' ') {
+        if (kc == 13 || kc == 32) {
 
 
 
@@ -207,7 +218,7 @@
 
             randomFont_prev = randomFont;
 
-            //console.log("getin ", randomFont);
+            console.log("getin ", randomFont);
 
             editor.summernote('fontName', randomFont);
 
