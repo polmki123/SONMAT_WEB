@@ -55,10 +55,19 @@ router.get('/to/:sonmat_request_id', function(req, res, next) {
 
 router.get('/share/list', function(req, res, next) {
 
-    res.render('message/share_list', res.render_data);
+    message_share_service.get_share_message(req.user.id)
+    .then(function(message_list) {
+        res.render_data.message_list = message_list;
+        res.render('message/share_list', res.render_data);
+    }).catch(function(err) {
+        console.log(err);
+        next();
+    });
 });
 
 router.get('/share/:temp_url', function(req, res, next) {
+
+    res.render_data.none_header = true;
 
     var temp_url = req.params.temp_url;
 
@@ -70,10 +79,11 @@ router.get('/share/:temp_url', function(req, res, next) {
     .then(function(msg){
         res.render_data.msg = msg;
 
-        return font_service.get_font_used_in_message(msg.id);
+        return font_service.get_font_file_by_id(msg.sonmat.font_id);
     })
-    .then(function(fonts){
-        res.render_data.msg = msg;
+    .then(function(font_list){
+
+        res.render_data.font_list = font_list;
         res.render('share_message', res.render_data);
 
     }).catch(function(err) {

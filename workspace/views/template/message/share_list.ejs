@@ -1,5 +1,109 @@
+<div id="page-start"></div>
 
+<% if(message_list.length == 0) { %>
+<body class="">
 
+    <div class="page-wrapper">
+
+        <!-- banner start -->
+        <!-- ================ -->
+        <div class="banner clearfix">
+
+            <!-- slideshow start -->
+            <!-- ================ -->
+            <div class="slideshow">
+
+                <!-- slider revolution start -->
+                <!-- ================ -->
+                <div class="slider-revolution-5-container">
+                    <div id="slider-banner-fullwidth-hero" class="slider-banner-fullwidth-hero rev_slider" data-version="5.0">
+                        <ul class="slides">
+                            <!-- slide 1 start -->
+                            <!-- ================ -->
+                            <li class="text-right" data-transition="crossfade" data-slotamount="default" data-masterspeed="default" data-title="Boost your online presence">
+
+                                <!-- main image -->
+                                <img src="/images/font-gallery.jpg" alt="" data-bgposition="center center"  data-bgrepeat="no-repeat" data-bgfit="cover" class="rev-slidebg">
+
+                                <!-- Transparent Background -->
+                                <div class="tp-caption dark-translucent-bg"
+                                     data-x="center"
+                                     data-y="center"
+                                     data-start="0"
+                                     data-transform_in="opacity:0;s:600;e:Power2.easeInOut;"
+                                     data-transform_out="opacity:0;s:600;s:300;"
+                                     data-width="5000"
+                                     data-height="5000">
+                                </div>
+
+                                <!-- LAYER NR. 1 -->
+                                <div class="tp-caption large_white"
+                                     data-x="right"
+                                     data-y="150"
+                                     data-start="1000"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1100;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
+                                    <span class="logo-font" style="font-weight: bold">손맛나는<br/>나의 폰트 갤러리입니다</span>
+                                </div>
+
+                                <!-- LAYER NR. 2 -->
+                                <div class="tp-caption large_white tp-resizeme"
+                                     data-x="right"
+                                     data-y="270"
+                                     data-start="1100"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1100;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;">
+                                    <div class="separator-3 light"></div>
+                                </div>
+
+                                <!-- LAYER NR. 3 -->
+                                <div class="tp-caption medium_white"
+                                     data-x="right"
+                                     data-y="290"
+                                     data-start="1100"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1100;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">나만의 손글씨체를 만들어보세요
+                                </div>
+
+                                <!-- LAYER NR. 4 -->
+                                <div class="tp-caption small_white"
+                                     data-x="right"
+                                     data-y="380"
+                                     data-start="1200"
+                                     data-transform_idle="o:1;"
+                                     data-transform_in="y:[100%];z:0;rX:0deg;rY:0;rZ:0;sX:1;sY:1;skX:0;skY:0;opacity:0;s:1100;e:Power4.easeInOut;"
+                                     data-transform_out="y:[100%];s:1000;e:Power2.easeInOut;s:1000;e:Power2.easeInOut;"
+                                     data-mask_in="x:0px;y:[100%];s:inherit;e:inherit;"
+                                     data-mask_out="x:inherit;y:inherit;s:inherit;e:inherit;">
+                                    <a href="/handwrite" class="btn btn-default btn-animated margin-clear">손글씨 만들기&nbsp;<i class="fa fa-play"></i></a>
+                                </div>
+
+                            </li>
+                            <!-- slide 1 end -->
+
+                        </ul>
+                        <div class="tp-bannertimer"></div>
+                    </div>
+                </div>
+                <!-- slider revolution end -->
+
+            </div>
+            <!-- slideshow end -->
+
+        </div>
+        <!-- banner end -->
+
+    </div>
+
+</body>
+<% } else { %>
 <div id="page-start"></div>
 
 <section class="main-container">
@@ -11,44 +115,49 @@
             <!-- ================ -->
             <div class="main col-12">
 
-                <!-- page-title start -->
+              <!-- page-title start -->
+              <!-- ================ -->
+
+              <br>
+              <br>
+              <h1>카카오톡으로 공유한 편지</h1>
+              <div class="separator-2"></div>
+                <!-- masonry grid start -->
                 <!-- ================ -->
+                <div class="masonry-grid row">
+                    <!-- masonry grid item start -->
+                    <% message_list.forEach(function(message){ %>
+                      <div class="masonry-grid-item col-md-6 col-lg-4" onclick="location.href='/message/to/<%=message.id%>'">
+                          <!-- blogpost start -->
 
-                <br>
-                <br>
-                <h3>공유한 편지</h3>
-                <div class="separator"></div>
-                  <div class="row">
-                    <div class="row">
-
-                        <div class="col-sm-12">
-                          <div class="style-2 mb-50 hc-shadow bordered light-gray-bg text-center">
-                            <div class="main-container h3">
-                              <p>다람쥐 헌 쳇바퀴에 타고파</p>
-                            </div>
-                            <div class="body">
-                              <h4>폰트명 : </h4>
-                              <div class="separator"></div>
-                                <div class="text-center space-bottom">
-                                  <span>
-                                    <i class="fa fa-calendar-o pr-1"></i>
-                                    <span class="day">제작일 : </span>
-                                  </span>
-                                </div>
-                              <p></p>
-                              <a href="#" class="btn btn-default btn-sm margin-clear">Read More<i class="fa fa-arrow-right pl-10"></i></a>
-                            </div>
-                          </div>
-                        </div>
-
-                    </div>
-                  </div>
+                          <article class="blogpost hc-shadow-2 light-gray-bg bordered">
+                              <header>
+                                  <h5><%= message.sonmat.message.title %></h5>
+                              </header>
+                              <div class="blogpost-content">
+                                  <p><%= message.sonmat.message.contents %></p>
+                              </div>
+                              <div class="post-info text-right mb-2 mr-2">
+                                        <span class="post-date">
+                                            <i class="fa fa-calendar-o pr-1"></i>
+                                            <span class="day"><%= message.send_date %></span>
+                                        </span>
+                              </div>
+                          </article>
+                          <!-- blogpost end -->
+                      </div>
+                      <!-- masonry grid item end -->
+                    <% }); %>
+                    
                 <!-- section end -->
                 </div>
                 <!-- page-title end -->
-            </div>
-            <!-- main end -->
 
         </div>
     </div>
 </section>
+<% } %>
+
+<script type="text/javascript">
+
+</script>

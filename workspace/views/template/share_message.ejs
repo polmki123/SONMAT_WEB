@@ -5,8 +5,20 @@
 
 
 <style>
+    .message-detail-background {
+
+        background-size: cover;
+        background-image: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.7)), url("/images/paper-texture-2.jpg");
+
+        /*background: url("/images/paper-texture-2.jpg") 80% 0px;
+
+        opacity: 0.5;
+        z-index: -1;*/
+    }
+
     .note-editable {
         background-color: white !important;
+
 
     }
 
@@ -14,93 +26,99 @@
         border: 0 !important;
     }
 
+    .note-editor.note-frame .note-editing-area .note-editable {
+        padding: 30px;
+    }
+
 </style>
 
+<section class="section default-bg clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="call-to-action text-center">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h3 class="title"><img src="/images/logo-sonmat-white.png" style="display: inline-block">&nbsp;에서 작성된 손편지 입니다.</h3>
+                            <p>지금, 손맛나는 편지에 가입해서 자신만의 손글씨로 답장을 보내보세요</p>
+                        </div>
+                        <div class="col-md-4">
+                            <br>
+                            <p><a href="/" class="btn btn-lg btn-gray-transparent btn-animated">손맛으로 이동<i class="fa fa-arrow-right pl-20"></i></a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="main-container">
+    <div class="container">
+        <div class="row justify-content-center">
 
-	<div class="container">
-		<div class="row">
+            <!-- main start -->
+            <!-- ================ -->
+            <div class="main col-lg-10">
 
-			<!-- main start -->
-			<!-- ================ -->
-			<div class="main col-lg-12">
+                <div class="pv-30 ph-40 light-gray-bg hc-item-box bordered animated message-detail-background">
+                    <!--style="background-color: #F5F5DC"-->
 
-                <!--<div class="pv-20 ph-20 light-gray-bg hc-item-box bordered hc-shadow animated hc-element-invisible hc-element-visible">
--->
-                    <!-- page-title start -->
-                    <!-- ================ -->
-                    <h2 class="page-title"><%= msg.sonmat.message.title %></h2>
-                    <!-- page-title end -->
+                    <div>
+                        <h2 class="page-title"><%= msg.sonmat.message.title %></h2>
+                        <div class="post-info mb-4 text-right">
+                            <h5 class="post-date">
+                                <i class="fa fa-calendar-o pr-1"></i>
+                                <span class="day"><%= msg.send_date %></span>
+                            </h5>
+                        </div>
+                    </div>
+
 
                     <!-- blogpost start -->
                     <!-- ================ -->
-                    <article class="blogpost full">
+                    <article class="blogpost full mt-5">
 
-                        <header>
-                            <div class="post-info mb-4 text-right">
-                                <h5 class="post-date">
-                                    <i class="fa fa-calendar-o pr-1"></i>
-                                    <span class="day"><%= msg.send_date %></span>
-                                </h5>
-                            </div>
-                        </header>
+                        <div class="blogpost-content white-bg pv-30 ph-40 hc-item-box bordered hc-shadow animated fadeInDownSmall
+                                        pb-0 ml-lg-5 mr-lg-5 justify-content-center" style="padding-bottom: 0">
 
-                        <div class="blogpost-content light-gray-bg pv-30 ph-20 hc-item-box bordered hc-shadow hc-element-invisible animated hc-element-visible fadeInDownSmall" style="padding-bottom: 0">
-
-
-                           <!-- <div class="separator"></div>-->
                             <div id="summernote"></div>
-                            <!--<div class="separator"></div>-->
 
-                            <!-- section start -->
-                            <!-- ================ -->
-                            <section class="light-gray-bg clearfix">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="call-to-action text-right">
-                                                <div class="row ">
-                                                    <div class="col-md-12 mt-10">
-                                                        <h3 class="title logo-font">From.&nbsp;&nbsp;<span class="pen-font"><%= msg.From.name %></span></h3>
-                                                    </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="call-to-action text-right">
+                                            <div class="row">
+                                                <div class="col-md-12 mt-20">
+                                                    <div class="separator-3"></div>
+                                                    <h2 class="title logo-font text-default mt-2">From.&nbsp;&nbsp;<span class="pen-font"><%= msg.From.name %></span></h2>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </section>
-                            <!-- section end -->
-
-                        </div>
-
-                        <div class="text-right">
-                            <button class="btn _btn_share_facebook">facebook <i class="pl-1 fa fa-share"></i></button>
-                            <button class="btn _btn_share_kakao">kakao <i class="pl-1 fa fa-share"></i></button>
+                            </div>
 
                         </div>
                     </article>
                     <!-- blogpost end -->
 
+                </div>
 
-                <!--</div>-->
-
-			</div>
-			<!-- main end -->
+            </div>
+            <!-- main end -->
 
 
-		</div>
-	</div>
+        </div>
+    </div>
 </section>
 
-<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
-<script src="/js/social/kakao/kakao.js"></script>
 <script>
 
-    // 실제 사용되는 변형 폰트 리스트
-    var variation_font_list = <%- JSON.stringify(variation_font_list) %>;
+    var font_list = <%- JSON.stringify(font_list) %>;
 
-    // 변형 폰트를 font-face에 등록
-    register_font_to_font_face(variation_font_list);
+    // font-face에 등록
+    register_font_face(font_list);
 
     var message_contents_html = <%- "`" + msg.sonmat.message.contents_html + "`" %>;
 
@@ -119,9 +137,9 @@
     $('#summernote').summernote('code', message_contents_html);
 
 
-    function register_font_to_font_face(font_list) {
-        font_list.forEach(function(font) {
-            var font_face = new FontFace(font.font_name, 'url(/api/files/?path=' + font.file_path + ')');
+    function register_font_face(font) {
+        font.forEach(function(font_file) {
+            var font_face = new FontFace(font_file.file_name, 'url(' + font_file.file_path + ')');
 
             // 폰트 load
             font_face.load().then(function(loaded_face) {
@@ -130,27 +148,5 @@
             }).catch(function(error) { });
         });
     }
-
-    var kakaoShare = new KakaoShare();
-
-    function initShareKakao() {
-        var container = '._btn_share_kakao';
-        var title = '<%= msg.From.name %> 님이 보낸 메세지 입니다.';
-        var image = 'http://son-mat.com/images/share_logo.png';
-        var dummyLink = "http://son-mat.com";
-        var message = "손맛에서 확인해보세요";
-        kakaoShare.share(container , title, image, message , dummyLink);
-    }
-
-    initShareKakao();
-
-    $("._btn_share_facebook").on('click', function () {
-        var dummyLink = "http://son-mat.com";
-        window.open("https://www.facebook.com/sharer/sharer.php?u=" + dummyLink);
-
-    });
-
-
-
 
 </script>

@@ -1,190 +1,180 @@
 <div id="page-start"></div>
 
-    <!-- main-container start -->
-    <!-- ================ -->
-    <section class="main-container">
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
 
-        <div class="container">
-            <div class="row">
+    <div class="container">
+        <div class="row">
 
-                <!-- main start -->
+            <!-- main start -->
+            <!-- ================ -->
+            <div class="main col-lg-9 order-lg-2 ml-xl-auto">
+
+                <!-- section start -->
                 <!-- ================ -->
-                <div class="main col-lg-9 order-lg-2 ml-xl-auto">
-
-                    <!-- section start -->
-                    <!-- ================ -->
-                    <section class="section clearfix">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="call-to-action p-20 light-gray-bg hc-shadow bordered" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
-                                        <div class="row justify-content-md-center">
-                                            <div class="row col-lg-10">
-                                                <div class="col-lg-12">
-                                                    <h2 class="title row">손글씨 이미지 선택</h2>
-                                                    <div class="separator-2"></div>
-                                                    <div class="row">
-                                                        <p>손글씨 이미지를 선택해주세요</p>
-                                                    </div>
+                <section class="section clearfix">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="call-to-action p-20 light-gray-bg  bordered" data-animation-effect="fadeInDownSmall" data-effect-delay="100">
+                                    <div class="row justify-content-md-center">
+                                        <div class="row col-lg-10">
+                                            <div class="col-lg-12">
+                                                <h2 class="title row">손글씨 이미지 선택</h2>
+                                                <div class="separator-2"></div>
+                                                <div class="row">
+                                                    <p>손글씨 이미지를 선택해주세요</p>
                                                 </div>
                                             </div>
-
-                                            <div class="col-lg-10">
-                                                <form id="form-group-file" class="form-group form-inline margin-clear d-flex">
-                                                    <input type="file" id="input-file" name="img[]" class="file" style="visibility: hidden; position: absolute;" accept="image/*">
-                                                    <input type="text" id="form-control-file" class="form-control col-lg-10" placeholder="파일을 선택해주세요" disabled style="background-color: whitesmoke; color: black;">
-                                                    <button id="button-browse" class="browse btn btn-dark margin-clear col-lg-2" type="button">열기</button>
-                                                </form>
-
-                                                <div class="mt-4 pv-30 ph-20 hc-item-box bordered hc-shadow text-center hc-element-invisible animated hc-element-visible fadeInDownSmall">
-
-                                                    <div id="preview" class="col-sm-12" style="display: none;">
-                                                        <br/>
-                                                        <img src="" id="preview_image">
-                                                    </div>
-
-                                                    <br/>
-                                                    <div class="form-group row">
-                                                        <label for="font_name" class="col-sm-3 col-form-label">손글씨 이름</label>
-                                                        <div class="col-sm-9">
-                                                            <input type="text" class="form-control" id="font_name" placeholder="미입력시 '2018/10/10 01:30:30'의 형식으로 저장됩니다.">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group row">
-                                                        <label for="font_desc" class="col-sm-3 col-form-label">손글씨 설명</label>
-                                                        <div class="col-sm-9">
-                                                            <textarea class="form-control" id="font_desc" rows="3" placeholder="손글씨에 대한 설명을 써주세요."></textarea>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-                                                <div class="col-lg-3 pull-right">
-                                                    <btn id="image_upload_btn" class="btn btn-default btn-lg btn-animated margin-clear">업로드&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-up fa-2x"></i></btn>
-                                                </div>
-
-                                            </div>
-                                            <input type="text" style="visibility: hidden;">
                                         </div>
+
+                                        <div class="col-lg-10">
+                                            <div>
+                                                <input type="file" name="slim[]" id="myCropper"/>
+                                            </div>
+
+                                            <div class="mt-4 pv-30 ph-20 hc-item-box bordered hc-shadow text-center hc-element-invisible animated hc-element-visible fadeInDownSmall">
+
+
+                                                <br/>
+                                                <div class="form-group row">
+                                                    <label for="font_name" class="col-sm-3 col-form-label">손글씨 이름</label>
+                                                    <div class="col-sm-9">
+                                                        <input type="text" class="form-control" id="font_name" placeholder="미입력시 '2018/10/10 01:30:30'의 형식으로 저장됩니다.">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group row">
+                                                    <label for="font_desc" class="col-sm-3 col-form-label">손글씨 설명</label>
+                                                    <div class="col-sm-9">
+                                                        <textarea class="form-control" id="font_desc" rows="3" placeholder="손글씨에 대한 설명을 써주세요."></textarea>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-lg-3 pull-right">
+                                                <btn id="image_upload_btn" class="btn btn-default btn-lg btn-animated margin-clear">업로드&nbsp;&nbsp;<i class="fa fa-arrow-circle-o-up fa-2x"></i></btn>
+                                            </div>
+
+                                        </div>
+                                        <input type="text" style="visibility: hidden;">
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </section>
-                    <!-- section end -->
-
-                </div>
-                <!-- main end -->
-
-                <!-- sidebar start -->
-                <!-- ================ -->
-                <aside class="col-lg-2 col-xl-3 order-lg-1">
-                    <div class="sidebar">
-                        <div class="block clearfix">
-
-                            <h3>&nbsp;</h3>
-
-                            <div class="separator-2"></div>
-                            <nav>
-                                <ul class="nav flex-column">
-                                    <div class="hc-item-box-2 hc-element-invisible" data-animation-effect="fadeInLeftSmall" style="animation-delay: 0.1s; vertical-align: middle">
-                                        <a href="/handwrite"><span class="icon dark-bg small">1</span></a>
-                                        <div class="body">
-                                            <h5 class="title">손글씨 쓰기</h5>
-                                        </div>
-                                    </div>
-                                    <div class="separator-2"></div>
-                                    <div class="hc-item-box-2 hc-element-invisible" data-animation-effect="fadeInLeftSmall" style="animation-delay: 0.3s">
-                                        <a href="/handwrite/taking_picture"><span class="icon dark-bg small">2</span></a>
-                                        <div class="body">
-                                            <h5 class="title">사진 찍기</h5>
-                                        </div>
-                                    </div>
-                                    <div class="separator-2"></div>
-                                    <div class="hc-item-box-2 hc-element-invisible" data-animation-effect="fadeInLeftSmall" style="animation-delay: 0.5s">
-                                        <a href="/handwrite/form"><span class="icon default-bg small">3</span></a>
-                                        <div class="body">
-                                            <h5 class="title">손글씨 이미지 선택</h5>
-                                        </div>
-                                    </div>
-                                    <div class="separator-2"></div>
-                                    <div class="hc-item-box-2 hc-element-invisible" data-animation-effect="fadeInLeftSmall" style="animation-delay: 0.7s">
-                                        <span class="icon dark-bg small">4</span>
-                                        <div class="body">
-                                            <h5 class="title">제작 시작</h5>
-                                        </div>
-                                    </div>
-                                    <div class="separator-2"></div>
-                                </ul>
-                            </nav>
-                        </div>
                     </div>
-                </aside>
-                <!-- sidebar end -->
+                </section>
+                <!-- section end -->
 
             </div>
+            <!-- main end -->
+
+            <!-- sidebar start -->
+            <!-- ================ -->
+            <aside class="col-lg-2 col-xl-3 order-lg-1">
+                <div class="sidebar">
+                    <div class="block clearfix">
+
+                        <h3>&nbsp;</h3>
+
+                        <div class="separator-2"></div>
+                        <nav>
+                            <ul class="nav flex-column">
+                                <div class="hc-item-box-2 hc-element-invisible" data-animation-effect="fadeInLeftSmall" style="animation-delay: 0.1s; vertical-align: middle">
+                                    <a href="/handwrite"><span class="icon dark-bg small">1</span></a>
+                                    <div class="body">
+                                        <h5 class="title">손글씨 쓰기</h5>
+                                    </div>
+                                </div>
+                                <div class="separator-2"></div>
+                                <div class="hc-item-box-2 hc-element-invisible" data-animation-effect="fadeInLeftSmall" style="animation-delay: 0.3s">
+                                    <a href="/handwrite/taking_picture"><span class="icon dark-bg small">2</span></a>
+                                    <div class="body">
+                                        <h5 class="title">사진 찍기</h5>
+                                    </div>
+                                </div>
+                                <div class="separator-2"></div>
+                                <div class="hc-item-box-2 hc-element-invisible" data-animation-effect="fadeInLeftSmall" style="animation-delay: 0.5s">
+                                    <a href="/handwrite/form"><span class="icon default-bg small">3</span></a>
+                                    <div class="body">
+                                        <h5 class="title">손글씨 이미지 선택</h5>
+                                    </div>
+                                </div>
+                                <div class="separator-2"></div>
+                                <div class="hc-item-box-2 hc-element-invisible" data-animation-effect="fadeInLeftSmall" style="animation-delay: 0.7s">
+                                    <span class="icon dark-bg small">4</span>
+                                    <div class="body">
+                                        <h5 class="title">제작 시작</h5>
+                                    </div>
+                                </div>
+                                <div class="separator-2"></div>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </aside>
+            <!-- sidebar end -->
+
         </div>
-    </section>
-    <!-- main-container end -->
+    </div>
+</section>
+<!-- main-container end -->
 
-    <script>
+<script>
 
-        // 열기 버튼 - click event
-        $(document).on('click', '#button-browse', function(){
-            $('#input-file').trigger('click');
-        });
+    // 열기 버튼 - click event
+    $(document).on('click', '#button-browse', function () {
+        $('#input-file').trigger('click');
+    });
 
-        // 파일 경로 input - change event
-        $(document).on('change', '#input-file', function(){
-            $('#form-control-file').val($(this).val().replace(/C:\\fakepath\\/i, ''));
-        });
+    // 파일 경로 input - change event
+    $(document).on('change', '#input-file', function () {
+        $('#form-control-file').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+    });
 
-        // 업로드 버튼 - click event
-        $(document).on('click', '#image_upload_btn', function() {
 
-            var form = $('#form-group-file');
-            var formData = new FormData(form);
-            var file = $('#input-file')[0].files[0];
+    $(document).on('click', '#image_upload_btn', function () {
 
-            if(file == undefined) {
-                alert('업로드할 파일을 선택하세요.');
-                return false;
-            }
 
-            formData.append("file", file);
+        var formData = new FormData();
 
-            var FILE_UPLOAD_API_URL = 'http://file-api.seolgi.com/api/files/upload';
-            var FONT_CREATE_API_URL = '/api/font/';
 
-            AjaxUtils.upload(FILE_UPLOAD_API_URL , formData , function (result) {
-                result.file_path = result.host + result.downloadPath;
-                result.name = $('#font_name').val();
-                result.desc = $('#font_desc').val();
-
-                AjaxUtils.post(FONT_CREATE_API_URL, result, function(res) {
-                    window.location.href = "/handwrite/making";
-                });
-            });
-
-        });
-
-        $(document).on('change', '#input-file', function() {
-            readURL(this);
-        });
-
-        function readURL(input) {
- 
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-         
-                reader.onload = function (e) {
-                    $('#preview_image').attr('src', e.target.result);
-                    $('#preview').css('display', "");
-                }
-         
-                reader.readAsDataURL(input.files[0]);
-            }
+        if (imageCrop.containsImage() == false) {
+            alert('업로드할 파일을 선택하세요.');
+            return false;
         }
-         
-    </script>
+
+        formData.append("file", dataURItoBlob(imageCrop.data.output.image.toDataURL()), imageCrop.data.input.name);
+
+        var FILE_UPLOAD_API_URL = 'http://file-api.seolgi.com/api/files/upload';
+        var FONT_CREATE_API_URL = '/api/font/';
+
+        AjaxUtils.upload(FILE_UPLOAD_API_URL, formData, function (result) {
+
+            result.file_path = result.host + result.downloadPath;
+            result.name = $('#font_name').val();
+            result.desc = $('#font_desc').val();
+
+            AjaxUtils.post(FONT_CREATE_API_URL, result, function (res) {
+                window.location.href = "/handwrite/making";
+            });
+        });
+
+    });
+
+
+    function dataURItoBlob(dataURI) {
+        var binary = atob(dataURI.split(',')[1]);
+        var array = [];
+        for (var i = 0; i < binary.length; i++) {
+            array.push(binary.charCodeAt(i));
+        }
+        return new Blob([new Uint8Array(array)], {type: 'image/jpeg'});
+    }
+
+    var imageCrop = new Slim(document.getElementById('myCropper'));
+
+
+</script>

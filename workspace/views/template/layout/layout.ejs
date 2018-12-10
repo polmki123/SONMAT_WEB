@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>The Project | Home</title>
+    <title>손맛나는 편지</title>
     <meta name="description" content="The Project a Bootstrap-based, Responsive HTML5 Template">
     <meta name="author" content="author">
     <%- meta %>
@@ -12,12 +12,6 @@
 
     <%- include('./css') -%>
     <%- style %>
-
-    <style>
-        .btn_share_kakao {
-            background: url("/images/kakaolink_btn_small.png") 0px no-repeat;}
-    </style>
-
 </head>
 
 <!-- body classes:  -->
@@ -35,10 +29,13 @@
 
 <div class="page-wrapper">
 
+    <% if(locals.none_header) { %>
 
-    <!-- header-container start -->
-    <%- include('./header') -%>
-    <!-- header-container end -->
+    <% } else { %>
+            <!-- header-container start -->
+        <%- include('./header') -%>
+        <!-- header-container end -->
+    <% } %>
 
     <%- body %>
     <!-- footer start (Add "dark" class to #footer in order to enable dark footer) -->
