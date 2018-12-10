@@ -63,11 +63,15 @@
                                 <div class="row justify-content-md-center">
                                     <div class="row col-lg-10">
                                         <div class="col-lg-12">
-                                            <h4 class="page-title">내 손글씨 이미지
-                                                <div class="pull-right">
-                                                    <p class=""><a href="#" class="btn btn-animated btn-md btn-gray-transparent" data-toggle="modal" data-target="#myModal">폰트 정보 수정하기<i class="fa fa-wrench pl-20"></i></a></p>
-                                                </div>
-                                            </h4>
+                                            <% if(font.open_state=="private") { %>
+                                                <h4 class="page-title">내 손글씨 이미지
+                                                    <div class="pull-right">
+                                                        <p class=""><a href="#" class="btn btn-animated btn-md btn-gray-transparent" data-toggle="modal" data-target="#myModal">폰트 정보 수정하기<i class="fa fa-wrench pl-20"></i></a></p>
+                                                    </div>
+                                                </h4>
+                                            <% } else { %>
+                                                <h4 class="page-title">손글씨 이미지
+                                            <% } %>
                                         </div>
                                     </div>
                                 </div>
