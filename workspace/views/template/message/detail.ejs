@@ -5,8 +5,20 @@
 
 
 <style>
+    .message-detail-background {
+
+        background-size: cover;
+        background-image: linear-gradient(rgba(255,255,255,0.6), rgba(255,255,255,0.7)), url("/images/paper-texture-2.jpg");
+
+        /*background: url("/images/paper-texture-2.jpg") 80% 0px;
+
+        opacity: 0.5;
+        z-index: -1;*/
+    }
+
     .note-editable {
         background-color: white !important;
+
 
     }
 
@@ -14,93 +26,100 @@
         border: 0 !important;
     }
 
+    .note-editor.note-frame .note-editing-area .note-editable {
+        padding: 30px;
+    }
+
+    ._btn_share_kakao {
+        border: none;
+        cursor: pointer;
+        padding : 0;
+        display: inline;
+    }
+
 </style>
 
 <section class="main-container">
 
 	<div class="container">
-		<div class="row">
+		<div class="row justify-content-center">
 
 			<!-- main start -->
 			<!-- ================ -->
-			<div class="main col-lg-12">
+			<div class="main col-lg-10">
 
-                <!--<div class="pv-20 ph-20 light-gray-bg hc-item-box bordered hc-shadow animated hc-element-invisible hc-element-visible">
--->
-                    <!-- page-title start -->
-                    <!-- ================ -->
-                    <h2 class="page-title"><%= msg.sonmat.message.title %></h2>
-                    <!-- page-title end -->
+                <div style="  overflow:hidden;">
+                    <div style="float: left;">
+                        <a href="javascript:history.back()" class="btn btn-default pull-right"><i class="fa fa-chevron-left pr-10"></i> 뒤로</a>
+                    </div>
+                    <% if(msg.To != null) { %>
+                        <div style="float: right;">
+                            <h5 class="float-right">카카오톡으로 공유&nbsp;&nbsp;<button type="button" class="btn _btn_share_kakao"><img src="/images/kakaolink_btn_small_ov.png"></button></h5>
+                        </div>
+                    <% } %>
+                </div>
+
+
+                <div class="pv-30 ph-40 light-gray-bg hc-item-box bordered animated message-detail-background">
+                    <!--style="background-color: #F5F5DC"-->
+
+                    <div>
+                        <h2 class="page-title"><%= msg.sonmat.message.title %></h2>
+                        <div class="post-info mb-4 text-right">
+                            <h5 class="post-date">
+                                <i class="fa fa-calendar-o pr-1"></i>
+                                <span class="day"><%= msg.send_date %></span>
+                            </h5>
+                        </div>
+                    </div>
+
 
                     <!-- blogpost start -->
                     <!-- ================ -->
-                    <article class="blogpost full">
+                    <article class="blogpost full mt-5">
 
-                        <header>
-                            <div class="post-info mb-4 text-right">
-                                <h5 class="post-date">
-                                    <i class="fa fa-calendar-o pr-1"></i>
-                                    <span class="day"><%= msg.send_date %></span>
-                                </h5>
-                            </div>
-                        </header>
+                        <div class="blogpost-content white-bg pv-30 ph-40 hc-item-box bordered hc-shadow animated fadeInDownSmall
+                                        pb-0 ml-lg-5 mr-lg-5 justify-content-center" style="padding-bottom: 0">
 
-                        <div class="blogpost-content light-gray-bg pv-30 ph-20 hc-item-box bordered hc-shadow hc-element-invisible animated hc-element-visible fadeInDownSmall" style="padding-bottom: 0">
-
-                            <!-- section start -->
-                            <!-- ================ -->
-                            <section class="light-gray-bg clearfix">
+                            <% if(msg.To != null) { %>
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="call-to-action">
                                                 <div class="row">
-                                                    <div class="col-md-8 mt-10">
-                                                        <h3 class="title logo-font">To.&nbsp;&nbsp;<span class="pen-font"><%= msg.To.name %></span></h3>
+                                                    <div class="col-md-8 mt-20">
+                                                        <h2 class="title logo-font text-default mb-2">To.&nbsp;&nbsp;<span class="pen-font"><%= msg.To.name %></span></h2>
+                                                        <div class="separator-2"></div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </section>
-                            <!-- section end -->
+                            <% } %>
 
-                           <!-- <div class="separator"></div>-->
                             <div id="summernote"></div>
-                            <!--<div class="separator"></div>-->
 
-                            <!-- section start -->
-                            <!-- ================ -->
-                            <section class="light-gray-bg clearfix">
-                                <div class="container">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="call-to-action text-right">
-                                                <div class="row ">
-                                                    <div class="col-md-12 mt-10">
-                                                        <h3 class="title logo-font">From.&nbsp;&nbsp;<span class="pen-font"><%= msg.From.name %></span></h3>
-                                                    </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="call-to-action text-right">
+                                            <div class="row">
+                                                <div class="col-md-12 mt-20">
+                                                    <div class="separator-3"></div>
+                                                    <h2 class="title logo-font text-default mt-2">From.&nbsp;&nbsp;<span class="pen-font"><%= msg.From.name %></span></h2>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </section>
-                            <!-- section end -->
-
-                        </div>
-
-                        <div class="text-right">
-                            <button class="btn _btn_share_facebook">facebook <i class="pl-1 fa fa-share"></i></button>
-                            <button class="btn _btn_share_kakao">kakao <i class="pl-1 fa fa-share"></i></button>
+                            </div>
 
                         </div>
                     </article>
                     <!-- blogpost end -->
 
-
-                <!--</div>-->
+                </div>
 
 			</div>
 			<!-- main end -->
