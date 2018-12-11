@@ -1,1 +1,0 @@
-Tue, 11 Dec 2018 03:44:13 GMT sequelize deprecated String based operators are now deprecated. Please use Symbol based operators for better security, read more at http://docs.sequelizejs.com/manual/tutorial/querying.html#operators at node_modules\sequelize\lib\sequelize.js:242:13
